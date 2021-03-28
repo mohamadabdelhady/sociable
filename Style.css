@@ -1,0 +1,41 @@
+body{
+	color: #0a1417;
+}
+footer{color: #0a1417;
+width: 100%;
+
+}
+.btn-primary{
+	background-color: #166678;
+	border-color: #9cacbf;
+}
+.btn-primary:hover{
+	background-color: #0a1417;
+	border-color: #9cacbf;
+}
+.form-control:focus{
+	color: #0a1417;
+	border-color: #9cacbf;
+	 box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+#logo-img{
+	background: url('Connect-Logo.png');
+	width: 180px;
+	height: 34px;
+
+}
+#nav-bar{
+	padding-left: 60px;
+}
+#background{
+	min-height: 96vh;
+	width: 100%;
+}
+#background-img{
+	background: url('background.jpg');background-repeat: none;background-size: cover;
+}
+#log-in{
+	padding-top: 100px;
+	float: right;
+
+}
