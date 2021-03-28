@@ -39,3 +39,9 @@ width: 100%;
 	float: right;
 
 }
+#signupform{
+	display: none;
+}
+#loginbtn{
+	display: none;
+}
