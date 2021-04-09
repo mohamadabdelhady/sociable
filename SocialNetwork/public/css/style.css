@@ -1,0 +1,33 @@
+#logo-img{
+	width: 180px;
+	height: 34px;
+
+}
+#background{
+	min-height: 96vh;
+	width: 100%;
+}
+#forms{
+	padding-top: 100px;
+	float: right;
+
+}
+
+#signupform{
+	display: none;
+}
+#loginbtn{
+	display: none;
+}
+@media (max-width: 576px){
+	body
+	{
+		justify-content: center;
+		align-content: center;
+	}
+	#logintext,#siguparea,#forms
+	{
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+}
