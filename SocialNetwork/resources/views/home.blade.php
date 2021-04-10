@@ -11,10 +11,10 @@
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <div class="container-fluid" style="background: rgba(156,172,191,0.7); " id="background">
-<body style="background: url('images/hangout.jpg'); background-repeat: no-repeat;background-size: cover; ">
+<body style="background: url('/images/hangout.jpg'); background-repeat: no-repeat;background-size: cover; ">
 <nav class="navbar navbar-dark" id="nav-bar">
 	<div class="container-fluid">
-		<div class="navbar-brand" id="logo-img" style="background: url('images/Connect-Logo.png');"></div>
+		<div class="navbar-brand" id="logo-img" style="background: url('/images/Connect-Logo.png');"></div>
 	</div>
 </nav>
 	<div id="forms" class="row" style="min-width: 100%">
@@ -35,15 +35,19 @@
                                     </span>
                                 @enderror
 			</div>
+
 			<div class="m-3">
 				<input type="password" class="form-control" id="InputPassword" aria-describedly="password-help" placeholder="Password" name="password">
-				<div id="password-help" class="form-text"></div>
+				<p class=" m-1" ><a href="forgot-password" style="color: black; text-decoration: none;">Forgot your password ?</a></p>
 			</div>
+			
 			<button type="submit" class="btn btn-primary">Log In</button>
+
 		</form>
+
 		<form class="card" id="signupform" method="POST" action="{{ route('register') }}">
 			@csrf
-			<div class="card-header">{{ __('Register') }}</div>
+			<div class="card-header h4">{{ __('Register') }}</div>
 			<div class="m-3">
 				<input type="firstname" class="form-control @error('first_name') is-invalid @enderror" id="Inputusername"  placeholder="First name" name="first_name">
 				@error('first_name')

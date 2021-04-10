@@ -21,33 +21,40 @@
 			
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12" id="logintext"> 
-			@if(session('status'))
-			<div class="alert alert-success" role="alert">
-				{{session('status')}}
-			</div>
-			@endif
 	    </div>
 	    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="loginarea">
-		<form class="card " id="loginform" method="POST" action="{{ route('password.request') }}">
-			<div class="card-header h4">{{ __('Reset password') }}</div>
+		<form class="card " id="loginform" method="POST" action="{{ route('password.update') }}">
+			<div class="card-header h4">{{ __('Set new password') }}</div>
 			@csrf
+			<input type="hidden" name="token" value="{{$request->route('token')}}">
 			<div class="m-3">
-				<input type="email" class="form-control @error('email') is-invalid @enderror" id="InputEmail" aria-describedly="email-help" placeholder="Email" name="email">
+				<input type="email" class="form-control @error('email') is-invalid @enderror" id="InputEmail" aria-describedly="email-help" value="{{$request->email}}" name="email">
 				@error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
 			</div>
-			<button type="submit" class="btn btn-primary">Reset</button>
+			<div class="m-3">
+				<input type="password" class="form-control @error('password') is-invalid @enderror" id="InputPassword" placeholder="Password" name="password">
+				@error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+			</div>
+			<div class="m-3">
+				<input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="InputConfirmPassword" placeholder="Confirm password" name="password_confirmation">
+				@error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+			</div>
+			<button type="submit" class="btn btn-primary">update</button>
 		</form>
 		</div>
 		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="siguparea">
-			<h1 class="display2 ">Lost your way?</h1>
-			<p class="lead ">Return to the home page.</p>
-			<form action="return-home">
-    <input type="submit" value="Home page" class="btn btn-primary"/>
-</form>
 					</div>
 				</div>	
 </body>

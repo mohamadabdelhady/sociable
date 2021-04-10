@@ -28,26 +28,13 @@
 			@endif
 	    </div>
 	    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="loginarea">
-		<form class="card " id="loginform" method="POST" action="{{ route('password.request') }}">
-			<div class="card-header h4">{{ __('Reset password') }}</div>
+		<form class="card " id="loginform" method="POST" action="{{ route('verification.send') }}">
 			@csrf
-			<div class="m-3">
-				<input type="email" class="form-control @error('email') is-invalid @enderror" id="InputEmail" aria-describedly="email-help" placeholder="Email" name="email">
-				@error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-			</div>
-			<button type="submit" class="btn btn-primary">Reset</button>
+			<p class="h4 m-4">You must verify your email adress, please check your email for vertification link.</p>
+			<button type="submit" class="btn btn-primary">Resend email</button>
 		</form>
 		</div>
 		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="siguparea">
-			<h1 class="display2 ">Lost your way?</h1>
-			<p class="lead ">Return to the home page.</p>
-			<form action="return-home">
-    <input type="submit" value="Home page" class="btn btn-primary"/>
-</form>
 					</div>
 				</div>	
 </body>
