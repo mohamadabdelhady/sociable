@@ -43,6 +43,7 @@
 		</form>
 		<form class="card" id="signupform" method="POST" action="{{ route('register') }}">
 			@csrf
+			<div class="card-header">{{ __('Register') }}</div>
 			<div class="m-3">
 				<input type="firstname" class="form-control @error('first_name') is-invalid @enderror" id="Inputusername"  placeholder="First name" name="first_name">
 				@error('first_name')
