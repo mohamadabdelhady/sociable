@@ -34,7 +34,7 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
-        ])->validate();
+        ])->validateWithBag('register_error');
 
         return User::create([
             'first_name' => $input['first_name'],
