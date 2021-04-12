@@ -20,10 +20,12 @@
 	<div id="forms" class="row" style="min-width: 100%">
 		<div class="col-xl-1 col-lg-1 col-md-1">
 		</div>
-		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12" id="logintext"> 
+		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 " id="logintext"> 
+			<div class="@if ($errors->register_error->any()) d-none @endif">
 		<h1 class="display2 ">Log In</h1>
 		<p class="lead ">And be connected to the world.</p>
-		<button class="btn btn-primary" onclick="displaysignup(2)" id="loginbtn">Log in</button>
+		<button class="btn btn-primary " onclick="displaysignup(2)" id="loginbtn">Log in</button>
+	</div>
 	    </div>
 	    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="loginarea">
 		<form class="card @if ($errors->register_error->any()) d-none @endif" id="loginform" method="POST" action="{{ route('login') }}">
@@ -93,11 +95,20 @@
 			<button class="btn btn-primary" id="registerbtn" name="signup">Sign up</button>
 		</form>
 		</div>
-		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="siguparea">
+		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 " id="siguparea">
+<div class="@if ($errors->register_error->any()) d-none @endif">
 			<h1 class="display2 ">Don't have an account?</h1>
 		<p class="lead ">Creat a new account and join our online community.</p>
 			<button class="btn btn-primary" onclick="displaysignup(1)" id="signupbtn">Sign up</button>
 					</div>
+					<div class="d-none @if ($errors->register_error->any()) d-block @endif">
+						<h1 class="display2 ">Lost your way?</h1>
+			<p class="lead ">Return to the home page.</p>
+			<form action="return-home">
+    <input type="submit" value="Home page" class="btn btn-primary"/>
+</form>
+					</div>
+				</div>
 				</div>	
 </body>
 </div>
