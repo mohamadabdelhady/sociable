@@ -54,7 +54,7 @@
 
 		</form>
 
-		<form class="card @if ($errors->register_error->any()) d-flex @endif" id="signupform" method="POST" action="{{ route('register') }}">
+		<form class="card @if ($errors->register_error->any()) d-flex @endif overflow-auto" id="signupform" method="POST" action="{{ route('register') }}" style="height: 400px;">
 			@csrf
 			<div class="card-header h4">{{ __('Register') }}</div>
 			<div class="m-3">
