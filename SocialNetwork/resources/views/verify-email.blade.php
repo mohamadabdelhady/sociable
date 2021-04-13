@@ -35,6 +35,7 @@
 		</form>
 		</div>
 		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="siguparea">
+			
 					</div>
 				</div>	
 </body>

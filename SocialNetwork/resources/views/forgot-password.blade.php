@@ -43,8 +43,8 @@
 		</form>
 		</div>
 		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="siguparea">
-			<h1 class="display2 ">Lost your way?</h1>
-			<p class="lead ">Return to the home page.</p>
+			<h1 class="display2 ">want to go to the home page?</h1>
+			
 			<form action="return-home">
     <input type="submit" value="Home page" class="btn btn-primary"/>
 </form>

@@ -19,6 +19,7 @@
 </nav>
 	<div id="forms" class="row" style="min-width: 100%">
 		<div class="col-xl-1 col-lg-1 col-md-1">
+			
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 " id="logintext"> 
 			<div class="@if ($errors->register_error->any()) d-none @endif">
@@ -92,6 +93,17 @@
 			<div class="m-3">
 				<input type="password" class="form-control  " id="InputConfirmPassword" placeholder="Confirm password" name="password_confirmation">
 			</div>
+			<div class="btn-group btn-group-toggle m-3" data-toggle="buttons" name="gender">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="gender" id="male" autocomplete="off" checked value="male"> Male
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="gender" id="female" autocomplete="off" value="female"> Female
+  </label>
+   <label class="btn btn-secondary">
+    <input type="radio" name="gender" id="other" autocomplete="off" value="other"> Other
+  </label>
+</div>
 			<button class="btn btn-primary" id="registerbtn" name="signup">Sign up</button>
 		</form>
 		</div>
@@ -102,8 +114,8 @@
 			<button class="btn btn-primary" onclick="displaysignup(1)" id="signupbtn">Sign up</button>
 					</div>
 					<div class="d-none @if ($errors->register_error->any()) d-block @endif">
-						<h1 class="display2 ">Lost your way?</h1>
-			<p class="lead ">Return to the home page.</p>
+						<h1 class="display2 ">want to go to the home page?</h1>
+			
 			<form action="return-home">
     <input type="submit" value="Home page" class="btn btn-primary"/>
 </form>

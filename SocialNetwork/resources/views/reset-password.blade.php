@@ -24,7 +24,7 @@
 	    </div>
 	    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" id="loginarea">
 		<form class="card " id="loginform" method="POST" action="{{ route('password.update') }}">
-			<div class="card-header h4">{{ __('Set new password') }}</div>
+			<div class="card-header h4">{{ __('Set a new password') }}</div>
 			@csrf
 			<input type="hidden" name="token" value="{{$request->route('token')}}">
 			<div class="m-3">
