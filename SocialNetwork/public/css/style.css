@@ -19,12 +19,17 @@
 #loginbtn{
 	display: none;
 }
+#nav-bar{
+	background-color: rgb(156,172,191);
+}
+#search-input{
+	 border-radius: 25px;
+	 border: none;
+	 box-shadow: none;
+	 background-color: #f2f2f2;
+	 width: 300px;
+}
 @media (max-width: 576px){
-	body
-	{
-		justify-content: center;
-		align-content: center;
-	}
 	#logintext,#siguparea,#forms
 	{
 		padding-top: 30px;

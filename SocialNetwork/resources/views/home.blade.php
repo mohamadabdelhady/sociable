@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
 </head>
 <div class="container-fluid" style="background: rgba(156,172,191,0.7); " id="background">
 <body style="background: url('/images/hangout.jpg'); background-repeat: no-repeat;background-size: cover; ">
-<nav class="navbar navbar-dark" id="nav-bar">
+<nav class="navbar navbar-dark" >
 	<div class="container-fluid">
 		<div class="navbar-brand" id="logo-img" style="background: url('/images/Connect-Logo.png');"></div>
 	</div>
@@ -99,9 +100,6 @@
   </label>
   <label class="btn btn-secondary">
     <input type="radio" name="gender" id="female" autocomplete="off" value="female"> Female
-  </label>
-   <label class="btn btn-secondary">
-    <input type="radio" name="gender" id="other" autocomplete="off" value="other"> Other
   </label>
 </div>
 			<button class="btn btn-primary" id="registerbtn" name="signup">Sign up</button>

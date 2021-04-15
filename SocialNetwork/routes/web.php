@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,13 +15,24 @@ use Illuminate\Support\Facades\Validator;
 */
 
 Route::get('/', function () {
-    return view('home');
+	 if (!Auth::check()) {
+    return view('home');}
+    else
+    {
+    	return redirect()->route('main');
+    }
 });
+Route::get('main', [ 'as' => 'main', 'uses' => function () {
+    return view('main');
+}])->middleware('auth');
 Route::get('/return-home', function () {
     return view('home');
 });
 Route::get('/home', function () {
-    dd(Illuminate\Support\Facades\Auth::user());
+    if (Auth::check()) {
+    	// echo "you are in";
+    	return redirect()->route('main');
+    }
 })->middleware(['auth','verified']);
 
 

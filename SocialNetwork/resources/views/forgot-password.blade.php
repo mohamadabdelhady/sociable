@@ -11,7 +11,7 @@
 </head>
 <div class="container-fluid" style="background: rgba(156,172,191,0.7); " id="background">
 <body style="background: url('/images/hangout.jpg'); background-repeat: no-repeat;background-size: cover; ">
-<nav class="navbar navbar-dark" id="nav-bar">
+<nav class="navbar navbar-dark" >
 	<div class="container-fluid">
 		<div class="navbar-brand" id="logo-img" style="background: url('/images/Connect-Logo.png');"></div>
 	</div>
