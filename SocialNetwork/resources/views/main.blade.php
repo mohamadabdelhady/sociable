@@ -13,9 +13,18 @@
 	<nav class="navbar navbar-dark"id="nav-bar" >
 	<div class="container-fluid" >
 		<div class="navbar-brand" id="logo-img" style="background: url('/images/Connect-Logo.png');"></div>
+		<div class="ml-5">
+			<button class="btn">
+		<img src="/home_icon.png" id="home_icon">
+		</button>
+		<button class="btn">
+		<img src="/profile_icon.png" id="home_icon">
+		</button>
+	    </div>
 		<form class="navbar-nav ml-auto mr-auto" id="Search-form">
    <input class="form-control " type="search" placeholder="Search" aria-label="Search" id="search-input" >
   </form>
+
   <div class="dropdown">
   <button class="btn dropdown-toggle mr-3" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   	@if($prof_img!=null)
@@ -26,13 +35,14 @@
 
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">log out</a>
+  	<a class="dropdown-item" href="#"><img src="/notifications_icon.png" id="user_icons"> <span class="ml-2">notifications</span></a>
+    <a class="dropdown-item" href="#"><img src="/settings.png" id="user_icons"> <span class="ml-2">settings</span></a>
+    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img src="/logout_icon.png" id="user_icons"> <span class="ml-2">log out</span></a>
     <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
     @csrf
     </form>
 
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+    
   </div>
 </div>
 	</div>

@@ -38,6 +38,14 @@
 	height: 30px;
 	 border-radius: 50%;
 }
+#home_icon{
+	width: 30px;
+	height: 30px;
+}
+#user_icons{
+width: 20px;
+height: 20px;
+}
 @media (max-width: 576px){
 	#logintext,#siguparea,#forms
 	{
