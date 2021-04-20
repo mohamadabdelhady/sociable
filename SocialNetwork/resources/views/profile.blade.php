@@ -50,28 +50,7 @@
 	</div>
 </nav>
 <div class="row container-fluid">
-	<div class="col-xl-3 col-lg-3 " id="chat_area">
-		<p class="mt-5" style="font-size: 30px;">Chat</p>
-		<hr>
-		<form class="" id="Search-chat">
-   <input class="form-control " type="search" placeholder="Search" aria-label="Search" id="search-input" >
-  </form>
-  <p class="" style="font-size: 25px;">Online contacts</p>
-  <div id="online_contacts" class="overflow-auto">
-  	
-  </div>
-	</div>
-	<div class="col-xl-6 col-lg-6" id="post_area">
-		post
-	</div>
-	<div class="col-xl-3 col-lg-3" id="action_area">
-		<p style="font-size: 25px;"class="mt-5">What is on your mind?</p>
-		<hr>
-		<button class="btn" style="border: none;box-shadow: none;">
-		<img src="/create_post_icon.png" id="user_icons"> <span class="ml-2">Creat a post</span>
-		</button>
 	
-	</div>
 </div>
 </body>
 </html>

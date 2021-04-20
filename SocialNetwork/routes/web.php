@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,13 +23,7 @@ Route::get('/', function () {
     	return redirect()->route('main');
     }
 });
-Route::get('main', [ 'as' => 'main', 'uses' => function () {
-    $first = DB::table('users')->where('id', Auth::id())->value('first_name');
-    $last= DB::table('users')->where('id', Auth::id())->value('last_name');
-    $username=$first." ".$last;
-    $prof_img=DB::table('users')->where('id', Auth::id())->value('profile_img');
-    return view('main',['username' => $username],['prof_img'=>$prof_img]);
-}])->middleware('auth');
+Route::get('main',  ['as' => 'main', 'uses' => 'App\Http\Controllers\UserController@get_uer_name_and_img'])->middleware('auth');
 Route::get('/return-home', function () {
     return view('home');
 });
@@ -38,4 +33,5 @@ Route::get('/home', function () {
     	return redirect()->route('main');
     }
 })->middleware(['auth','verified']);
+Route::get('profile',  ['as' => 'profile', 'uses' => 'App\Http\Controllers\UserController@get_uer_name_and_img'])->middleware('auth');
 
