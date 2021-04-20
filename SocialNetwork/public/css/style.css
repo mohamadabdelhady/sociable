@@ -46,6 +46,9 @@
 width: 20px;
 height: 20px;
 }
+.btn:hover{
+	background-color: #f2f2f2;
+}
 @media (max-width: 576px){
 	#logintext,#siguparea,#forms
 	{
