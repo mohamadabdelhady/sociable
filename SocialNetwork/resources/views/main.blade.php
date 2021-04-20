@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,25 @@
 		<form class="navbar-nav ml-auto mr-auto" id="Search-form">
    <input class="form-control " type="search" placeholder="Search" aria-label="Search" id="search-input" >
   </form>
+  <div class="dropdown">
+  <button class="btn dropdown-toggle mr-3" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  	@if($prof_img!=null)
+    <img src="{{url('/images/users_profile_img/'.$prof_img.'.png')}}" id="userAvatar"><span class="ml-3">{{$username}}</span>
+    @else
+    <img src="/images/user_default.png" id="userAvatar">{{$username}}
+    @endif
+
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">log out</a>
+    <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
+    @csrf
+    </form>
+
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
 	</div>
 </nav>
 </body>

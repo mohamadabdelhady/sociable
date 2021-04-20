@@ -29,6 +29,15 @@
 	 background-color: #f2f2f2;
 	 width: 300px;
 }
+#userlogindrop{
+	border: none;
+	box-shadow: none;
+}
+#userAvatar{
+	width: 30px;
+	height: 30px;
+	 border-radius: 50%;
+}
 @media (max-width: 576px){
 	#logintext,#siguparea,#forms
 	{
