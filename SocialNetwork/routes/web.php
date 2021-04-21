@@ -34,4 +34,11 @@ Route::get('/home', function () {
     }
 })->middleware(['auth','verified']);
 Route::get('profile',  ['as' => 'profile', 'uses' => 'App\Http\Controllers\UserController@get_uer_name_and_img'])->middleware('auth');
-
+Route::get('/old', function () {
+     return view('old');
+    
+});
+Route::get('/signup', function () {
+     return view('signup-form');
+    
+});

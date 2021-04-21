@@ -1,11 +1,13 @@
 #logo-img{
-	width: 180px;
-	height: 34px;
-
+	width: 167px;
+	height: 67px;
+background: url('/images/logo_size.jpg');
+background-repeat: no-repeat;
 }
 #background{
 	min-height: 96vh;
 	width: 100%;
+
 }
 #forms{
 	padding-top: 100px;
