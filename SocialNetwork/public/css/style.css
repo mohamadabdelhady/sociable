@@ -1,7 +1,7 @@
 #logo-img{
-	width: 167px;
-	height: 67px;
-background: url('/images/logo_size.jpg');
+	width: 171px;
+	height: 40px;
+background: url('/images/logo_size.png');
 background-repeat: no-repeat;
 }
 #background{
@@ -22,13 +22,15 @@ background-repeat: no-repeat;
 	display: none;
 }
 #nav-bar{
-	background-color: rgb(156,172,191);
+	background-color: #189AB4;
+	border-bottom: 1px solid #05445E;
+
 }
 #search-input{
 	 border-radius: 25px;
 	 border: none;
 	 box-shadow: none;
-	 background-color: #f2f2f2;
+	 background-color: #D4F1F4;
 	 width: 300px;
 }
 #userlogindrop{
@@ -49,7 +51,7 @@ width: 20px;
 height: 20px;
 }
 .mybtn:hover{
-	background-color: #f2f2f2;
+	background-color: #D4F1F4;
 }
 @media (max-width: 576px){
 	#logintext,#siguparea,#forms
