@@ -58,10 +58,21 @@
 </div>
 	</div>
 </nav>
-<div class="row container-fluid"style="background-color: #f1f7fc; min-height: 100vh;">
-	<div class="col-xl-3 col-lg-3 ml-2" id="chat_area">
-		
-  </div>
+<div class="row container-fluid"style="min-height: 100vh; min-width: 100%">
+	<!-- <div class="left-side"> -->
+	<div class="col-xl-3 col-lg-3 ml-4 mt-5" id="icons_area" style="">
+		<ul><li><a href="#"><img src="/profile_icon.png" class="side_icon"><span>My profile</span></a></li></ul>
+		<hr>
+		<ul><li><a href="#"><img src="/groups_icon.png" class="side_icon"><span>My groups</span></a></li></ul>
+	<ul><li><a href="#"><img src="/flag_icon.png" class="side_icon"><span>My pages</span></a></li></ul>
+		<hr>
+		<ul><li><a href="#"><img src="/market_icon.png" class="side_icon"><span>Market</span></a></li></ul>
+		<ul><li><a href="#"><img src="/product_icon.png" class="side_icon"><span>My products</span></a></li></ul>
+		<hr>
+		<ul><li><a href="#"><img src="/event_icon.png" class="side_icon"><span>Events</span></a></li></ul>
+		<ul><li><a href="#"><img src="/trending_icon.png" class="side_icon"><span>Trending</span></a></li></ul>
+  <!-- </div> -->
+</div>
 	<div class="col-xl-6 col-lg-6" id="post_area">
 		
 	</div>

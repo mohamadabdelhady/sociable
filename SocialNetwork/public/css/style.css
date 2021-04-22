@@ -53,6 +53,40 @@ height: 20px;
 .mybtn:hover{
 	background-color: #D4F1F4;
 }
+.side_icon{
+	width: 30px;
+	height: 30px;
+}
+.left-side{
+	background-color:#D4F1F4;
+	
+	 
+}
+#icons_area a{
+	text-decoration: none;
+	color: black;
+
+}
+#icons_area span{
+	margin-left: 10px;
+	font-size: 15px;
+
+}
+#icons_area hr{
+	margin-left: 0;
+	margin-right: 0;
+	width: 70%;
+	  border: none;
+    height: 1px;
+    color: #05445E; 
+    background-color: #05445E; 
+}
+#icons_area ul {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+  margin-top: 10px;
+}
 @media (max-width: 576px){
 	#logintext,#siguparea,#forms
 	{
