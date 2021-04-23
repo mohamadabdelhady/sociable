@@ -39,20 +39,11 @@ background-repeat: no-repeat;
 .container {
   position: relative;
 }
-#editbtn{
-	position: absolute;
-  top: 90%;
-  left: 6%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: white;
-  color: black;
-  font-size: 16px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: none;
-  box-shadow: none;
+.editbtn{
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+
 }
 #search-input{
 	 border-radius: 25px;
@@ -70,6 +61,27 @@ background-repeat: no-repeat;
 	height: 30px;
 	 border-radius: 50%;
 }
+.cover-profile{
+	position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cover-profile img {
+	border:5px solid white;
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+}
+.cover-text{
+	position: absolute;
+  top: 140%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	font-size: 30px;
+	margin:0 auto;
+}
+
 #home_icon{
 	width: 30px;
 	height: 30px;
@@ -119,10 +131,4 @@ height: 20px;
   margin: 0; /* Remove margins */
   margin-top: 10px;
 }
-@media (max-width: 576px){
-	#logintext,#siguparea,#forms
-	{
-		padding-top: 30px;
-		padding-bottom: 30px;
-	}
-}
+.btn-group { margin: auto; display: flex; flex-direction: row; justify-content: center; }

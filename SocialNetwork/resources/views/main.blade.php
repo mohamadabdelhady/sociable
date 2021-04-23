@@ -61,7 +61,7 @@
 <div class="row container-fluid"style="min-height: 100vh; min-width: 100%" id="content">
 	<!-- <div class="left-side"> -->
 	<div class="col-xl-3 col-lg-3 ml-4 " id="icons_area" style="">
-		<ul><li><a href="#"><img src="/profile_icon.png" class="side_icon"><span>My profile</span></a></li></ul>
+		<ul><li><a href="profile"><img src="/profile_icon.png" class="side_icon"><span>My profile</span></a></li></ul>
 		<hr>
 		<ul><li><a href="#"><img src="/groups_icon.png" class="side_icon"><span>My groups</span></a></li></ul>
 	<ul><li><a href="#"><img src="/flag_icon.png" class="side_icon"><span>My pages</span></a></li></ul>

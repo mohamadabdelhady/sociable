@@ -57,7 +57,32 @@
     @else
     <img src="/images/user_cover_img/cover_default.png" id="cover"><!-- <span class="ml-3">{{$username}}</span> -->
     @endif
-    <button class="btn btn-primary" id="editbtn">Edit</button>
+    <div class="editbtn ">
+    <button class="btn btn-light ml-2">Edit cover</button>
+    </div>
+    <div class="cover-profile">
+    @if($prof_img!=null)
+    <img src="{{url('/images/users_profile_img/'.$prof_img.'.png')}}"><!-- <p>{{$username}}</p> -->
+    @else
+    <img src="/images/user_default.png" ><!-- <p>{{$username}}</p> -->
+    @endif
+  </div>
+  <div class="cover-text">
+     @if($prof_img!=null)
+    <p>{{$username}}</p>
+    @endif
+  </div>
+
+</div>
+
+<div style="margin-top: 130px;">
+  <hr>
+  <div class="btn-group btn-group-lg me-2" role="group" aria-label="Second group">
+    <button type="button" class="btn btn-light"><img src="/timeline_icon.png" id="home_icon"><p>Timeline</p></button>
+    <button type="button" class="btn btn-light"><img src="/likes_icon.png" id="home_icon"><p>Likes</p></button>
+    <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon"><p>Following</p></button>
+    <button type="button" class="btn btn-light"><img src="/followers_icon.png" id="home_icon"><p>Followers</p></button>
+  </div>
 </div>
 	</div>
 	<div class="col-xl-1 col-lg-1" id="action_area"></div>
