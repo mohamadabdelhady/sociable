@@ -22,7 +22,7 @@
         
         <p class="h4 form-group">You must verify your email adress, please check your email for vertification link.</p>
         <div class="form-group"><button type="submit" class="btn btn-block btn-log">Resend email</button></div>
-         <div class="form-group"><button class="btn btn-block btn-log" type="submit">Sign up</button></div><a class="already" href="/">You alredy have an account? Log in here.</a>
+       <a class="already" href="/">You alredy have an account? Log in here.</a>
         </form>
          @if(session('status'))
             <script type="text/javascript">alert("{{session('status')}}");</script>
