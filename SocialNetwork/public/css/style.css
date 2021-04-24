@@ -132,3 +132,7 @@ height: 20px;
   margin-top: 10px;
 }
 .btn-group { margin: auto; display: flex; flex-direction: row; justify-content: center; }
+.post-input:focus{
+	outline:none;
+	
+}

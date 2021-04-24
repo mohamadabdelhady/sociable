@@ -64,13 +64,13 @@
 		<ul><li><a href="#"><img src="/trending_icon.png" class="side_icon"><span>Trending</span></a></li></ul>
 </div>
 <div class="col-xl-5 col-lg-5 ">
-	<form class="createPost post">
+	<!-- <form class="createPost post">
 
         <div class="partOne">
             @if($prof_img!=null)
     <img src="{{url('/images/users_profile_img/'.$prof_img.'.png')}}" id="userAvatar">
     		@endif
-            <textarea placeholder="What do you think..?" class="text"></textarea>
+            <textarea placeholder="What do you think..?" class="text "></textarea>
 
         </div>
         <div class="partTwo">
@@ -141,8 +141,23 @@
 
     <div class="post">
         <p class="welcomePar">Welcome in new feed... Say Hello! </p>
-    </div>
+    </div> -->
+    <div class="card">
+    	<div class="card-body">
+    	@if($prof_img!=null)
+    <img src="{{url('/images/users_profile_img/'.$prof_img.'.png')}}" id="userAvatar">
+    @else
+    <img src="/images/user_default.png" id="userAvatar"><span class="ml-3">
+    @endif
 
+    <input class="m-2 post-input" type="search" placeholder="What is on your mind {{$username}}" aria-label="Search" id="search-input" style="
+	width: 80%;" >
+	 <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+    <button type="button" class="btn btn-light"><img src="/picture_icon.png" id="home_icon"><p>Picture</p></button>
+    <button type="button" class="btn btn-light"><img src="/video_icon.png" id="home_icon"><p>Video</p></button>
+  </div>
+    </div>
+    </div>
 </div>
 <div class="col-xl-3 col-lg-3 card " style="height:30rem; ">
 
