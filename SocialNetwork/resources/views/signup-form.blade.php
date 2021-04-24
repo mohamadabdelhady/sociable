@@ -62,7 +62,7 @@
     <input type="radio" name="gender" id="female" autocomplete="off" value="female"> Female
   </label>
 </div>
-            <div class="form-group"><button class="btn btn-block btn-log" type="submit">Sign up</button></div><a class="already" href="/">You alredy have an account? Log in here.</a>
+            <div class="form-group mt-2"><button class="btn btn-block btn-log " type="submit">Sign up</button></div><a class="already" href="/">You alredy have an account? Log in here.</a>
         </form>
     </div>
 </div>
