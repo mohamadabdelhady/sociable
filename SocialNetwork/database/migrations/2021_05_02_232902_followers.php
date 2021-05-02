@@ -14,11 +14,10 @@ class Followers extends Migration
     public function up()
     {
         Schema::create('followers', function (Blueprint $table) {
+
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->text('message_content');
-            $table->timestamps();
-
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
