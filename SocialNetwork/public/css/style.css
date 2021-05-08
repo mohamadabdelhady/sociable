@@ -99,8 +99,8 @@ height: 20px;
 }
 .left-side{
 	background-color:#D4F1F4;
-	
-	 
+
+
 }
 #cover{
 	width: 100%;
@@ -122,8 +122,8 @@ height: 20px;
 	width: 70%;
 	  border: none;
     height: 1px;
-    color: #05445E; 
-    background-color: #05445E; 
+    color: #05445E;
+    background-color: #05445E;
 }
 #icons_area ul {
   list-style-type: none; /* Remove bullets */
@@ -134,5 +134,10 @@ height: 20px;
 .btn-group { margin: auto; display: flex; flex-direction: row; justify-content: center; }
 .post-input:focus{
 	outline:none;
-	
+
+}
+.box{
+    background-color:#D4F1F4 ;
+    color: black;
+    border-radius: 25px;
 }
