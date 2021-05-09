@@ -8,10 +8,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/script.js') }}" defer></script>
+    <script src="{{ asset('js/script1.js') }}" defer></script>
+    <script src="{{ asset('js/script2.js') }}" defer></script>
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/popup.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style-post.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -86,14 +86,21 @@
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <div class="form">
-                    <textarea class="form-control" id="textArea" rows="10" placeholder="text here"></textarea>
-                    <div class="btn-group btn-group-sm m-2" role="group" aria-label="Second group">
-                        <button type="button" class="btn btn-light"><img src="/picture_icon.png" id="home_icon"><p>Picture</p></button>
-                        <button type="button" class="btn btn-light"><img src="/video_icon.png" id="home_icon"><p>Video</p></button>
+                <form method="POST" action="{{route('crtpost')}}"enctype="multipart/form-data" >
+                    @csrf
+                    <textarea class="form-control" id="textArea" rows="10" placeholder="text here" name="textinput"></textarea>
+                    <p id="error-upload" style="display:none; color: red;"></p>
+                    <div class="btn-group btn-group-sm m-2" role="group" aria-label="Second group" >
+                        <button type="button" class="btn btn-light " onclick="event.preventDefault(); document.getElementById('upload-img').click();"><img src="/picture_icon.png" id="home_icon"><p>Picture</p></button>
+                        <input type="file"  directory  accept="image/*" style="display: none;" id="upload-img" class="form-control" name="inputimg">
+                        <button type="button" class="btn btn-light"onclick="event.preventDefault(); document.getElementById('upload-video').click();"><img src="/video_icon.png" id="home_icon"><p>Video</p></button>
+                        <input type="file" accept="video/*" style="display: none;" id="upload-video" class="form-control" name="inputvid">
+
+
                     </div>
-                    <input type="button" class="btn btn-outline-info " style="width: 100%;" value="Post">
-                </div>
+                    <input type="submit" class="btn btn-outline-info " style="width: 100%;" value="Post">
+                </form>
+
             </div>
 
         </div>
@@ -110,4 +117,6 @@
 </div>
 </div>
 </body>
+
+
 </html>

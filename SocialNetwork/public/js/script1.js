@@ -9,6 +9,8 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
     modal.style.display = "block";
+    document.getElementById('error-upload').style.display='none';
+    document.getElementById('textArea').value = "";
 }
 
 // When the user clicks on <span> (x), close the modal

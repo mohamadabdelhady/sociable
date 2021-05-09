@@ -38,4 +38,5 @@ Route::get('/signup', function () {
      return view('signup-form');
 
 });
+Route::post('crtpost',['as' => 'crtpost', 'uses' => 'App\Http\Controllers\create_post@store'])->middleware('auth');
 
