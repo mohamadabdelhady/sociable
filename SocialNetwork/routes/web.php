@@ -41,3 +41,5 @@ Route::get('/signup', function () {
 Route::post('crtpost',['as' => 'crtpost', 'uses' => 'App\Http\Controllers\create_post@store'])->middleware('auth');
 Route::post('prof_ch',['as' => 'prof_ch', 'uses' => 'App\Http\Controllers\change_img@change_prof'])->middleware('auth');
 Route::post('cover_ch',['as' => 'cover_ch', 'uses' => 'App\Http\Controllers\change_img@change_cover'])->middleware('auth');
+Route::post('cover_rm',['as' => 'cover_rm', 'uses' => 'App\Http\Controllers\change_img@rm_cover'])->middleware('auth');
+Route::post('profile_rm',['as' => 'profile_rm', 'uses' => 'App\Http\Controllers\change_img@rm_profile'])->middleware('auth');

@@ -72,7 +72,12 @@
                 <form id="change_cover" action="{{route('cover_ch')}}" method="post"  style="display: none;" enctype="multipart/form-data"> @csrf
                     <input type="file"  directory  accept="image/*" style="display: none;" id="upload-img_cover" class="form-control" name="coverimg" onchange="document.getElementById('change_cover').submit()">
                 </form>
-
+                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('remove_profile').submit();">Remove profile image</a>
+                <form id="remove_profile" action="{{route('profile_rm')}}" method="post"  style="display: none;" > @csrf
+                </form>
+                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('remove_cover').submit();">Remove cover image</a>
+                <form id="remove_cover" action="{{route('cover_rm')}}" method="post"  style="display: none;" > @csrf
+                </form>
             </div>
         </div>
     </div>
