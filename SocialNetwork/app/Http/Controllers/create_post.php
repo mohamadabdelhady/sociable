@@ -36,8 +36,6 @@ class create_post extends Controller
                'post_content'=>$request->input('textinput'),
            ]);
        }
-       /* Store $imageName name in DATABASE from HERE */
-
        return back();
    }
 

@@ -22,14 +22,14 @@
 		</button>
   <div class="dropdown">
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/chat_icon.png" id="userAvatar"></button></div>
-  
+
   <div class="dropdown">
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>
   <div class="dropdown">
 
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   	@if($prof_img!=null)
-    <img src="{{url('/images/users_profile_img/'.$prof_img.'.png')}}" id="userAvatar"><span class="ml-3">{{$username}}</span>
+    <img src="{{url('/images/users_profile_img/'.$prof_img)}}" id="userAvatar"><span class="ml-3">{{$username}}</span>
     @else
     <img src="/images/user_default.png" id="userAvatar"><span class="ml-3">{{$username}}</span>
     @endif
@@ -43,7 +43,7 @@
     @csrf
     </form>
 
-    
+
   </div>
 </div>
 	</div>
@@ -53,16 +53,32 @@
 	<div class="col-xl-10 col-lg-10" >
 		<div class="container">
 		@if($cover_img!=null)
-    <img src="{{url('/images/user_cover_img/'.$cover_img.'.png')}}" id="cover"><!-- <span class="ml-3">{{$username}}</span> -->
+    <img src="{{url('/images/user_cover_img/'.$cover_img)}}" id="cover"><!-- <span class="ml-3">{{$username}}</span> -->
     @else
     <img src="/images/user_cover_img/cover_default.png" id="cover"><!-- <span class="ml-3">{{$username}}</span> -->
     @endif
-    <div class="editbtn ">
-    <button class="btn btn-light ml-2">Edit cover</button>
+
+        <div class="dropdown editbtn">
+            <button class="btn btn-light ml-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Edit cover
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('upload-img_prof').click();">Change profile image</a>
+
+                <form id="change_prof" action="{{route('prof_ch')}}" method="post"  style="display: none;" enctype="multipart/form-data"> @csrf
+                    <input type="file"  directory  accept="image/*" style="display: none;" id="upload-img_prof" class="form-control" name="profimg" onchange="document.getElementById('change_prof').submit()">
+                </form>
+                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('upload-img_cover').click();">Change cover image</a>
+                <form id="change_cover" action="{{route('cover_ch')}}" method="post"  style="display: none;" enctype="multipart/form-data"> @csrf
+                    <input type="file"  directory  accept="image/*" style="display: none;" id="upload-img_cover" class="form-control" name="coverimg" onchange="document.getElementById('change_cover').submit()">
+                </form>
+
+            </div>
+        </div>
     </div>
     <div class="cover-profile">
     @if($prof_img!=null)
-    <img src="{{url('/images/users_profile_img/'.$prof_img.'.png')}}"><!-- <p>{{$username}}</p> -->
+    <img src="{{url('/images/users_profile_img/'.$prof_img)}}"><!-- <p>{{$username}}</p> -->
     @else
     <img src="/images/user_default.png" ><!-- <p>{{$username}}</p> -->
     @endif
@@ -73,18 +89,18 @@
     @endif
   </div>
 
-</div>
 
-<div style="margin-top: 130px;">
+
+
   <hr>
-  <div class="btn-group btn-group-lg me-2" role="group" aria-label="Second group">
+  <div class="btn-group btn-group-lg m-2 btn-cover" role="group" aria-label="Second group">
     <button type="button" class="btn btn-light"><img src="/timeline_icon.png" id="home_icon"><p>Timeline</p></button>
     <button type="button" class="btn btn-light"><img src="/likes_icon.png" id="home_icon"><p>Likes</p></button>
     <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon"><p>Following</p></button>
     <button type="button" class="btn btn-light"><img src="/followers_icon.png" id="home_icon"><p>Followers</p></button>
-  </div>
 </div>
 	</div>
+</div>
 	<div class="col-xl-1 col-lg-1" id="action_area"></div>
 </div>
 </body>

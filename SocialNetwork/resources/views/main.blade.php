@@ -33,7 +33,7 @@
   <div class="dropdown">
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   	@if($prof_img!=null)
-    <img src="{{url('/images/users_profile_img/'.$prof_img.'.png')}}" id="userAvatar"><span class="ml-3">{{$username}}</span>
+    <img src="{{url('/images/users_profile_img/'.$prof_img)}}" id="userAvatar"><span class="ml-3">{{$username}}</span>
     @else
     <img src="/images/user_default.png" id="userAvatar"><span class="ml-3">{{$username}}</span>
     @endif
@@ -72,7 +72,7 @@
             <a href="#" style="text-decoration: none;" onclick="event.preventDefault(); document.getElementById('crt-post').click();">
             <div class="box p-2">
     	@if($prof_img!=null)
-    <img src="{{url('/images/users_profile_img/'.$prof_img.'.png')}}" id="userAvatar">
+    <img src="{{url('/images/users_profile_img/'.$prof_img)}}" id="userAvatar">
     @else
     <img src="/images/user_default.png" id="userAvatar">
     @endif
