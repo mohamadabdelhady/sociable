@@ -8,8 +8,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/script1.js') }}" defer></script>
     <script src="{{ asset('js/script2.js') }}" defer></script>
+    <script src="{{ asset('js/filter-script.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-post.css') }}" rel="stylesheet">
@@ -57,13 +57,16 @@
         <div id="mySidemenu" class="sidemenu">
            <p style="font-size: 25px;font-weight: bold;" class="pl-3">Search results</p><hr>
             <p style="font-size: 20px;font-weight: bold;" class="pl-3">Filters</p>
-            <a href="#"><span>All</span><span>{{" (".$total.")"}}</span></a>
-            <a href="#"><span>People</span><span>{{"   (".$user_num.")"}}</span></a>
-            <a href="#"><span>Posts</span><span>{{"   (".$post_num.")"}}</span></a>
+            <a href="#" id="all-link" onclick="event.preventDefault(); document.getElementById('all').click();"><span>All</span><span>{{" (".$total.")"}}</span></a>
+            <button style="display: none" id="all"></button>
+            <a href="#" id="user-link" onclick="event.preventDefault(); document.getElementById('user').click();"><span>People</span><span>{{"   (".$user_num.")"}}</span></a>
+            <button style="display: none" id="user"></button>
+            <a href="#" id="post_link" onclick="event.preventDefault(); document.getElementById('post').click();"><span>Posts</span><span>{{"   (".$post_num.")"}}</span></a>
+            <button style="display: none" id="post"></button>
         </div>
     </div>
     <div class="col-xl-5 col-lg-5 ">
-        <div id="user-result">
+        <div id="user-result" class="">
             @if($user_num!=0)
                 <p style="font-size: 25px">People</p><hr>
                 @foreach($user as $user)
@@ -94,7 +97,7 @@
                             @if($post['image_dir'!=null])
                             <img src="{{url('/images/post_img/'.$post['image_dir'])}}">
                             @elseif($post['video_dir'])
-                                
+
                             @endif
                         </div>
                     </div>
