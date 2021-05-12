@@ -18,16 +18,16 @@
 	<nav class="navbar navbar-dark"id="nav-bar" >
 	<div class="container-fluid" >
 		<div class="navbar-brand" id="logo-img"></div>
-		<form class="navbar-nav ml-auto mr-auto" id="Search-form">
-   <input class="form-control " type="search" placeholder="Search" aria-label="Search" id="search-input" >
+		<form class="navbar-nav ml-auto mr-auto" id="Search-form" method="get" action="{{route('search-results')}}">@csrf
+   <input class="form-control " type="search" placeholder="Search" aria-label="Search" id="search-input" name="q">
   </form>
+
   <button class="btn mybtn mr-3" style="border: none;box-shadow: none;" onclick="event.preventDefault(); document.getElementById('home-form').submit();">
 				<form action="{{route('main')}}" method="get" style="display: none;" id="home-form"></form>
 		<img src="/home_icon.png" id="home_icon">
 		</button>
   <div class="dropdown">
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/chat_icon.png" id="userAvatar"></button></div>
-
   <div class="dropdown">
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>
   <div class="dropdown">
@@ -88,6 +88,7 @@
                 <span class="close">&times;</span>
                 <form method="POST" action="{{route('crtpost')}}"enctype="multipart/form-data" >
                     @csrf
+                    <input type="text" placeholder="Title" class="form-control m-1" name="title">
                     <textarea class="form-control" id="textArea" rows="10" placeholder="text here" name="textinput"></textarea>
                     <p id="error-upload" style="display:none; color: red;"></p>
                     <div class="btn-group btn-group-sm m-2" role="group" aria-label="Second group" >
@@ -101,9 +102,11 @@
                     <input type="submit" class="btn btn-outline-info " style="width: 100%;" value="Post">
                 </form>
 
+
             </div>
 
         </div>
+{{--
     </div>
 <div class="col-xl-3 col-lg-3 card " style="height:30rem; ">
 
@@ -118,5 +121,5 @@
 </div>
 </body>
 
-
+<script type="text/javascript" src="resources/js/app.js"></script>
 </html>

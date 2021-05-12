@@ -23,7 +23,7 @@ Route::get('/', function () {
     	return redirect()->route('main');
     }
 });
-Route::get('main',  ['as' => 'main', 'uses' => 'App\Http\Controllers\UserController@get_uer_name_and_img'])->middleware('auth');
+Route::get('main',  ['as' => 'main', 'uses' => 'App\Http\Controllers\mainpage@get_all_data'])->middleware('auth');
 Route::get('/return-home', function () {
     return view('home');
 });
@@ -33,7 +33,7 @@ Route::get('/home', function () {
     	return redirect()->route('main');
     }
 })->middleware(['auth','verified']);
-Route::get('profile',  ['as' => 'profile', 'uses' => 'App\Http\Controllers\UserController@get_uer_name_and_img'])->middleware('auth');
+Route::get('profile',  ['as' => 'profile', 'uses' => 'App\Http\Controllers\mainpage@get_all_data'])->middleware('auth');
 Route::get('/signup', function () {
      return view('signup-form');
 
@@ -43,3 +43,5 @@ Route::post('prof_ch',['as' => 'prof_ch', 'uses' => 'App\Http\Controllers\change
 Route::post('cover_ch',['as' => 'cover_ch', 'uses' => 'App\Http\Controllers\change_img@change_cover'])->middleware('auth');
 Route::post('cover_rm',['as' => 'cover_rm', 'uses' => 'App\Http\Controllers\change_img@rm_cover'])->middleware('auth');
 Route::post('profile_rm',['as' => 'profile_rm', 'uses' => 'App\Http\Controllers\change_img@rm_profile'])->middleware('auth');
+//Route::get('search-results',function (){return view('search-results');});
+Route::get('search-results',  ['as' => 'search-results', 'uses' => 'App\Http\Controllers\search@search'])->middleware('auth');

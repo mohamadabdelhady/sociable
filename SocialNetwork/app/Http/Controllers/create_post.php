@@ -16,6 +16,7 @@ class create_post extends Controller
             $path = $request->file('inputimg')->move(public_path('images/post_img'), $imageName);
             $img_size = $path->getSize();
            $img = posts::create([
+               'title'=>$request->input('title'),
                'image_dir' => $imageName,
                'post_content'=>$request->input('textinput'),
                'size'=>$img_size,
@@ -26,6 +27,7 @@ class create_post extends Controller
            $pathv = $request->file('inputvid')->move(public_path('images/post_vid'), $imageName);
            $img_size = $pathv->getSize();
            $img = posts::create([
+               'title'=>$request->input('title'),
                'image_dir' => $imageName,
                'post_content'=>$request->input('textinput'),
                'size'=>$img_size,
@@ -33,6 +35,7 @@ class create_post extends Controller
        }
        else if($request->input('textinput')!=""){
            $img = posts::create([
+               'title'=>$request->input('title'),
                'post_content'=>$request->input('textinput'),
            ]);
        }

@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->text('post_content')->nullable();
             $table->double('likes')->default(0);
             $table->double('dislikes')->default(0);

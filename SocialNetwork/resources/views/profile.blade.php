@@ -14,8 +14,9 @@
 	<div class="container-fluid" >
 		<div class="navbar-brand" id="logo-img"></div>
 		<form class="navbar-nav ml-auto mr-auto" id="Search-form">
-   <input class="form-control " type="search" placeholder="Search" aria-label="Search" id="search-input" >
+   <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search-input" >
   </form>
+
   <button class="btn mybtn mr-3" style="border: none;box-shadow: none;" onclick="event.preventDefault(); document.getElementById('home-form').submit();">
 				<form action="{{route('main')}}" method="get" style="display: none;" id="home-form"></form>
 		<img src="/home_icon.png" id="home_icon">
@@ -100,8 +101,7 @@
   <hr>
   <div class="btn-group btn-group-lg m-2 btn-cover" role="group" aria-label="Second group">
     <button type="button" class="btn btn-light"><img src="/timeline_icon.png" id="home_icon"><p>Timeline</p></button>
-    <button type="button" class="btn btn-light"><img src="/likes_icon.png" id="home_icon"><p>Likes</p></button>
-    <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon"><p>Following</p></button>
+    <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon"><p>Follow</p></button>
     <button type="button" class="btn btn-light"><img src="/followers_icon.png" id="home_icon"><p>Followers</p></button>
 </div>
 	</div>
