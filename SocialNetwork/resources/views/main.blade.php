@@ -106,7 +106,6 @@
             </div>
 
         </div>
-{{--
     </div>
 <div class="col-xl-3 col-lg-3 card " style="height:30rem; ">
 
