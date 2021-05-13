@@ -187,3 +187,7 @@ height: 20px;
 #search-username{
 font-size: 20px;
 }
+#post_img{
+    height: 95%;
+    width: 95%;
+}

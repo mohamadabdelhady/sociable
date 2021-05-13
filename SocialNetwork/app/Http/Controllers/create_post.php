@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class create_post extends Controller
@@ -16,6 +17,7 @@ class create_post extends Controller
             $path = $request->file('inputimg')->move(public_path('images/post_img'), $imageName);
             $img_size = $path->getSize();
            $img = posts::create([
+               'user_id'=>Auth::id(),
                'title'=>$request->input('title'),
                'image_dir' => $imageName,
                'post_content'=>$request->input('textinput'),
@@ -27,6 +29,7 @@ class create_post extends Controller
            $pathv = $request->file('inputvid')->move(public_path('images/post_vid'), $imageName);
            $img_size = $pathv->getSize();
            $img = posts::create([
+               'user_id'=>Auth::id(),
                'title'=>$request->input('title'),
                'image_dir' => $imageName,
                'post_content'=>$request->input('textinput'),
@@ -35,6 +38,7 @@ class create_post extends Controller
        }
        else if($request->input('textinput')!=""){
            $img = posts::create([
+               'user_id'=>Auth::id(),
                'title'=>$request->input('title'),
                'post_content'=>$request->input('textinput'),
            ]);

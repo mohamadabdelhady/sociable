@@ -13,9 +13,9 @@
 	<nav class="navbar navbar-dark"id="nav-bar" >
 	<div class="container-fluid" >
 		<div class="navbar-brand" id="logo-img"></div>
-		<form class="navbar-nav ml-auto mr-auto" id="Search-form">
-   <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search-input" >
-  </form>
+        <form class="navbar-nav ml-auto mr-auto" id="Search-form" method="get" action="{{route('search-results')}}">@csrf
+            <input class="form-control " type="search" placeholder="Search" aria-label="Search" id="search-input" name="q">
+        </form>
 
   <button class="btn mybtn mr-3" style="border: none;box-shadow: none;" onclick="event.preventDefault(); document.getElementById('home-form').submit();">
 				<form action="{{route('main')}}" method="get" style="display: none;" id="home-form"></form>

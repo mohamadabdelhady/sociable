@@ -90,17 +90,22 @@
                 <p style="font-size: 25px">Posts</p><hr>
                 @foreach($posts as $post)
                     <div class="card">
-                        <div></div>
+                        @if($post->profile_img!=null)
+                        <div><img src="{{'/images/users_profile_img/'.$post->profile_img}}" id="userAvatar" class="m-2"><span>{{$post->first_name." ".$post->last_name}}</span></div>
+                        @else
+                            <div><img src="images/user_default.png" id="userAvatar">
+                        @endif
                         <hr>
                         <div>
-                            <p>{{$post['post_content']}}</p>
-                            @if($post['image_dir'!=null])
-                            <img src="{{url('/images/post_img/'.$post['image_dir'])}}">
-                            @elseif($post['video_dir'])
-
+                            <p class="m-2">{{$post->post_content}}</p>
+                            @if($post->image_dir!=null)
+                            <img src="{{url('/images/post_img/'.$post->image_dir)}}" id="post_img" class="m-2">
+                            @elseif($post->video_dir)
+                            <p>vid</p>
                             @endif
                         </div>
                     </div>
+                        <br>
                 @endforeach
             @endif
         </div>
