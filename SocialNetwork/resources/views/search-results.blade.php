@@ -101,7 +101,10 @@
                             @if($post->image_dir!=null)
                             <img src="{{url('/images/post_img/'.$post->image_dir)}}" id="post_img" class="m-2">
                             @elseif($post->video_dir)
-                            <p>vid</p>
+                                <video id="post_img" controls class="m-2">
+                                    <source src="{{URL::asset("/images/post_vid/$post->video_dir")}}" type="video/mp4" >
+                                    Your browser does not support the video tag.
+                                </video>
                             @endif
                         </div>
                     </div>

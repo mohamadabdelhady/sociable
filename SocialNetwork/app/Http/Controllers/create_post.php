@@ -31,7 +31,7 @@ class create_post extends Controller
            $img = posts::create([
                'user_id'=>Auth::id(),
                'title'=>$request->input('title'),
-               'image_dir' => $imageName,
+               'video_dir' => $imageName,
                'post_content'=>$request->input('textinput'),
                'size'=>$img_size,
            ]);
