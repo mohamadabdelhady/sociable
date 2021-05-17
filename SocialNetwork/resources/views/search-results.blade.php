@@ -32,11 +32,14 @@
             <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>
         <div class="dropdown">
             <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @if($prof_img!=null)
-                    <img src="{{url('/images/users_profile_img/'.$prof_img)}}" id="userAvatar"><span class="ml-3">{{$username}}</span>
+                @if(auth()->user()->profile_img)
+                    <img src="{{url('/images/users_profile_img/' . auth()->user()->profile_img)}}" id="userAvatar"><span
+                        class="ml-3">{{auth()->user()->first_name." ".auth()->user()->last_name}}</span>
                 @else
-                    <img src="/images/user_default.png" id="userAvatar"><span class="ml-3">{{$username}}</span>
+                    <img src="/images/user_default.png" id="userAvatar"><span
+                        class="ml-3">{{auth()->user()->first_name." ".auth()->user()->last_name}}</span>
                 @endif
+
 
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

@@ -32,11 +32,14 @@
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>
   <div class="dropdown">
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  	@if($prof_img!=null)
-    <img src="{{url('/images/users_profile_img/'.$prof_img)}}" id="userAvatar"><span class="ml-3">{{$username}}</span>
-    @else
-    <img src="/images/user_default.png" id="userAvatar"><span class="ml-3">{{$username}}</span>
-    @endif
+      @if(auth()->user()->profile_img)
+          <img src="{{url('/images/users_profile_img/' . auth()->user()->profile_img)}}" id="userAvatar"><span
+              class="ml-3">{{auth()->user()->first_name." ".auth()->user()->last_name}}</span>
+      @else
+          <img src="/images/user_default.png" id="userAvatar"><span
+              class="ml-3">{{auth()->user()->first_name." ".auth()->user()->last_name}}</span>
+      @endif
+
 
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -72,11 +75,11 @@
             <a href="#" style="text-decoration: none;" onclick="event.preventDefault(); document.getElementById('crt-post').click();">
             <div class="box p-2">
     	@if($prof_img!=null)
-    <img src="{{url('/images/users_profile_img/'.$prof_img)}}" id="userAvatar">
+    <img src="{{url('/images/users_profile_img/'.auth()->user()->profile_img)}}" id="userAvatar">
     @else
     <img src="/images/user_default.png" id="userAvatar">
     @endif
-            <span class="h5">What is on your mind {{$username}} </span>
+            <span class="h5">What is on your mind {{auth()->user()->first_name." ".auth()->user()->last_name}} </span>
             </div></a>
             <button id="crt-post" style="display: none" ></button>
 
