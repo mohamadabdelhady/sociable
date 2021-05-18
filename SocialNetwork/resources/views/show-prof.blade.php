@@ -56,24 +56,24 @@
     <div class="col-xl-1 col-lg-1"></div>
     <div class="col-xl-10 col-lg-10" >
         <div class="container">
-            @if($cover_img!=null)
-                <img src="{{url('/images/user_cover_img/'.$cover_img)}}" id="cover"><!-- <span class="ml-3">{{$username}}</span> -->
+            @if($userdata->cover_img!=null)
+                <img src="{{url('/images/user_cover_img/'.$userdata->cover_img)}}" id="cover">
             @else
-                <img src="/images/user_cover_img/cover_default.png" id="cover"><!-- <span class="ml-3">{{$username}}</span> -->
+                <img src="/images/user_cover_img/cover_default.png" id="cover">
             @endif
 
 
         </div>
         <div class="cover-profile">
-            @if($prof_img!=null)
-                <img src="{{url('/images/users_profile_img/'.$prof_img)}}"><!-- <p>{{$username}}</p> -->
+            @if($userdata->profile_img!=null)
+                <img src="{{url('/images/users_profile_img/'.$userdata->profile_img)}}">
             @else
-                <img src="/images/user_default.png" ><!-- <p>{{$username}}</p> -->
+                <img src="/images/user_default.png" >
             @endif
         </div>
         <div class="cover-text">
 
-                <p>{{$username}}</p>
+                <p>{{$userdata->first_name." ".$userdata->last_name}}</p>
 
         </div>
 
@@ -83,8 +83,12 @@
         <hr>
         <div class="btn-group btn-group-lg m-2 btn-cover" role="group" aria-label="Second group">
             <button type="button" class="btn btn-light"><img src="/timeline_icon.png" id="home_icon"><p>Timeline</p></button>
-            <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon"><p>Follow</p></button>
-{{--            <form id="follow">@csrf </form>--}}
+            <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon" onclick="event.preventDefault(); document.getElementById('follow').submit();"><p>Follow</p></button>
+            <form action="{{ route('follow') }}" method="POST" id="follow" style="display: none;">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ $userdata->id }}">
+
+            </form>
             <button type="button" class="btn btn-light"><img src="/followers_icon.png" id="home_icon"><p>Followers</p></button>
         </div>
     </div>
