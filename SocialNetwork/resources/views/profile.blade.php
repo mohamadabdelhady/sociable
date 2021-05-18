@@ -29,11 +29,14 @@
   <div class="dropdown">
 
   <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  	@if($prof_img!=null)
-    <img src="{{url('/images/users_profile_img/'.$prof_img)}}" id="userAvatar"><span class="ml-3">{{$username}}</span>
-    @else
-    <img src="/images/user_default.png" id="userAvatar"><span class="ml-3">{{$username}}</span>
-    @endif
+      @if(auth()->user()->profile_img)
+          <img src="{{url('/images/users_profile_img/' . auth()->user()->profile_img)}}" id="userAvatar"><span
+              class="ml-3">{{auth()->user()->first_name." ".auth()->user()->last_name}}</span>
+      @else
+          <img src="/images/user_default.png" id="userAvatar"><span
+              class="ml-3">{{auth()->user()->first_name." ".auth()->user()->last_name}}</span>
+      @endif
+
 
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -53,10 +56,10 @@
 	<div class="col-xl-1 col-lg-1"></div>
 	<div class="col-xl-10 col-lg-10" >
 		<div class="container">
-		@if($cover_img!=null)
-    <img src="{{url('/images/user_cover_img/'.$cover_img)}}" id="cover"><!-- <span class="ml-3">{{$username}}</span> -->
+		@if(auth()->user()->cover_img!=null)
+    <img src="{{url('/images/user_cover_img/'.auth()->user()->cover_img)}}" id="cover">
     @else
-    <img src="/images/user_cover_img/cover_default.png" id="cover"><!-- <span class="ml-3">{{$username}}</span> -->
+    <img src="/images/user_cover_img/cover_default.png" id="cover">
     @endif
 
         <div class="dropdown editbtn">
@@ -83,16 +86,16 @@
         </div>
     </div>
     <div class="cover-profile">
-    @if($prof_img!=null)
-    <img src="{{url('/images/users_profile_img/'.$prof_img)}}"><!-- <p>{{$username}}</p> -->
+    @if(auth()->user()->profile_img!=null)
+    <img src="{{url('/images/users_profile_img/'.auth()->user()->profile_img)}}">
     @else
-    <img src="/images/user_default.png" ><!-- <p>{{$username}}</p> -->
+    <img src="/images/user_default.png" >
     @endif
   </div>
   <div class="cover-text">
-     @if($prof_img!=null)
-    <p>{{$username}}</p>
-    @endif
+
+    <p>{{auth()->user()->first_name." ".auth()->user()->last_name}}</p>
+
   </div>
 
 

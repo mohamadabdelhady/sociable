@@ -74,7 +74,7 @@
     	<div class="card-body">
             <a href="#" style="text-decoration: none;" onclick="event.preventDefault(); document.getElementById('crt-post').click();">
             <div class="box p-2">
-    	@if($prof_img!=null)
+                @if(auth()->user()->profile_img)
     <img src="{{url('/images/users_profile_img/'.auth()->user()->profile_img)}}" id="userAvatar">
     @else
     <img src="/images/user_default.png" id="userAvatar">

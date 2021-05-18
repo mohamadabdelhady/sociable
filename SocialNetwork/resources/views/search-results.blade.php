@@ -81,7 +81,7 @@
                             @else
                                 <div><img src="images/user_default.png" id="search-prof">
                                     @endif
-                        <span id="search-username">{{$user['first_name']." ".$user['last_name']}}</span></div>
+                                   <a style="text-decoration: none;color: black;" href="profile/{{$user['id']}}"><span id="search-username">{{$user['first_name']." ".$user['last_name']}}</span></a></div>
 
                     </div>
                         <br>
@@ -118,6 +118,4 @@
     </div>
 </div>
 </body>
-
-<script type="text/javascript" src="resources/js/app.js"></script>
 </html>

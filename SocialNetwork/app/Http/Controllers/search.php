@@ -46,9 +46,8 @@ public function search(Request $request)
     $img_name=app()->call('App\Http\Controllers\UserController@get_uer_name_and_img');
     $current=$request->path();
 
-    return view("$current")->with(compact( 'user', 'posts', 'post_num', 'user_num','total'))
-        ->with($img_name);
-//echo "$posts";
+    return view("$current")->with(compact( 'user', 'posts', 'post_num', 'user_num','total'));
+//echo "$user";
 
 }
 }

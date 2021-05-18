@@ -45,3 +45,4 @@ Route::post('cover_rm',['as' => 'cover_rm', 'uses' => 'App\Http\Controllers\chan
 Route::post('profile_rm',['as' => 'profile_rm', 'uses' => 'App\Http\Controllers\change_img@rm_profile'])->middleware('auth');
 //Route::get('search-results',function (){return view('search-results');});
 Route::get('search-results',  ['as' => 'search-results', 'uses' => 'App\Http\Controllers\search@search'])->middleware('auth');
+Route::get('profile/{id}',  ['as' => 'profile/{id}', 'uses' => 'App\Http\Controllers\showprofile@get_all_data'])->middleware('auth');
