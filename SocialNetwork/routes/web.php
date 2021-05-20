@@ -44,5 +44,6 @@ Route::post('cover_ch',['as' => 'cover_ch', 'uses' => 'App\Http\Controllers\chan
 Route::post('cover_rm',['as' => 'cover_rm', 'uses' => 'App\Http\Controllers\change_img@rm_cover'])->middleware('auth');
 Route::post('profile_rm',['as' => 'profile_rm', 'uses' => 'App\Http\Controllers\change_img@rm_profile'])->middleware('auth');
 Route::get('search-results',  ['as' => 'search-results', 'uses' => 'App\Http\Controllers\search@search'])->middleware('auth');
-Route::get('profile/{id}',  ['as' => 'profile/{id}', 'uses' => 'App\Http\Controllers\showprofile@get_all_data'])->middleware('auth');
+Route::GET('get-profile/{id}',  ['as' => 'get-profile/{id}', 'uses' => 'App\Http\Controllers\showprofile@get_all_data'])->middleware('auth');
 Route::post('follow', [App\Http\Controllers\follow::class, 'following'])->name('follow');
+Route::post('unfollow', [App\Http\Controllers\follow::class, 'unfollowing'])->name('unfollow');

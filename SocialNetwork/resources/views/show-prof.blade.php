@@ -40,7 +40,6 @@
 
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#"><img src="/notifications_icon.png" id="user_icons"> <span class="ml-2">notifications</span></a>
                 <a class="dropdown-item" href="#"><img src="/settings.png" id="user_icons"> <span class="ml-2">settings</span></a>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img src="/logout_icon.png" id="user_icons"> <span class="ml-2">log out</span></a>
                 <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
@@ -83,12 +82,20 @@
         <hr>
         <div class="btn-group btn-group-lg m-2 btn-cover" role="group" aria-label="Second group">
             <button type="button" class="btn btn-light"><img src="/timeline_icon.png" id="home_icon"><p>Timeline</p></button>
+            @if($is_exist==false)
             <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon" onclick="event.preventDefault(); document.getElementById('follow').submit();"><p>Follow</p></button>
-            <form action="{{ route('follow') }}" method="POST" id="follow" style="display: none;">
-                @csrf
-                <input type="hidden" name="user_id" value="{{ $userdata->id }}">
+                <form action="{{ route('follow') }}" method="POST" id="follow" style="display: none;">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ $userdata->id }}">
 
-            </form>
+                </form>
+            @else
+                <button type="button" class="btn btn-light active"><img src="/followed_icon.png" id="home_icon" onclick="event.preventDefault(); document.getElementById('unfollow').submit();"><p>Followed</p></button>
+                <form action="{{ route('unfollow') }}" method="POST" id="unfollow" style="display: none;">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ $userdata->id }}">
+                </form>
+            @endif
             <button type="button" class="btn btn-light"><img src="/followers_icon.png" id="home_icon"><p>Followers</p></button>
         </div>
     </div>

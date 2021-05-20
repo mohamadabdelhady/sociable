@@ -43,7 +43,7 @@
 
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  	<a class="dropdown-item" href="#"><img src="/notifications_icon.png" id="user_icons"> <span class="ml-2">notifications</span></a>
+
     <a class="dropdown-item" href="#"><img src="/settings.png" id="user_icons"> <span class="ml-2">settings</span></a>
     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img src="/logout_icon.png" id="user_icons"> <span class="ml-2">log out</span></a>
     <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
