@@ -128,7 +128,7 @@
                             @else
                                 <div class="m-2"><img src="/images/user_default.png" id="userAvatar">
                                     @endif
-                                    <a style="text-decoration: none;color: black; margin-left: 10px;" href="{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}</span></a>
+                                    <a style="text-decoration: none;color: black; margin-left: 10px;" href="get-profile/{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}</span></a>
                                 </div>
                             <br>
                                 @endforeach
