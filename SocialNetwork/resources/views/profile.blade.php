@@ -85,6 +85,7 @@
             </div>
         </div>
     </div>
+
     <div class="cover-profile">
     @if(auth()->user()->profile_img!=null)
     <img src="{{url('/images/users_profile_img/'.auth()->user()->profile_img)}}">
@@ -102,13 +103,39 @@
 
 
   <hr>
-  <div class="btn-group btn-group-lg m-2 btn-cover" role="group" aria-label="Second group">
-    <button type="button" class="btn btn-light"><img src="/timeline_icon.png" id="home_icon"><p>Timeline</p></button>
-    <button type="button" class="btn btn-light"><img src="/followers_icon.png" id="home_icon"><p>Followers</p></button>
+{{--  <div class="btn-group btn-group-lg m-2 btn-cover" role="group" aria-label="Second group">--}}
+{{--    <button type="button" class="btn btn-light"><img src="/timeline_icon.png" id="home_icon"><p>Timeline</p></button>--}}
+{{--    <button type="button" class="btn btn-light"><img src="/followers_icon.png" id="home_icon"><p>Followers</p></button>--}}
+{{--</div>--}}
+
+
 </div>
-	</div>
-</div>
+
 	<div class="col-xl-1 col-lg-1" id="action_area"></div>
 </div>
+    <div class="row "  style="width: 100%">
+        <div class="col-xl-1 col-lg-1" id="action_area"></div>
+        <div class="col-xl-6 col-lg-6 ">
+            <img src="/timeline_icon.png" id="home_icon"><span class="ml-1">Time line</span>
+            <hr>
+        </div>
+        <div class="col-xl-4 col-lg-4">
+            <div class="card m-2" style="height: 18rem;">
+                <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">Followers</p>
+                @foreach($followers as $follower)
+                    @if($follower->profile_img!=null)
+                        <div class="m-2"><img src="{{url('/images/users_profile_img/'.$follower->profile_img)}}" id="userAvatar">
+                            @else
+                                <div class="m-2"><img src="/images/user_default.png" id="userAvatar">
+                                    @endif
+                                    <a style="text-decoration: none;color: black; margin-left: 10px;" href="{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}</span></a>
+                                </div>
+                            <br>
+                                @endforeach
+                        </div>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>

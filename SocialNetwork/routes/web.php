@@ -47,3 +47,4 @@ Route::get('search-results',  ['as' => 'search-results', 'uses' => 'App\Http\Con
 Route::GET('get-profile/{id}',  ['as' => 'get-profile/{id}', 'uses' => 'App\Http\Controllers\showprofile@get_all_data'])->middleware('auth');
 Route::post('follow', [App\Http\Controllers\follow::class, 'following'])->name('follow');
 Route::post('unfollow', [App\Http\Controllers\follow::class, 'unfollowing'])->name('unfollow');
+Route::get('profile',  ['as' => 'profile', 'uses' => 'App\Http\Controllers\profilepage@get_all_data'])->middleware('auth');
