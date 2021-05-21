@@ -55,7 +55,7 @@
 </div>
 	</div>
 </nav>
-<div class="row container-fluid"style="min-height: 100vh; min-width: 100%" id="content">
+<div class="row container-fluid"style="min-height: 100vh; width: 100%" id="content">
 	<div class="col-xl-3 col-lg-3 ml-4 " id="icons_area" style="">
 		<ul><li><a href="profile"><img src="/profile_icon.png" class="side_icon"><span>My profile</span></a></li></ul>
 		<hr>
@@ -109,17 +109,46 @@
             </div>
 
         </div>
+    <div id="post-result">
+        @if($post_num!=0)
+            <br>
+            @foreach($posts as $post)
+                <div class="card">
+{{--                    @if($post->profile_img!=null)--}}
+{{--                        <div><img src="{{'/images/users_profile_img/'.$post->profile_img}}" id="userAvatar" class="m-2"><span>{{$post->first_name." ".$post->last_name}}</span></div>--}}
+{{--                    @else--}}
+{{--                        <div><img src="images/user_default.png" id="userAvatar">--}}
+{{--                            @endif--}}
+                            <hr>
+                            <div>
+                                <p class="m-2">{{$post->post_content}}</p>
+                                @if($post->image_dir!=null)
+                                    <img src="{{url('/images/post_img/'.$post->image_dir)}}" id="post_img" class="m-2">
+                                @elseif($post->video_dir)
+                                    <video id="post_img" controls class="m-2">
+                                        <source src="{{URL::asset("/images/post_vid/$post->video_dir")}}" type="video/mp4" >
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @endif
+                            </div>
+                        </div>
+                        <br>
+                        @endforeach
+                    @endif
+                </div>
     </div>
-<div class="col-xl-3 col-lg-3 card " style="height:30rem; ">
+    <div class="col-xl-3 col-lg-3 card " style="height:30rem; ">
 
 
-	<input class="form-control m-2" type="search" placeholder="Search users" aria-label="Search" id="search-input" style="width: 100%;" >
-	<span style="font-size: 20px;" class="mt-3 ml-3">Online users</span>
-	<hr>
-	<div class="online-contacts overflow-auto mt-2">
+        <input class="form-control m-2" type="search" placeholder="Search users" aria-label="Search" id="search-input" style="width: 100%;" >
+        <span style="font-size: 20px;" class="mt-3 ml-3">Online users</span>
+        <hr>
+        <div class="online-contacts overflow-auto mt-2">
 
-	</div>
-</div>
+        </div>
+    </div>
+    </div>
+
 </div>
 </body>
 

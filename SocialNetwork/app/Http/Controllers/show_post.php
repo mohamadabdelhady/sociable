@@ -10,7 +10,9 @@ class show_post extends Controller
 {
     public function getpost()
     {
-        $query=DB::table('posts')->all();
-        return back()->with($query);
+        $id=auth()->id();
+        $posts= DB::select("SELECT *  FROM posts WHERE user_id IN (SELECT follower_id FROM followers where id =$id)OR user_id=$id;");
+        $post_num=count($posts);
+        return (compact('posts'))->with($post_num);
     }
 }
