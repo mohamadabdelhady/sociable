@@ -118,6 +118,33 @@
         <div class="col-xl-6 col-lg-6 ">
             <img src="/timeline_icon.png" id="home_icon"><span class="ml-1">Time line</span>
             <hr>
+            <div id="post-result">
+                @if($post_num!=0)
+                    <br>
+                    @foreach($posts as $post)
+                        <div class="card">
+                            {{--                    @if($post->profile_img!=null)--}}
+                            {{--                        <div><img src="{{'/images/users_profile_img/'.$post->profile_img}}" id="userAvatar" class="m-2"><span>{{$post->first_name." ".$post->last_name}}</span></div>--}}
+                            {{--                    @else--}}
+                            {{--                        <div><img src="images/user_default.png" id="userAvatar">--}}
+                            {{--                            @endif--}}
+                            <hr>
+                            <div>
+                                <p class="m-2">{{$post->post_content}}</p>
+                                @if($post->image_dir!=null)
+                                    <img src="{{url('/images/post_img/'.$post->image_dir)}}" id="post_img" class="m-2">
+                                @elseif($post->video_dir)
+                                    <video id="post_img" controls class="m-2">
+                                        <source src="{{URL::asset("/images/post_vid/$post->video_dir")}}" type="video/mp4" >
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @endif
+                            </div>
+                        </div>
+                        <br>
+                    @endforeach
+                @endif
+            </div>
         </div>
         <div class="col-xl-4 col-lg-4">
             <div class="card m-2" style="height: 18rem;">
