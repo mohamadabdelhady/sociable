@@ -55,7 +55,8 @@
 </div>
 	</div>
 </nav>
-<div class="row container-fluid"style="min-height: 100vh; width: 100%" id="content">
+<div class=" container-fluid"style="min-height: 100vh; width: 100%" id="content">
+    <div class="row">
 	<div class="col-xl-3 col-lg-3 ml-4 " id="icons_area" style="">
 		<ul><li><a href="profile"><img src="/profile_icon.png" class="side_icon"><span>My profile</span></a></li></ul>
 		<hr>
@@ -114,11 +115,11 @@
             <br>
             @foreach($posts as $post)
                 <div class="card">
-{{--                    @if($post->profile_img!=null)--}}
-{{--                        <div><img src="{{'/images/users_profile_img/'.$post->profile_img}}" id="userAvatar" class="m-2"><span>{{$post->first_name." ".$post->last_name}}</span></div>--}}
-{{--                    @else--}}
-{{--                        <div><img src="images/user_default.png" id="userAvatar">--}}
-{{--                            @endif--}}
+                    @if(\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')!=null)
+                        <div><img src="{{'/images/users_profile_img/'.\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')}}" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a></div>
+                    @else
+                        <div><img src="/images/user_default.png" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a></div>
+                            @endif
                             <hr>
                             <div>
                                 <p class="m-2">{{$post->post_content}}</p>
@@ -132,14 +133,12 @@
                                 @endif
                             </div>
                         </div>
-                        <br>
+                        <br />
                         @endforeach
                     @endif
                 </div>
     </div>
     <div class="col-xl-3 col-lg-3 card " style="height:30rem; ">
-
-
         <input class="form-control m-2" type="search" placeholder="Search users" aria-label="Search" id="search-input" style="width: 100%;" >
         <span style="font-size: 20px;" class="mt-3 ml-3">Online users</span>
         <hr>
@@ -148,9 +147,8 @@
         </div>
     </div>
     </div>
-
+    </div>
 </div>
 </body>
 
-<script type="text/javascript" src="resources/js/app.js"></script>
 </html>

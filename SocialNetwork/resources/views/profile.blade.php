@@ -123,11 +123,11 @@
                     <br>
                     @foreach($posts as $post)
                         <div class="card">
-                            {{--                    @if($post->profile_img!=null)--}}
-                            {{--                        <div><img src="{{'/images/users_profile_img/'.$post->profile_img}}" id="userAvatar" class="m-2"><span>{{$post->first_name." ".$post->last_name}}</span></div>--}}
-                            {{--                    @else--}}
-                            {{--                        <div><img src="images/user_default.png" id="userAvatar">--}}
-                            {{--                            @endif--}}
+                            @if(\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')!=null)
+                                <div><img src="{{'/images/users_profile_img/'.\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')}}" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a></div>
+                            @else
+                                <div><img src="/images/user_default.png" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a></div>
+                            @endif
                             <hr>
                             <div>
                                 <p class="m-2">{{$post->post_content}}</p>
@@ -141,7 +141,7 @@
                                 @endif
                             </div>
                         </div>
-                        <br>
+                        <br />
                     @endforeach
                 @endif
             </div>
