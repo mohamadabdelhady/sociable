@@ -15,13 +15,14 @@ class showprofile extends Controller
         $user=DB::table('followers')->where('follower_id',$id)->where('id',auth()->id())->get();
         if(count($user)==1){$is_exist=true;}
         $followers= DB::select("SELECT id,first_name,last_name,profile_img FROM users WHERE id IN (SELECT follower_id FROM followers where id =$id);");
-
-
+        $posts= DB::select("SELECT *  FROM posts WHERE user_id=$id;");
+        $post_num=count($posts);
         if($id!=auth()->id()) {
-            return view('show-prof')->with(compact('userdata','followers','is_exist'));
+
+            return view('show-prof')->with(compact('userdata','followers','is_exist','post_num','posts'));
         }
         else {
-            return view('profile')->with(compact('followers'));
+            return redirect()->route('profile');
         }
 
     }
