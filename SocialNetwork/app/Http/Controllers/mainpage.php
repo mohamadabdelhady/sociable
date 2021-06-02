@@ -12,7 +12,9 @@ class mainpage extends Controller
 
         $id=auth()->id();
         $posts= DB::select("SELECT *  FROM posts WHERE user_id IN (SELECT follower_id FROM followers where id =$id)OR user_id=$id;");
+
         $post_num=count($posts);
+
         $current=$request->path();
 
         return view("$current")->with(compact('post_num','posts'));

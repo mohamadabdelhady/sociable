@@ -110,9 +110,10 @@
                 @foreach($posts as $post)
                     <div class="card">
                         @if(\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')!=null)
-                            <div><img src="{{'/images/users_profile_img/'.\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')}}" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a></div>
+                            <div><img src="{{'/images/users_profile_img/'.\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')}}" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a>
+                                <span style="float: right;" class="m-2">{{$post->updated_at}}</span></div>
                         @else
-                            <div><img src="/images/user_default.png" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a></div>
+                            <div><img src="/images/user_default.png" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a><span style="float: right;" class="m-2">{{$post->updated_at}}</span></div>
                         @endif
                         <hr>
                         <div>
@@ -125,6 +126,13 @@
                                     Your browser does not support the video tag.
                                 </video>
                             @endif
+                        </div>
+                        <hr>
+                        <div class="m-2">
+                            <a href="#" class="" style="color: black;text-decoration: none;font-size: 20px;"><img src="/comment_icon.png" style="height: 40px;width: 40px;">
+                                <span>{{\Illuminate\Support\Facades\DB::table("comments")->where("id",$post->id)->count()}}</span></a>
+                            <span  style="float: right;"><a href="#"><img src="/likes_icon.png" style="height: 40px;width: 40px;"></a><span>{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("likes")}}</span>
+                                <a href="#"><img src="/dislike_icon.png" style="height: 40px;width: 40px;"></a><span>{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("dislikes")}}</span></span>
                         </div>
                     </div>
                     <br>

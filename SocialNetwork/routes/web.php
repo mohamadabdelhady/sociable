@@ -48,3 +48,6 @@ Route::GET('get-profile/{id}',  ['as' => 'get-profile/{id}', 'uses' => 'App\Http
 Route::post('follow', [App\Http\Controllers\follow::class, 'following'])->name('follow');
 Route::post('unfollow', [App\Http\Controllers\follow::class, 'unfollowing'])->name('unfollow');
 Route::get('profile',  ['as' => 'profile', 'uses' => 'App\Http\Controllers\profilepage@get_all_data'])->middleware('auth');
+Route::post('like', [App\Http\Controllers\ratesys::class, 'like'])->name('like');
+Route::post('dislike', [App\Http\Controllers\ratesys::class, 'dislike'])->name('dislike');
+Route::GET('like', [App\Http\Controllers\ratesys::class, 'like'])->name('like');

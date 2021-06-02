@@ -13,6 +13,7 @@ class show_post extends Controller
         $id=auth()->id();
         $posts= DB::select("SELECT *  FROM posts WHERE user_id IN (SELECT follower_id FROM followers where id =$id)OR user_id=$id;");
         $post_num=count($posts);
+
         return (compact('posts'))->with($post_num);
     }
 }
