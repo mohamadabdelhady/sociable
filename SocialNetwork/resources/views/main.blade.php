@@ -249,7 +249,7 @@
                 success: function (response) {
                     console.log(response);
                     if (response) {
-                        document.getElementById("comment_num"+post_id).innerHTML =response.length+1;
+                        document.getElementById("comment_num"+post_id).innerHTML =response.length;
                         for (var i = 0; i < response.length; i++)
                         {
                             var temp=response[i];
