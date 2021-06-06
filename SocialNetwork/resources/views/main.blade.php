@@ -185,7 +185,7 @@
                     _token: _token
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     if (response) {
 
                         document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
@@ -215,7 +215,7 @@
                 _token: _token
             },
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 if (response) {
 
                     document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
@@ -230,6 +230,7 @@
     {
         var commentsec=document.getElementById('comment_sec'+post_id).style.display;
         if(commentsec=='none'){
+            document.getElementById('comment-sec'+post_id).innerHTML="";
         document.getElementById('comment_sec'+post_id).style.display='block';
             $.ajaxSetup({
                 headers: {
@@ -249,6 +250,7 @@
                 success: function (response) {
                     console.log(response);
                     if (response) {
+
                         document.getElementById("comment_num"+post_id).innerHTML =response.length;
                         for (var i = 0; i < response.length; i++)
                         {
@@ -292,10 +294,11 @@
                 _token: _token
             },
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 if (response) {
 
                     document.getElementById("comment_box"+post_id).value = "";
+                    document.getElementById('comment-sec'+post_id).innerHTML="";
                     $.ajax({
                         url: "{{route('loadcomment')}}",
                         type: "POST",
