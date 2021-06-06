@@ -139,11 +139,14 @@
                     <hr>
                     <div class="m-2">
                         <input type="hidden" id="post_id" value="{{$post->id}}">
-                        <a href="#" class="" style="color: black;text-decoration: none;font-size: 20px;"><img src="/comment_icon.png" style="height: 40px;width: 40px;">
-                            <span>{{\Illuminate\Support\Facades\DB::table("comments")->where("id",$post->id)->count()}}</span></a>
+                        <a href="#" class="" style="color: black;text-decoration: none;font-size: 20px;" onclick="event.preventDefault(); loadcomment({{$post->id}})"><img src="/comment_icon.png" style="height: 40px;width: 40px;">
+                            <span id="comment_num{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("comments")->where("post_id",$post->id)->count()}}</span></a>
                         <span  style="float: right;"><a href="#"  onclick="event.preventDefault(); like({{$post->id}})"><img src="/likes_icon.png" style="height: 40px;width: 40px;"></a><span id="likenum{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("likes")}}</span>
                                 <a href="#" onclick="event.preventDefault(); dislike({{$post->id}})"><img src="/dislike_icon.png" style="height: 40px;width: 40px;"></a><span id="dislikenum{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("dislikes")}}</span></span>
-
+                        <div style="display: none" id="comment_sec{{$post->id}}">
+                            <textarea id="comment_box{{$post->id}}" type="text" placeholder="Have any comments {{auth()->user()->first_name." ".auth()->user()->last_name." ?"}}" class="form-control m-2" name="comment" style="width: 95%;"></textarea><button class="btn btn-outline-primary ml-2" onclick="event.preventDefault(); postcomment({{$post->id}})">Post</button><hr>
+                            <div class="ml-5" id="comment-sec{{$post->id}}"></div>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -217,6 +220,105 @@
 
                     document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
                     document.getElementById("likenum"+post_id).innerHTML = response['likes'];
+
+                }
+            },
+        });
+
+    }
+    function loadcomment(post_id)
+    {
+        var commentsec=document.getElementById('comment_sec'+post_id).style.display;
+        if(commentsec=='none'){
+        document.getElementById('comment_sec'+post_id).style.display='block';
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let id = post_id;
+            let _token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: "{{route('loadcomment')}}",
+                type: "POST",
+                data: {
+
+                    id: id,
+                    _token: _token
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (response) {
+                        document.getElementById("comment_num"+post_id).innerHTML =response.length+1;
+                        for (var i = 0; i < response.length; i++)
+                        {
+                            var temp=response[i];
+
+                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
+                            +"<p>"+temp['comment_content']+"</p><hr>";
+
+                        }
+
+                    }
+                },
+            });
+
+        }
+        else
+            document.getElementById('comment_sec'+post_id).style.display='none';
+    }
+    function postcomment(post_id)
+    {
+        var num=parseInt(document.getElementById("comment_num"+post_id).innerHTML );
+        num=num+1;
+        document.getElementById("comment_num"+post_id).innerHTML =num;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let id = post_id;
+        let comment=$("#comment_box"+post_id).val();
+
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: "{{route('postcomment')}}",
+            type: "POST",
+            data: {
+
+                id: id,
+                comment:comment,
+                _token: _token
+            },
+            success: function (response) {
+                console.log(response);
+                if (response) {
+
+                    document.getElementById("comment_box"+post_id).value = "";
+                    $.ajax({
+                        url: "{{route('loadcomment')}}",
+                        type: "POST",
+                        data: {
+
+                            id: id,
+                            _token: _token
+                        },
+                        success: function (data) {
+                            console.log(response);
+                            if (data) {
+                                for (var i = 0; i < data.length; i++)
+                                {
+                                    var temp=data[i];
+
+                                    document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
+                                        +"<p>"+temp['comment_content']+"</p><hr>";
+
+                                }
+
+                            }
+                        },
+                    });
 
                 }
             },

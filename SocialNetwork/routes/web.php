@@ -50,4 +50,7 @@ Route::post('unfollow', [App\Http\Controllers\follow::class, 'unfollowing'])->na
 Route::get('profile',  ['as' => 'profile', 'uses' => 'App\Http\Controllers\profilepage@get_all_data'])->middleware('auth');
 Route::post('like', [App\Http\Controllers\ratesys::class, 'like'])->name('like');
 Route::post('dislike', [App\Http\Controllers\ratesys::class, 'dislike'])->name('dislike');
-Route::GET('like', [App\Http\Controllers\ratesys::class, 'like'])->name('like');
+Route::POST('loadcomment', [App\Http\Controllers\loadcomments::class, 'load'])->name('loadcomment');
+Route::GET('loadcomment', [App\Http\Controllers\loadcomments::class, 'load'])->name('loadcomment');
+Route::POST('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('postcomment');
+Route::GET('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('postcomment');
