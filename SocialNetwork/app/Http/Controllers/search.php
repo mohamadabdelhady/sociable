@@ -43,7 +43,7 @@ public function search(Request $request)
     $user_num=count($user);
     $post_num=count($posts);
     $total=$user_num+$post_num;
-    $img_name=app()->call('App\Http\Controllers\UserController@get_uer_name_and_img');
+
     $current=$request->path();
 
     return view("$current")->with(compact( 'user', 'posts', 'post_num', 'user_num','total'));

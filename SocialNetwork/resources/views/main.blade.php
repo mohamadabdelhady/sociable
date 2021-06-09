@@ -160,8 +160,25 @@
         <hr>
         <div class="online-contacts overflow-auto mt-2">
 
+            @foreach($followers as $follower)
+                @if($follower->profile_img!=null)
+                    <div class="m-2"><img src="{{url('/images/users_profile_img/'.$follower->profile_img)}}" id="userAvatar">
+                        @else
+                            <div class="m-2"><img src="/images/user_default.png" id="userAvatar">
+                                @endif
+                                <a style="text-decoration: none;color: black; margin-left: 10px;" href="get-profile/{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}@if(Cache::has('user-is-online-' . $follower->id))
+                                        <span class=""style="color: green; float: right;">Online</span>
+                                    @else
+                                        <span class="" style="color: red; float:right;">Offline</span>
+                                    @endif</span></a>
+                            </div>
+                            <br>
+                            @endforeach
         </div>
     </div>
+        <div>
+
+        </div>
     </div>
     </div>
 </div>

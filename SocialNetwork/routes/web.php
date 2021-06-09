@@ -54,3 +54,4 @@ Route::POST('loadcomment', [App\Http\Controllers\loadcomments::class, 'load'])->
 Route::GET('loadcomment', [App\Http\Controllers\loadcomments::class, 'load'])->name('loadcomment');
 Route::POST('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('postcomment');
 Route::GET('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('postcomment');
+Route::GET('chat', [App\Http\Controllers\UserController::class, 'userOnlineStatus'])->name('chat');
