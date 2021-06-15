@@ -27,6 +27,9 @@ Route::get('main',  ['as' => 'main', 'uses' => 'App\Http\Controllers\mainpage@ge
 Route::get('/return-home', function () {
     return view('home');
 });
+Route::get('/chat', function () {
+    return view('chat');
+});
 Route::get('/home', function () {
     if (Auth::check()) {
     	// echo "you are in";
@@ -54,4 +57,5 @@ Route::POST('loadcomment', [App\Http\Controllers\loadcomments::class, 'load'])->
 Route::GET('loadcomment', [App\Http\Controllers\loadcomments::class, 'load'])->name('loadcomment');
 Route::POST('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('postcomment');
 Route::GET('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('postcomment');
-Route::GET('chat', [App\Http\Controllers\UserController::class, 'userOnlineStatus'])->name('chat');
+Route::GET('chat/{id}', [App\Http\Controllers\chat::class, 'get_user'])->name('chat/{id}');
+

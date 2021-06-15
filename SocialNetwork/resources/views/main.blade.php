@@ -7,9 +7,11 @@
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="{{ asset('js/app.js') }}" defer></script>
+
     <script src="{{ asset('js/script1.js') }}" defer></script>
+
     <script src="{{ asset('js/script2.js') }}" defer></script>
+
 {{--    <script src="{{ asset('js/ratesys.js') }}" defer></script>--}}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -166,7 +168,7 @@
                         @else
                             <div class="m-2"><img src="/images/user_default.png" id="userAvatar">
                                 @endif
-                                <a style="text-decoration: none;color: black; margin-left: 10px;" href="get-profile/{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}@if(Cache::has('user-is-online-' . $follower->id))
+                                <a href="chat/{{$follower->id}}" style="text-decoration: none;color: black; margin-left: 10px;" href="get-profile/{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}@if(Cache::has('user-is-online-' . $follower->id))
                                         <span class=""style="color: green; float: right;">Online</span>
                                     @else
                                         <span class="" style="color: red; float:right;">Offline</span>
