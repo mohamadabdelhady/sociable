@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content_chat">
         <div class="container p-0">
             <div class="card">
                 <div class="row g-0">
@@ -18,10 +18,12 @@
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
-                                    <img src="/images/" class="rounded-circle mr-1" alt="" width="40" height="40">
+                                    <img v-if="profile==null" src="/images/user_default.png" class="rounded-circle mr-1" alt="" width="40" height="40">
+                                    <img v-if="profile!=null" v-bind:src="'/images/users_profile_img/'+profile" class="rounded-circle mr-1" alt="" width="40" height="40">
+
                                 </div>
                                 <div class="flex-grow-1 pl-3">
-                                    <strong></strong>
+                                    <strong>{{username}}</strong>
                                     <div class="text-muted small"><em></em></div>
                                 </div>
                                 <div>
@@ -31,15 +33,16 @@
                         </div>
 
                         <div class="position-relative">
-                            <div class="chat-messages p-4">
+                            <div class="chat-messages p-4" style="min-height:200px" id="messages">
 
                             </div>
                         </div>
 
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Type your message">
-                                <button class="btn btn-primary">Send</button>
+                                <input type="text" class="form-control"  placeholder="Type your message" v-model="mymessage">
+                                <button class="btn btn-primary ml-2"  v-on:click="send_message()":disabled="mymessage==''">Send</button>
+
                             </div>
                         </div>
 
@@ -52,15 +55,43 @@
 
 <script>
 export default {
-    props: ['userinfo'],
-    data() {
+    props:['userinfo','myid'],
+    data(){
+        return{
+            username:this.userinfo['first_name']+" "+this.userinfo['last_name'],
+            profile:this.userinfo['profile_img'],
+            userid:this.userinfo['id'],
+            mymessage:'',
 
-        return {}
+
+        }
+    },
+    methods:{
+        send_message(){
+            axios.post('/send_message',{
+            message:this.mymessage,
+                id:this.userid,
+            })
+            let message=this.mymessage;
+             let buble=(message.length)*20;
+            document.getElementById('messages').innerHTML+="<p class='chat-message-right' class='' style=' padding-right:10px;border-radius: 25px;background-color:#37daec;width:"+buble+"px'>"+message+"</p>";
+            this.mymessage='';
+        }
     },
     mounted() {
-        console.log(this.userinfo)
+        window.Echo.private("chat"+this.myid)
+            .listen('MessageSend', (e) => {
+                let sender=e.sender;
+                if (sender==this.userid)
+                {
+                    let buble=(e.message.length)*20;
+                    document.getElementById('messages').innerHTML+="<p class='chat-message-left' style='  padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:"+buble+"px'>"+e.message+"</p>";
+                }
+            });
     }
 }
+
+
 </script>
 
 <style scoped >

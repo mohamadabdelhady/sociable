@@ -58,4 +58,5 @@ Route::GET('loadcomment', [App\Http\Controllers\loadcomments::class, 'load'])->n
 Route::POST('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('postcomment');
 Route::GET('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('postcomment');
 Route::GET('chat/{id}', [App\Http\Controllers\chat::class, 'get_user'])->name('chat/{id}');
-
+Route::POST('send_message', [App\Http\Controllers\chat::class, 'send_message'])->name('send_message');
+Route::GET('send_message', [App\Http\Controllers\chat::class, 'send_message'])->name('send_message');

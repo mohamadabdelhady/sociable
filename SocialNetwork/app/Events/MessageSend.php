@@ -10,21 +10,24 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use phpDocumentor\Reflection\Types\This;
 
 class MessageSend implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $message;
-    public $user;
+    public $receiver;
+    public $sender;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message,User $user)
+    public function __construct($message, $sender, $receiver)
     {
         $this->message = $message;
-        $this->user = $user;
+        $this->sender = $sender;
+        $this->receiver=$receiver;
     }
 
     /**
@@ -34,6 +37,6 @@ class MessageSend implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat');
+        return new PrivateChannel("chat".$this->receiver);
     }
 }
