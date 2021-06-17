@@ -76,6 +76,29 @@ export default {
              let buble=(message.length)*20;
             document.getElementById('messages').innerHTML+="<p class='chat-message-right' class='' style=' padding-right:10px;border-radius: 25px;background-color:#37daec;width:"+buble+"px'>"+message+"</p>";
             this.mymessage='';
+        },
+        fetch_all_message()
+        {
+            axios.get('/get_messages'+this.userid).then(resp=>{
+                console.log(resp.data[1]);
+                let num=resp.data.length;
+                for(var i=0;i<num;i++)
+                {
+                    let arr=resp.data[i];
+                    if(arr['sender']==this.myid){
+                        let message=arr['message_content'];
+                        let buble=(message.length)*20;
+                        document.getElementById('messages').innerHTML+="<p class='chat-message-right' class='' style=' padding-right:10px;border-radius: 25px;background-color:#37daec;width:"+buble+"px'>"+message+"</p>";
+                    }
+                    else
+                    {
+                        let message=arr['message_content'];
+                        let buble=(message.length)*20;
+                        document.getElementById('messages').innerHTML+="<p class='chat-message-left' class='' style=' padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:"+buble+"px'>"+message+"</p>";
+
+                    }
+                }
+            })
         }
     },
     mounted() {
@@ -88,7 +111,10 @@ export default {
                     document.getElementById('messages').innerHTML+="<p class='chat-message-left' style='  padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:"+buble+"px'>"+e.message+"</p>";
                 }
             });
-    }
+    },
+    beforeMount(){
+        this.fetch_all_message();
+    },
 }
 
 

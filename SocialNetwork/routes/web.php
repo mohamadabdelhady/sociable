@@ -60,3 +60,4 @@ Route::GET('postcomment', [App\Http\Controllers\comment::class, 'post'])->name('
 Route::GET('chat/{id}', [App\Http\Controllers\chat::class, 'get_user'])->name('chat/{id}');
 Route::POST('send_message', [App\Http\Controllers\chat::class, 'send_message'])->name('send_message');
 Route::GET('send_message', [App\Http\Controllers\chat::class, 'send_message'])->name('send_message');
+Route::GET('get_messages{id}', [App\Http\Controllers\chat::class, 'get_all_message'])->name('get_messages{id}');

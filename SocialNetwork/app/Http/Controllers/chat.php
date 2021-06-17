@@ -11,10 +11,12 @@ use function MongoDB\BSON\toJSON;
 
 class chat extends Controller
 {
+    public $currentuser;
     public function get_user($id)
     {
         $userdata=DB::table('users')->select('id','first_name','last_name','profile_img')
             ->where('id',$id)->first();
+
 
         return view('chat')->with(compact('userdata'));
     }
@@ -26,5 +28,11 @@ $chat=messages::create([
     'receiver'=>$request->id,
 ]);
 event(new MessageSend($request->message,Auth::id(),$request->id));
+}
+public function get_all_message($id)
+{
+$messages=DB::table('messages')->where('sender',Auth::id())->orwhere('sender',$id)->orderby('updated_at','ASC')->get();
+
+return response(json_encode($messages));
 }
 }

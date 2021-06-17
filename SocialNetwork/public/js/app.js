@@ -1920,19 +1920,46 @@ __webpack_require__.r(__webpack_exports__);
       var buble = message.length * 20;
       document.getElementById('messages').innerHTML += "<p class='chat-message-right' class='' style=' padding-right:10px;border-radius: 25px;background-color:#37daec;width:" + buble + "px'>" + message + "</p>";
       this.mymessage = '';
+    },
+    fetch_all_message: function fetch_all_message() {
+      var _this = this;
+
+      axios.get('/get_messages' + this.userid).then(function (resp) {
+        console.log(resp.data[1]);
+        var num = resp.data.length;
+
+        for (var i = 0; i < num; i++) {
+          var arr = resp.data[i];
+
+          if (arr['sender'] == _this.myid) {
+            var message = arr['message_content'];
+            var buble = message.length * 20;
+            document.getElementById('messages').innerHTML += "<p class='chat-message-right' class='' style=' padding-right:10px;border-radius: 25px;background-color:#37daec;width:" + buble + "px'>" + message + "</p>";
+          } else {
+            var _message = arr['message_content'];
+
+            var _buble = _message.length * 20;
+
+            document.getElementById('messages').innerHTML += "<p class='chat-message-left' class='' style=' padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:" + _buble + "px'>" + _message + "</p>";
+          }
+        }
+      });
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     window.Echo["private"]("chat" + this.myid).listen('MessageSend', function (e) {
       var sender = e.sender;
 
-      if (sender == _this.userid) {
+      if (sender == _this2.userid) {
         var buble = e.message.length * 20;
         document.getElementById('messages').innerHTML += "<p class='chat-message-left' style='  padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:" + buble + "px'>" + e.message + "</p>";
       }
     });
+  },
+  beforeMount: function beforeMount() {
+    this.fetch_all_message();
   }
 });
 
@@ -6502,7 +6529,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.content_chat{margin-top:100px;}\n\n.chat-online {\n    color: #34ce57\n}\n\n.chat-offline {\n    color: #e4606d\n}\n\n.chat-messages {\n    display: flex;\n    flex-direction: column;\n    max-height: 800px;\n    overflow-y: scroll\n}\n\n.chat-message-left,\n.chat-message-right {\n    display: flex;\n    flex-shrink: 0\n}\n\n.chat-message-left {\n    margin-right: auto\n}\n\n.chat-message-right {\n    flex-direction: row-reverse;\n    margin-left: auto\n}\n.py-3 {\n    padding-top: 1rem!important;\n    padding-bottom: 1rem!important;\n}\n.px-4 {\n    padding-right: 1.5rem!important;\n    padding-left: 1.5rem!important;\n}\n.flex-grow-0 {\n    flex-grow: 0!important;\n}\n.border-top {\n    border-top: 1px solid #dee2e6!important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.content_chat{margin-top:100px;}\n\n.chat-online {\n    color: #34ce57\n}\n\n.chat-offline {\n    color: #e4606d\n}\n\n.chat-messages {\n    display: flex;\n    flex-direction: column;\n    max-height: 200px;\n    overflow-y: scroll\n}\n\n.chat-message-left,\n.chat-message-right {\n    display: flex;\n    flex-shrink: 0\n}\n\n.chat-message-left {\n    margin-right: auto\n}\n\n.chat-message-right {\n    flex-direction: row-reverse;\n    margin-left: auto\n}\n.py-3 {\n    padding-top: 1rem!important;\n    padding-bottom: 1rem!important;\n}\n.px-4 {\n    padding-right: 1.5rem!important;\n    padding-left: 1.5rem!important;\n}\n.flex-grow-0 {\n    flex-grow: 0!important;\n}\n.border-top {\n    border-top: 1px solid #dee2e6!important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
