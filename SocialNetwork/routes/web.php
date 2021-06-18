@@ -61,3 +61,4 @@ Route::GET('chat/{id}', [App\Http\Controllers\chat::class, 'get_user'])->name('c
 Route::POST('send_message', [App\Http\Controllers\chat::class, 'send_message'])->name('send_message');
 Route::GET('send_message', [App\Http\Controllers\chat::class, 'send_message'])->name('send_message');
 Route::GET('get_messages{id}', [App\Http\Controllers\chat::class, 'get_all_message'])->name('get_messages{id}');
+Route::GET('get_followers', [App\Http\Controllers\chat::class, 'get_followers'])->name('get_followers');

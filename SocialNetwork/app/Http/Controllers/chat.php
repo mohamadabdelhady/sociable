@@ -35,4 +35,10 @@ $messages=DB::table('messages')->where('sender',Auth::id())->orwhere('sender',$i
 
 return response(json_encode($messages));
 }
+public function get_followers()
+{
+    $id=auth()->id();
+    $followers= DB::select("SELECT id,first_name,last_name,profile_img FROM users WHERE id IN (SELECT follower_id FROM followers where id =$id);");
+    return response(json_encode($followers));
+}
 }

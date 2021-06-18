@@ -1900,6 +1900,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['userinfo', 'myid'],
   data: function data() {
@@ -1920,12 +1923,13 @@ __webpack_require__.r(__webpack_exports__);
       var buble = message.length * 20;
       document.getElementById('messages').innerHTML += "<p class='chat-message-right' class='' style=' padding-right:10px;border-radius: 25px;background-color:#37daec;width:" + buble + "px'>" + message + "</p>";
       this.mymessage = '';
+      var messageBody = document.querySelector('.chat-messages');
+      messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
     },
     fetch_all_message: function fetch_all_message() {
       var _this = this;
 
       axios.get('/get_messages' + this.userid).then(function (resp) {
-        console.log(resp.data[1]);
         var num = resp.data.length;
 
         for (var i = 0; i < num; i++) {
@@ -1942,6 +1946,20 @@ __webpack_require__.r(__webpack_exports__);
 
             document.getElementById('messages').innerHTML += "<p class='chat-message-left' class='' style=' padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:" + _buble + "px'>" + _message + "</p>";
           }
+
+          var messageBody = document.querySelector('.chat-messages');
+          messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        }
+      });
+    },
+    get_all_followers: function get_all_followers() {
+      axios.get('/get_followers').then(function (resp) {
+        console.log(resp.data);
+        var num = resp.data.length;
+
+        for (var i = 0; i < num; i++) {
+          var arr = resp.data[i];
+          if (arr['profile_img'] == null) document.getElementById('users').innerHTML += "<div class=\"mt-2\"><img src=\"/images/user_default.png\" id=\"userAvatar\"><span class='m-2'>" + arr['first_name'] + " " + arr['last_name'] + "<img src='/envelope_icon.png' class='m-2' style='width: 10px;height: 10px; margin: 0'></span></div>";else document.getElementById('users').innerHTML += "<div class=\"mt-2\"><img src=\'/images/users_profile_img/" + arr['profile_img'] + "'id=\"userAvatar\"><span class='m-2'>" + arr['first_name'] + " " + arr['last_name'] + "</span><img src='/envelope_icon.png' class='m-2' style='width: 10px;height: 10px;'></div>";
         }
       });
     }
@@ -1955,11 +1973,14 @@ __webpack_require__.r(__webpack_exports__);
       if (sender == _this2.userid) {
         var buble = e.message.length * 20;
         document.getElementById('messages').innerHTML += "<p class='chat-message-left' style='  padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:" + buble + "px'>" + e.message + "</p>";
+        var messageBody = document.querySelector('.chat-messages');
+        messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
       }
     });
   },
   beforeMount: function beforeMount() {
     this.fetch_all_message();
+    this.get_all_followers();
   }
 });
 
@@ -43916,14 +43937,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-5 col-xl-3 border-right" }, [
+    return _c("div", { staticClass: "col-12 col-lg-6 col-xl-3 border-right" }, [
       _c("div", { staticClass: "px-4 d-none d-md-block" }, [
         _c("div", { staticClass: "d-flex align-items-center" }, [
           _c("div", { staticClass: "flex-grow-1" }, [
             _c("input", {
               staticClass: "form-control my-3",
               attrs: { type: "text", placeholder: "Search..." }
-            })
+            }),
+            _vm._v(" "),
+            _c("div", { attrs: { id: "users" } })
           ])
         ])
       ]),

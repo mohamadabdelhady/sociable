@@ -3,12 +3,15 @@
         <div class="container p-0">
             <div class="card">
                 <div class="row g-0">
-                    <div class="col-12 col-lg-5 col-xl-3 border-right">
+                    <div class="col-12 col-lg-6 col-xl-3 border-right">
 
                         <div class="px-4 d-none d-md-block">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <input type="text" class="form-control my-3" placeholder="Search...">
+                                    <div id="users">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,11 +79,12 @@ export default {
              let buble=(message.length)*20;
             document.getElementById('messages').innerHTML+="<p class='chat-message-right' class='' style=' padding-right:10px;border-radius: 25px;background-color:#37daec;width:"+buble+"px'>"+message+"</p>";
             this.mymessage='';
+            var messageBody = document.querySelector('.chat-messages');
+            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
         },
         fetch_all_message()
         {
             axios.get('/get_messages'+this.userid).then(resp=>{
-                console.log(resp.data[1]);
                 let num=resp.data.length;
                 for(var i=0;i<num;i++)
                 {
@@ -97,6 +101,24 @@ export default {
                         document.getElementById('messages').innerHTML+="<p class='chat-message-left' class='' style=' padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:"+buble+"px'>"+message+"</p>";
 
                     }
+                    var messageBody = document.querySelector('.chat-messages');
+                    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
+                }
+            })
+        },
+        get_all_followers()
+        {
+            axios.get('/get_followers').then(resp=> {
+                console.log(resp.data);
+                let num=resp.data.length;
+                for(var i=0;i<num;i++)
+                {
+                    let arr=resp.data[i];
+                    if(arr['profile_img']==null)
+                    document.getElementById('users').innerHTML+="<div class=\"mt-2\"><img src=\"/images/user_default.png\" id=\"userAvatar\"><span class='m-2'>"+arr['first_name']+" "+arr['last_name']+"<img src='/envelope_icon.png' class='m-2' style='width: 10px;height: 10px; margin: 0'></span></div>";
+                    else
+                        document.getElementById('users').innerHTML+="<div class=\"mt-2\"><img src=\'/images/users_profile_img/"+arr['profile_img']+"'id=\"userAvatar\"><span class='m-2'>"+arr['first_name']+" "+arr['last_name']+"</span><img src='/envelope_icon.png' class='m-2' style='width: 10px;height: 10px;'></div>";
                 }
             })
         }
@@ -109,11 +131,14 @@ export default {
                 {
                     let buble=(e.message.length)*20;
                     document.getElementById('messages').innerHTML+="<p class='chat-message-left' style='  padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:"+buble+"px'>"+e.message+"</p>";
+                    var messageBody = document.querySelector('.chat-messages');
+                    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
                 }
             });
     },
     beforeMount(){
         this.fetch_all_message();
+        this.get_all_followers();
     },
 }
 
