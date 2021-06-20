@@ -8,6 +8,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
 <nav class="navbar navbar-dark"id="nav-bar" >
@@ -21,11 +22,14 @@
             <form action="{{route('main')}}" method="get" style="display: none;" id="home-form"></form>
             <img src="/home_icon.png" id="home_icon">
         </button>
-        <div class="dropdown">
-            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/chat_icon.png" id="userAvatar"></button></div>
+        {{--        <div class="dropdown">--}}
+        {{--            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/chat_icon.png" id="userAvatar"></button></div>--}}
 
-        <div class="dropdown">
-            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>
+        {{--        <div class="dropdown">--}}
+        {{--            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>--}}
+        <div id="notifications">
+            <notifications></notifications>
+        </div>
         <div class="dropdown">
 
             <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,6 +44,7 @@
 
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
                 <a class="dropdown-item" href="#"><img src="/settings.png" id="user_icons"> <span class="ml-2">settings</span></a>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img src="/logout_icon.png" id="user_icons"> <span class="ml-2">log out</span></a>
                 <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
@@ -110,10 +115,10 @@
                 @foreach($posts as $post)
                     <div class="card">
                         @if(\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')!=null)
-                            <div><img src="{{'/images/users_profile_img/'.\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')}}" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a>
+                            <div><img src="{{'/images/users_profile_img/'.\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')}}" id="userAvatar" class="m-2"><a href="../get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a>
                                 <span style="float: right;" class="m-2">{{$post->updated_at}}</span></div>
                         @else
-                            <div><img src="/images/user_default.png" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a><span style="float: right;" class="m-2">{{$post->updated_at}}</span></div>
+                            <div><img src="/images/user_default.png" id="userAvatar" class="m-2"><a href="../get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a><span style="float: right;" class="m-2">{{$post->updated_at}}</span></div>
                         @endif
                         <hr>
                         <div>
@@ -129,13 +134,18 @@
                         </div>
                         <hr>
                         <div class="m-2">
-                            <a href="#" class="" style="color: black;text-decoration: none;font-size: 20px;"><img src="/comment_icon.png" style="height: 40px;width: 40px;">
-                                <span>{{\Illuminate\Support\Facades\DB::table("comments")->where("id",$post->id)->count()}}</span></a>
-                            <span  style="float: right;"><a href="#"><img src="/likes_icon.png" style="height: 40px;width: 40px;"></a><span>{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("likes")}}</span>
-                                <a href="#"><img src="/dislike_icon.png" style="height: 40px;width: 40px;"></a><span>{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("dislikes")}}</span></span>
+                            <input type="hidden" id="post_id" value="{{$post->id}}">
+                            <a href="#" class="" style="color: black;text-decoration: none;font-size: 20px;" onclick="event.preventDefault(); loadcomment({{$post->id}})"><img src="/comment_icon.png" style="height: 40px;width: 40px;">
+                                <span id="comment_num{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("comments")->where("post_id",$post->id)->count()}}</span></a>
+                            <span  style="float: right;"><a href="#"  onclick="event.preventDefault(); like({{$post->id}})"><img src="/likes_icon.png" style="height: 40px;width: 40px;"></a><span id="likenum{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("likes")}}</span>
+                                <a href="#" onclick="event.preventDefault(); dislike({{$post->id}})"><img src="/dislike_icon.png" style="height: 40px;width: 40px;"></a><span id="dislikenum{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("dislikes")}}</span></span>
+                            <div style="display: none" id="comment_sec{{$post->id}}">
+                                <textarea id="comment_box{{$post->id}}" type="text" placeholder="Have any comments {{auth()->user()->first_name." ".auth()->user()->last_name." ?"}}" class="form-control m-2" name="comment" style="width: 95%;"></textarea><button class="btn btn-outline-primary ml-2" onclick="event.preventDefault(); postcomment({{$post->id}})">Post</button><hr>
+                                <div class="ml-5" id="comment-sec{{$post->id}}"></div>
+                            </div>
                         </div>
                     </div>
-                    <br>
+                    <br />
                 @endforeach
             @endif
         </div>
@@ -149,7 +159,7 @@
                         @else
                             <div class="m-2"><img src="/images/user_default.png" id="userAvatar">
                                 @endif
-                                <a style="text-decoration: none;color: black; margin-left: 10px;" href="get-profile/{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}</span></a>
+                                <a style="text-decoration: none;color: black; margin-left: 10px;" href="../get-profile/{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}</span></a>
                             </div>
                             <br>
                             @endforeach
@@ -158,6 +168,169 @@
     </div>
 
 </div>
-</div>
+<script>
+    function like(post_id)
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let id = post_id;
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: "{{route('like')}}",
+            type: "POST",
+            data: {
+
+                id: id,
+                _token: _token
+            },
+            success: function (response) {
+                // console.log(response);
+                if (response) {
+
+                    document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
+                    document.getElementById("likenum"+post_id).innerHTML = response['likes'];
+
+                }
+            },
+        });
+
+    }
+    function dislike(post_id)
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let id = post_id;
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: "{{route('dislike')}}",
+            type: "POST",
+            data: {
+
+                id: id,
+                _token: _token
+            },
+            success: function (response) {
+                // console.log(response);
+                if (response) {
+
+                    document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
+                    document.getElementById("likenum"+post_id).innerHTML = response['likes'];
+
+                }
+            },
+        });
+
+    }
+    function loadcomment(post_id)
+    {
+        var commentsec=document.getElementById('comment_sec'+post_id).style.display;
+        if(commentsec=='none'){
+            document.getElementById('comment-sec'+post_id).innerHTML="";
+            document.getElementById('comment_sec'+post_id).style.display='block';
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let id = post_id;
+            let _token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: "{{route('loadcomment')}}",
+                type: "POST",
+                data: {
+
+                    id: id,
+                    _token: _token
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (response) {
+
+                        document.getElementById("comment_num"+post_id).innerHTML =response.length;
+                        for (var i = 0; i < response.length; i++)
+                        {
+                            var temp=response[i];
+
+                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
+                                +"<p>"+temp['comment_content']+"</p><hr>";
+
+                        }
+
+                    }
+                },
+            });
+
+        }
+        else
+            document.getElementById('comment_sec'+post_id).style.display='none';
+    }
+    function postcomment(post_id)
+    {
+        var num=parseInt(document.getElementById("comment_num"+post_id).innerHTML );
+        num=num+1;
+        document.getElementById("comment_num"+post_id).innerHTML =num;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let id = post_id;
+        let comment=$("#comment_box"+post_id).val();
+
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: "{{route('postcomment')}}",
+            type: "POST",
+            data: {
+
+                id: id,
+                comment:comment,
+                _token: _token
+            },
+            success: function (response) {
+                // console.log(response);
+                if (response) {
+
+                    document.getElementById("comment_box"+post_id).value = "";
+                    document.getElementById('comment-sec'+post_id).innerHTML="";
+                    $.ajax({
+                        url: "{{route('loadcomment')}}",
+                        type: "POST",
+                        data: {
+
+                            id: id,
+                            _token: _token
+                        },
+                        success: function (data) {
+                            console.log(response);
+                            if (data) {
+                                for (var i = 0; i < data.length; i++)
+                                {
+                                    var temp=data[i];
+
+                                    document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
+                                        +"<p>"+temp['comment_content']+"</p><hr>";
+
+                                }
+
+                            }
+                        },
+                    });
+
+                }
+            },
+        });
+
+    }
+</script>
 </body>
 </html>

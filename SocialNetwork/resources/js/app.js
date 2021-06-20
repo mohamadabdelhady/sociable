@@ -25,3 +25,8 @@ Vue.component('chat_box', require('./components/chat_box.vue').default);
 const app = new Vue({
     el: '#app',
 });
+Vue.component('notifications', require('./components/notifications.vue').default);
+
+const notifications = new Vue({
+    el: '#notifications',
+});

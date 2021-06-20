@@ -31,12 +31,15 @@
             <form action="{{route('main')}}" method="get" style="display: none;" id="home-form"></form>
             <img src="/home_icon.png" id="home_icon">
         </button>
-        <div class="dropdown">
-            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/chat_icon.png" id="userAvatar"></button></div>
+{{--        <div class="dropdown">--}}
+{{--            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/chat_icon.png" id="userAvatar"></button></div>--}}
 
-        <div class="dropdown">
-            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>
-        <div class="dropdown">
+{{--        <div class="dropdown">--}}
+{{--            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>--}}
+        <div id="notifications">
+      <notifications></notifications>
+        </div>
+            <div class="dropdown">
 
             <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if(auth()->user()->profile_img)
@@ -123,10 +126,10 @@
             @foreach($posts as $post)
                 <div class="card">
                     @if(\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')!=null)
-                        <div><img src="{{'/images/users_profile_img/'.\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')}}" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a>
+                        <div><img src="{{'/images/users_profile_img/'.\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')}}" id="userAvatar" class="m-2"><a href="../get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a>
                             <span style="float: right;" class="m-2">{{$post->updated_at}}</span></div>
                     @else
-                        <div><img src="/images/user_default.png" id="userAvatar" class="m-2"><a href="get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a><span style="float: right;" class="m-2">{{$post->updated_at}}</span></div>
+                        <div><img src="/images/user_default.png" id="userAvatar" class="m-2"><a href="../get-profile/{{$post->user_id}}" class="m-2" style="text-decoration: none;color: black;">{{\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('first_name')." ".\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('last_name')}}</a><span style="float: right;" class="m-2">{{$post->updated_at}}</span></div>
                     @endif
                     <hr>
                     <div>
@@ -159,8 +162,8 @@
     </div>
     </div>
     <div class="col-xl-3 col-lg-3 card " style="height:30rem; ">
-        <input class="form-control m-2" type="search" placeholder="Search users" aria-label="Search" id="search-input" style="width: 100%;" >
-        <span style="font-size: 20px;" class="mt-3 ml-3">Online users</span>
+
+        <span style="font-size: 20px;" class="mt-3 ml-3">Chat</span>
         <hr>
         <div class="online-contacts overflow-auto mt-2">
 
@@ -170,7 +173,8 @@
                         @else
                             <div class="m-2"><img src="/images/user_default.png" id="userAvatar">
                                 @endif
-                                <a href="chat/{{$follower->id}}" style="text-decoration: none;color: black; margin-left: 10px;" href="get-profile/{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}@if(Cache::has('user-is-online-' . $follower->id))
+                                <a href="chat/{{$follower->id}}" style="text-decoration: none;color: black; margin-left: 10px;" href="../get-profile/{{$follower->id}}"><span id="search-username" >{{$follower->first_name." ".$follower->last_name}}
+                                        @if(Cache::has('user-is-online-' . $follower->id))
                                         <span class=""style="color: green; float: right;">Online</span>
                                     @else
                                         <span class="" style="color: red; float:right;">Offline</span>
@@ -277,7 +281,7 @@
                         {
                             var temp=response[i];
 
-                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
+                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
                             +"<p>"+temp['comment_content']+"</p><hr>";
 
                         }
@@ -335,7 +339,7 @@
                                 {
                                     var temp=data[i];
 
-                                    document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
+                                    document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
                                         +"<p>"+temp['comment_content']+"</p><hr>";
 
                                 }

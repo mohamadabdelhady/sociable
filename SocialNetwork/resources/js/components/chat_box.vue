@@ -107,6 +107,10 @@ export default {
                 }
             })
         },
+        notify()
+        {
+
+        },
         get_all_followers()
         {
             axios.get('/get_followers').then(resp=> {
@@ -116,9 +120,9 @@ export default {
                 {
                     let arr=resp.data[i];
                     if(arr['profile_img']==null)
-                    document.getElementById('users').innerHTML+="<div class=\"mt-2\"><img src=\"/images/user_default.png\" id=\"userAvatar\"><span class='m-2'>"+arr['first_name']+" "+arr['last_name']+"<img src='/envelope_icon.png' class='m-2' style='width: 10px;height: 10px; margin: 0'></span></div>";
+                    document.getElementById('users').innerHTML+="<div class=\"mt-2\"><a style='text-decoration: none;' href='../chat/"+arr['id']+"'><img src=\"/images/user_default.png\" id=\"userAvatar\"><span class='m-2'>"+arr['first_name']+" "+arr['last_name']+"<img src='/envelope_icon.png' class='m-2' style='width: 10px;height: 10px; margin: 0;display: none;'></span></div>";
                     else
-                        document.getElementById('users').innerHTML+="<div class=\"mt-2\"><img src=\'/images/users_profile_img/"+arr['profile_img']+"'id=\"userAvatar\"><span class='m-2'>"+arr['first_name']+" "+arr['last_name']+"</span><img src='/envelope_icon.png' class='m-2' style='width: 10px;height: 10px;'></div>";
+                        document.getElementById('users').innerHTML+="<div class=\"mt-2\"><a style='text-decoration: none;' href='../chat/"+arr['id']+"'><img src=\'/images/users_profile_img/"+arr['profile_img']+"'id=\"userAvatar\"><span class='m-2'>"+arr['first_name']+" "+arr['last_name']+"</span><img src='/envelope_icon.png' class='m-2' style='width: 10px;height: 10px; display: none;'></a></div>";
                 }
             })
         }
@@ -133,6 +137,7 @@ export default {
                     document.getElementById('messages').innerHTML+="<p class='chat-message-left' style='  padding-left:10px;border-radius: 25px;background-color:#D4F1F4;width:"+buble+"px'>"+e.message+"</p>";
                     var messageBody = document.querySelector('.chat-messages');
                     messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
                 }
             });
     },
