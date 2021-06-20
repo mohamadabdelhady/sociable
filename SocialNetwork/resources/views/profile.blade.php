@@ -181,9 +181,73 @@
         </div>
 
     </div>
-    <script>
-        function like(post_id)
-        {
+<script>
+    function like(post_id)
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let id = post_id;
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: "{{route('like')}}",
+            type: "POST",
+            data: {
+
+                id: id,
+                _token: _token
+            },
+            success: function (response) {
+                // console.log(response);
+                if (response) {
+
+                    document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
+                    document.getElementById("likenum"+post_id).innerHTML = response['likes'];
+
+                }
+            },
+        });
+
+    }
+    function dislike(post_id)
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let id = post_id;
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: "{{route('dislike')}}",
+            type: "POST",
+            data: {
+
+                id: id,
+                _token: _token
+            },
+            success: function (response) {
+                // console.log(response);
+                if (response) {
+
+                    document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
+                    document.getElementById("likenum"+post_id).innerHTML = response['likes'];
+
+                }
+            },
+        });
+
+    }
+    function loadcomment(post_id)
+    {
+        var commentsec=document.getElementById('comment_sec'+post_id).style.display;
+        if(commentsec=='none'){
+            document.getElementById('comment-sec'+post_id).innerHTML="";
+            document.getElementById('comment_sec'+post_id).style.display='block';
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -191,9 +255,8 @@
             });
             let id = post_id;
             let _token = $('meta[name="csrf-token"]').attr('content');
-
             $.ajax({
-                url: "{{route('like')}}",
+                url: "{{route('loadcomment')}}",
                 type: "POST",
                 data: {
 
@@ -201,120 +264,58 @@
                     _token: _token
                 },
                 success: function (response) {
-                    // console.log(response);
+                    console.log(response);
                     if (response) {
 
-                        document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
-                        document.getElementById("likenum"+post_id).innerHTML = response['likes'];
+                        document.getElementById("comment_num"+post_id).innerHTML =response.length;
+                        for (var i = 0; i < response.length; i++)
+                        {
+                            var temp=response[i];
 
-                    }
-                },
-            });
-
-        }
-        function dislike(post_id)
-        {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            let id = post_id;
-            let _token = $('meta[name="csrf-token"]').attr('content');
-
-            $.ajax({
-                url: "{{route('dislike')}}",
-                type: "POST",
-                data: {
-
-                    id: id,
-                    _token: _token
-                },
-                success: function (response) {
-                    // console.log(response);
-                    if (response) {
-
-                        document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
-                        document.getElementById("likenum"+post_id).innerHTML = response['likes'];
-
-                    }
-                },
-            });
-
-        }
-        function loadcomment(post_id)
-        {
-            var commentsec=document.getElementById('comment_sec'+post_id).style.display;
-            if(commentsec=='none'){
-                document.getElementById('comment-sec'+post_id).innerHTML="";
-                document.getElementById('comment_sec'+post_id).style.display='block';
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                let id = post_id;
-                let _token = $('meta[name="csrf-token"]').attr('content');
-                $.ajax({
-                    url: "{{route('loadcomment')}}",
-                    type: "POST",
-                    data: {
-
-                        id: id,
-                        _token: _token
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        if (response) {
-
-                            document.getElementById("comment_num"+post_id).innerHTML =response.length;
-                            for (var i = 0; i < response.length; i++)
-                            {
-                                var temp=response[i];
-
-                                document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
-                                    +"<p>"+temp['comment_content']+"</p><hr>";
-
-                            }
+                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
+                                +"<p>"+temp['comment_content']+"</p><hr>";
 
                         }
-                    },
-                });
 
-            }
-            else
-                document.getElementById('comment_sec'+post_id).style.display='none';
+                    }
+                },
+            });
+
         }
-        function postcomment(post_id)
-        {
-            var num=parseInt(document.getElementById("comment_num"+post_id).innerHTML );
+        else
+            document.getElementById('comment_sec'+post_id).style.display='none';
+    }
+    function postcomment(post_id)
+    {
+        var num=parseInt(document.getElementById("comment_num"+post_id).innerHTML );
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let id = post_id;
+        let comment=$("#comment_box"+post_id).val();
+
+        let _token = $('meta[name="csrf-token"]').attr('content');
+        if(comment!="") {
             num=num+1;
             document.getElementById("comment_num"+post_id).innerHTML =num;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            let id = post_id;
-            let comment=$("#comment_box"+post_id).val();
-
-            let _token = $('meta[name="csrf-token"]').attr('content');
-
             $.ajax({
                 url: "{{route('postcomment')}}",
                 type: "POST",
                 data: {
 
                     id: id,
-                    comment:comment,
+                    comment: comment,
                     _token: _token
                 },
                 success: function (response) {
                     // console.log(response);
                     if (response) {
 
-                        document.getElementById("comment_box"+post_id).value = "";
-                        document.getElementById('comment-sec'+post_id).innerHTML="";
+                        document.getElementById("comment_box" + post_id).value = "";
+                        document.getElementById('comment-sec' + post_id).innerHTML = "";
                         $.ajax({
                             url: "{{route('loadcomment')}}",
                             type: "POST",
@@ -326,12 +327,11 @@
                             success: function (data) {
                                 console.log(response);
                                 if (data) {
-                                    for (var i = 0; i < data.length; i++)
-                                    {
-                                        var temp=data[i];
+                                    for (var i = 0; i < data.length; i++) {
+                                        var temp = data[i];
 
-                                        document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
-                                            +"<p>"+temp['comment_content']+"</p><hr>";
+                                        document.getElementById("comment-sec" + post_id).innerHTML +=  "<a href='../get-profile/" + temp['user_id'] + "'><p>@" + temp['first_name'] + " " + temp['last_name'] + "</p></a>"
+                                            + "<p>" + temp['comment_content'] + "</p><hr>";
 
                                     }
 
@@ -340,10 +340,13 @@
                         });
 
                     }
-                },
-            });
 
+                },
+
+            });
         }
-    </script>
+
+    }
+</script>
 </body>
 </html>
