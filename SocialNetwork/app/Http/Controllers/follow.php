@@ -47,6 +47,7 @@ class follow extends Controller
     public function decline($id)
     {
         $decline=DB::table('friend_requests')->where('from',$id)->where('to',Auth::id())->delete();
+        return back();
 
     }
     public function get_all_request($id)

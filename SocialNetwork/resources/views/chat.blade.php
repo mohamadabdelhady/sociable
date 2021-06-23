@@ -23,9 +23,11 @@
             <form action="{{route('main')}}" method="get" style="display: none;" id="home-form"></form>
             <img src="/home_icon.png" id="home_icon">
         </button>
-
         <div id="notifications">
-            <notifications></notifications>
+            <notifications :myid="{{auth()->id()}}"></notifications>
+        </div>
+        <div id="friends_requests">
+            <friends_requests :id="{{auth()->id()}}"></friends_requests>
         </div>
         <div class="dropdown">
 

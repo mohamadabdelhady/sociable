@@ -30,11 +30,6 @@
             <form action="{{route('main')}}" method="get" style="display: none;" id="home-form"></form>
             <img src="/home_icon.png" id="home_icon">
         </button>
-{{--        <div class="dropdown">--}}
-{{--            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/chat_icon.png" id="userAvatar"></button></div>--}}
-
-{{--        <div class="dropdown">--}}
-{{--            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>--}}
         <div id="notifications">
       <notifications :myid="{{auth()->id()}}"></notifications>
         </div>
