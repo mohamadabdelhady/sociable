@@ -60,3 +60,5 @@ Route::POST('send_message', [App\Http\Controllers\chat::class, 'send_message'])-
 Route::GET('get_messages{id}', [App\Http\Controllers\chat::class, 'get_all_message'])->name('get_messages{id}')->middleware('auth');
 Route::GET('get_followers', [App\Http\Controllers\chat::class, 'get_followers'])->name('get_followers')->middleware('auth');
 Route::POST('settings', [App\Http\Controllers\settings::class, 'get_settings'])->name('settings')->middleware('auth');
+Route::GET('accept{id}', [App\Http\Controllers\follow::class, 'accept_req'])->name('accept{id}')->middleware('auth');
+Route::GET('decline{id}', [App\Http\Controllers\follow::class, 'decline'])->name('decline{id}')->middleware('auth');

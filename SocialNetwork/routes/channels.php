@@ -21,3 +21,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('chat{receiver}',function (){
     return true;
 });
+Broadcast::channel('friend_req{receiver}',function (){
+    return true;
+});

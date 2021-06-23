@@ -36,7 +36,10 @@
 {{--        <div class="dropdown">--}}
 {{--            <button class="btn dropdown-toggle mr-3 mybtn" type="button" id="userlogindrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/notifications_icon.png" id="userAvatar"></button></div>--}}
         <div id="notifications">
-      <notifications></notifications>
+      <notifications :myid="{{auth()->id()}}"></notifications>
+        </div>
+        <div id="friends_requests">
+            <friends_requests :id="{{auth()->id()}}"></friends_requests>
         </div>
             <div class="dropdown">
 

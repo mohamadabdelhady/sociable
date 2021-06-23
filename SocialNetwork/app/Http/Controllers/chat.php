@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Events\notify;
+
 use DB;
 use App\Events\MessageSend;
 use App\Models\messages;
@@ -28,6 +30,8 @@ $chat=messages::create([
     'receiver'=>$request->id,
 ]);
 event(new MessageSend($request->message,Auth::id(),$request->id));
+
+
 }
 public function get_all_message($id)
 {

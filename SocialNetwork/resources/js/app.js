@@ -30,3 +30,7 @@ Vue.component('notifications', require('./components/notifications.vue').default
 const notifications = new Vue({
     el: '#notifications',
 });
+Vue.component('friends_requests', require('./components/friends_requests.vue').default);
+const friends_requests = new Vue({
+    el: '#friends_requests',
+});

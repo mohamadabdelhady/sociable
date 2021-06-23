@@ -56,5 +56,26 @@
         </div>
     </div>
 </nav>
+<div class=" container-fluid"style="min-height: 100vh; width: 100%" id="content">
+<div class="row">
+<div class=" col-xl-4 col-lg-4">
+    <div id="mySidemenu" class="sidemenu">
+<p class="m-2 h4" >modify personal information</p>
+    </div>
+
+</div>
+    <div class="col-xl-4 col-lg-4">
+        <div>
+        <label>First name</label><input type="text" class="form-control"value="{{auth()->user()->first_name}}">
+        <label>Last name</label><input type="text" class="form-control" value="{{auth()->user()->last_name}}">
+        </div>
+        <div>
+            <label>Email</label><input type="text" class="form-control" value="{{auth()->user()->email}}">
+            <label>Password</label><input type="text" class="form-control">
+        </div>
+
+    </div>
+</div>
+</div>
 </body>
 </html>
