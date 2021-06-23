@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class friend_requests extends Model
 {
     use HasFactory;
-    protected $fillable = ['from','to'];
+    protected $fillable = ['from','to','message'];
 }

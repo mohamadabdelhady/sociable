@@ -2010,12 +2010,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "friends_requests",
   props: ['id'],
+  methods: {
+    fetch_all_requests: function fetch_all_requests() {
+      axios.get('/get_request' + this.id).then(function (resp) {
+        var num = resp.data.length;
+
+        for (var i = 0; i < num; i++) {
+          var arr = resp.data[i];
+          var from = arr['from'];
+          var message = arr['message'];
+          document.getElementById('area').innerHTML += "<div class=\"dropdown-item\">\n" + "                <p>" + message + "</p>" + "                <button style=\"background-color: green; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('accept').click();\">Accept</button>" + "                <a href='accept" + from + "' id=\"accept\"></a>" + "                <button style=\"background-color: red; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('decline').click();\">decline</button>" + "                <a href='decline" + from + "' id=\"decline\"></a>" + "                <button  class=\"btn btn-light\" onclick=\"event.preventDefault();document.getElementById('view').click();\">view profile</button>" + "                <a href='get-profile/" + from + "' id=\"view\"></a>" + "            </div>";
+        }
+      });
+    }
+  },
   mounted: function mounted() {
     window.Echo["private"]("friend_req" + this.id).listen('makerequest', function (e) {
       var from = e.from;
       var message = e.message;
       document.getElementById('area').innerHTML += "<div class=\"dropdown-item\">\n" + "                <p>" + message + "</p>" + "                <button style=\"background-color: green; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('accept').click();\">Accept</button>" + "                <a href='accept" + from + "' id=\"accept\"></a>" + "                <button style=\"background-color: red; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('decline').click();\">decline</button>" + "                <a href='decline" + from + "' id=\"decline\"></a>" + "                <button  class=\"btn btn-light\" onclick=\"event.preventDefault();document.getElementById('view').click();\">view profile</button>" + "                <a href='get-profile/" + from + "' id=\"view\"></a>" + "            </div>";
     });
+  },
+  beforeMount: function beforeMount() {
+    this.fetch_all_requests();
   }
 });
 

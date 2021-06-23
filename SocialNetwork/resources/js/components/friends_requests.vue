@@ -11,6 +11,32 @@
 export default {
     name: "friends_requests",
     props:['id'],
+    methods:
+        {
+          fetch_all_requests()
+          {
+              axios.get('/get_request'+this.id).then(resp=>{
+                  let num=resp.data.length;
+                  for(var i=0;i<num;i++)
+                  {
+                      let arr=resp.data[i];
+                      let from=arr['from'];
+                      let message=arr['message'];
+
+                      document.getElementById('area').innerHTML+="<div class=\"dropdown-item\">\n" +
+                          "                <p>"+message+"</p>" +
+                          "                <button style=\"background-color: green; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('accept').click();\">Accept</button>" +
+                          "                <a href='accept"+from+"' id=\"accept\"></a>" +
+                          "                <button style=\"background-color: red; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('decline').click();\">decline</button>" +
+                          "                <a href='decline"+from+"' id=\"decline\"></a>" +
+                          "                <button  class=\"btn btn-light\" onclick=\"event.preventDefault();document.getElementById('view').click();\">view profile</button>" +
+                          "                <a href='get-profile/"+from+"' id=\"view\"></a>" +
+                          "            </div>";
+                  }
+
+              });
+          }
+        },
     mounted() {
         window.Echo.private("friend_req"+this.id)
             .listen('makerequest', (e) => {
@@ -28,6 +54,9 @@ export default {
                          "            </div>";
 
             });
+    },
+    beforeMount(){
+this.fetch_all_requests();
     },
 }
 </script>

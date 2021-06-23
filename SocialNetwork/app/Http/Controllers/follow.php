@@ -13,14 +13,15 @@ class follow extends Controller
 {
     public function following(Request $request)
     {
-
-        $friend_req=friend_requests::create([
-            'from'=>Auth::id(),
-            'to'=>$request->input('user_id'),
-        ]);
         $fname=DB::table('users')->where('id',$request->input('user_id'))->first();
 
         $message=$fname->first_name." ".$fname->last_name." want to be your friend.";
+        $friend_req=friend_requests::create([
+            'from'=>Auth::id(),
+            'to'=>$request->input('user_id'),
+            'message'=>$message,
+        ]);
+
 
         event(new makerequest(\auth()->id(),$request->input('user_id'),$message));
         return back();
@@ -47,5 +48,11 @@ class follow extends Controller
     {
         $decline=DB::table('friend_requests')->where('from',$id)->where('to',Auth::id())->delete();
 
+    }
+    public function get_all_request($id)
+    {
+        $requests=DB::table('friend_requests')->where('to',Auth::id())->orwhere('from',$id)->orderby('updated_at','ASC')->get();
+
+        return response(json_encode($requests));
     }
 }
