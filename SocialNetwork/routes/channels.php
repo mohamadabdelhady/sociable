@@ -24,3 +24,6 @@ Broadcast::channel('chat{receiver}',function (){
 Broadcast::channel('friend_req{receiver}',function (){
     return true;
 });
+Broadcast::channel('notification{receiver}',function (){
+    return true;
+});

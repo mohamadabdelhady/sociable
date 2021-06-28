@@ -11,13 +11,13 @@
 </head>
 <body>
 <div class="container-fluid" style="background-color: #f1f7fc; min-height: 100vh;">
-	
+
 <div class="login-photo ml-auto mr-auto" style="max-width: 400px !important;">
     <div class="form-container">
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <div id="logo-img"class="ml-auto mr-auto" ></div>
-           
+
             <div class="form-group">
                 <input type="firstname" class="form-control @if($errors->register_error->has('first_name')) is-invalid @endif" id="Inputusername"  placeholder="First name" name="first_name">
                 @if($errors->register_error->has('first_name'))
@@ -44,6 +44,16 @@
                                 @endif
             </div>
             <div class="form-group">
+                <label>Date of birth</label>
+
+                <input type="date" class="form-control @if($errors->register_error->has('dob')) is-invalid @endif" id="Inputdob"  placeholder="" name="dob" value="dd/mm/yyyy">
+                @if($errors->register_error->has('dob'))
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->register_error->first('dob') }}</strong>
+                                    </span>
+                @endif
+            </div>
+            <div class="form-group">
                 <input type="password" class="form-control @if($errors->register_error->has('password')) is-invalid @endif" id="InputPassword" placeholder="Password" name="password">
                 @if($errors->register_error->has('password'))
                                 <span class="invalid-feedback" role="alert">
@@ -51,6 +61,7 @@
                                     </span>
                                 @endif
             </div>
+
             <div class="form-group">
                 <input type="password" class="form-control  " id="InputConfirmPassword" placeholder="Confirm password" name="password_confirmation">
             </div>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class posts extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','post_content','image_dir','video_dir','size','likes','dislikes','user_id'];
+    protected $fillable = ['post_content','image_dir','video_dir','size','likes','dislikes','user_id'];
     public function user()
     {
         return $this->belongsTo(User::class);

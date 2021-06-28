@@ -2019,7 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
           var arr = resp.data[i];
           var from = arr['from'];
           var message = arr['message'];
-          document.getElementById('area').innerHTML += "<div class=\"dropdown-item\">\n" + "                <p>" + message + "</p>" + "                <button style=\"background-color: green; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('accept').click();\">Accept</button>" + "                <a href='accept" + from + "' id=\"accept\"></a>" + "                <button style=\"background-color: red; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('decline').click();\">decline</button>" + "                <a href='decline" + from + "' id=\"decline\"></a>" + "                <button  class=\"btn btn-light\" onclick=\"event.preventDefault();document.getElementById('view').click();\">view profile</button>" + "                <a href='get-profile/" + from + "' id=\"view\"></a>" + "            </div>";
+          document.getElementById('area').innerHTML += "<div class=\"dropdown-item\">\n" + "                <p>" + message + "</p>" + "                <button style=\"background-color: green; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('accept').click();\">Accept</button>" + "                <a href='../accept" + from + "' id=\"accept\"></a>" + "                <button style=\"background-color: red; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('decline').click();\">decline</button>" + "                <a href='../decline" + from + "' id=\"decline\"></a>" + "                <button  class=\"btn btn-light\" onclick=\"event.preventDefault();document.getElementById('view').click();\">view profile</button>" + "                <a href='../get-profile/" + from + "' id=\"view\"></a>" + "            </div>";
         }
       });
     }
@@ -2063,8 +2063,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['myid'],
   mounted: function mounted() {
-    window.Echo["private"]("chat" + this.myid).listen('MessageSend', function (e) {
-      document.getElementById('dropdown-menu').innerHTML += "";
+    window.Echo["private"]("notification" + this.myid).listen('notification', function (e) {
+      var message = e.message;
+      document.getElementById('noti-menu').innerHTML += "<p className='dropdown-item'>" + message + "</p>";
     });
   }
 });
@@ -44361,14 +44362,10 @@ var staticRenderFns = [
         ]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "dropdown-menu",
-          attrs: { "aria-labelledby": "dropdownMenuButton" }
-        },
-        [_c("p", { staticClass: "dropdown-item-text" }, [_vm._v("+")])]
-      )
+      _c("div", {
+        staticClass: "dropdown-menu",
+        attrs: { "aria-labelledby": "dropdownMenuButton", id: "noti-menu" }
+      })
     ])
   }
 ]

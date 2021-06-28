@@ -95,7 +95,14 @@
             </div></a>
             <button id="crt-post" style="display: none" ></button>
 
-  </div>
+            @foreach ($errors->all() as $message)
+            <span class="" style="color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+            @endforeach
+
+
+        </div>
     </div>
 
         <div id="myModal" class="modal">
@@ -103,15 +110,14 @@
                 <span class="close">&times;</span>
                 <form method="POST" action="{{route('crtpost')}}"enctype="multipart/form-data" >
                     @csrf
-                    <input type="text" placeholder="Title" class="form-control m-1" name="title">
+
                     <textarea class="form-control" id="textArea" rows="10" placeholder="text here" name="textinput"></textarea>
-                    <p id="error-upload" style="display:none; color: red;"></p>
+                    <p id="error-upload" style=" color: red;"></p>
                     <div class="btn-group btn-group-sm m-2" role="group" aria-label="Second group" >
                         <button type="button" class="btn btn-light " onclick="event.preventDefault(); document.getElementById('upload-img').click();"><img src="/picture_icon.png" id="home_icon"><p>Picture</p></button>
                         <input type="file"  directory  accept="image/*" style="display: none;" id="upload-img" class="form-control" name="inputimg">
                         <button type="button" class="btn btn-light"onclick="event.preventDefault(); document.getElementById('upload-video').click();"><img src="/video_icon.png" id="home_icon"><p>Video</p></button>
                         <input type="file" accept="video/*" style="display: none;" id="upload-video" class="form-control" name="inputvid">
-
 
                     </div>
                     <input type="submit" class="btn btn-outline-info " style="width: 100%;" value="Post">

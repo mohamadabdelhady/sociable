@@ -24,8 +24,10 @@ class CreateNewUser implements CreatesNewUsers
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:6'],
-            'phone_number' => ['nullable', 'string', 'max:255'],
-            'location' => ['nullable', 'string', 'max:255'],
+//            'phone_number' => ['nullable', 'string', 'max:255'],
+//            'location' => ['nullable', 'string', 'max:255'],
+            'dob'=>['required','date','before_or_equal:13 years'],
+
             'email' => [
                 'required',
                 'string',
@@ -42,6 +44,7 @@ class CreateNewUser implements CreatesNewUsers
              'gender' => $input['gender'],
             // 'phone_number' => $input['phone_number'],
             // 'location' => $input['location'],
+            'dob'=>$input['dob'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);

@@ -55,7 +55,7 @@
 
             </div>
         </div>
-    </div>
+    </div>composer require antoineaugusti/laravel-sentiment-analysis
 </nav>
 <div class=" container-fluid"style="min-height: 100vh; width: 100%" id="content">
 <div class="row">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Events\makerequest;
+use App\Events\notification;
 use App\Models\followers;
 use App\Models\friend_requests;
 use Illuminate\Http\Request;
@@ -42,6 +43,9 @@ class follow extends Controller
             'follower_id'=>Auth::id(),
         ]);
         $decline=DB::table('friend_requests')->where('from',$id)->where('to',Auth::id())->delete();
+
+        $message=\auth()->user()->first_name." ".\auth()->user()->last_name." accepted your friend request";
+        event(new notification($message,$id));
         return back();
     }
     public function decline($id)
@@ -52,7 +56,7 @@ class follow extends Controller
     }
     public function get_all_request($id)
     {
-        $requests=DB::table('friend_requests')->where('to',Auth::id())->orwhere('from',$id)->orderby('updated_at','ASC')->get();
+        $requests=DB::table('friend_requests')->where('to',Auth::id())->orderby('updated_at','ASC')->get();
 
         return response(json_encode($requests));
     }

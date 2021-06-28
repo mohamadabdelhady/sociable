@@ -11,6 +11,10 @@ class create_post extends Controller
 {
    function store(Request $request)
    {
+       $this->validate($request,[
+            'inputimg'=>['image','mimes:jpeg,png,jpg,gif,svg','max:5000'],
+            'inputvid'=>['mimes:mp4,mov,ogg,mkv','max:20000'],
+        ]);
 
        if($request->hasFile('inputimg')) {
             $imageName = time() . '.' . $request->file('inputimg')->extension();
@@ -18,7 +22,6 @@ class create_post extends Controller
             $img_size = $path->getSize();
            $img = posts::create([
                'user_id'=>Auth::id(),
-               'title'=>$request->input('title'),
                'image_dir' => $imageName,
                'post_content'=>$request->input('textinput'),
                'size'=>$img_size,
@@ -30,7 +33,6 @@ class create_post extends Controller
            $img_size = $pathv->getSize();
            $img = posts::create([
                'user_id'=>Auth::id(),
-               'title'=>$request->input('title'),
                'video_dir' => $imageName,
                'post_content'=>$request->input('textinput'),
                'size'=>$img_size,
@@ -39,9 +41,12 @@ class create_post extends Controller
        else if($request->input('textinput')!=""){
            $img = posts::create([
                'user_id'=>Auth::id(),
-               'title'=>$request->input('title'),
                'post_content'=>$request->input('textinput'),
            ]);
+       }
+       else
+       {
+           $this->validate($request,['textinput'=>['required']]);
        }
        return back();
    }

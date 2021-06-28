@@ -26,11 +26,11 @@ export default {
                       document.getElementById('area').innerHTML+="<div class=\"dropdown-item\">\n" +
                           "                <p>"+message+"</p>" +
                           "                <button style=\"background-color: green; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('accept').click();\">Accept</button>" +
-                          "                <a href='accept"+from+"' id=\"accept\"></a>" +
+                          "                <a href='../accept"+from+"' id=\"accept\"></a>" +
                           "                <button style=\"background-color: red; color: white;\" class=\"btn\" onclick=\"event.preventDefault();document.getElementById('decline').click();\">decline</button>" +
-                          "                <a href='decline"+from+"' id=\"decline\"></a>" +
+                          "                <a href='../decline"+from+"' id=\"decline\"></a>" +
                           "                <button  class=\"btn btn-light\" onclick=\"event.preventDefault();document.getElementById('view').click();\">view profile</button>" +
-                          "                <a href='get-profile/"+from+"' id=\"view\"></a>" +
+                          "                <a href='../get-profile/"+from+"' id=\"view\"></a>" +
                           "            </div>";
                   }
 
