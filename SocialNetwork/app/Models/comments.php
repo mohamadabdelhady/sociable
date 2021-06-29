@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class comments extends Model
 {
     use HasFactory;
-    protected $fillable = ['post_id','user_id','comment_content'];
+    protected $fillable = ['post_id','user_id','comment_content','Sentiment Score','Sentiment magnitude','Sentiment_class'];
 }

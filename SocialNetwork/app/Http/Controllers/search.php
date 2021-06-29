@@ -46,7 +46,5 @@ public function search(Request $request)
     $current=$request->path();
 
     return view("$current")->with(compact( 'user', 'posts', 'post_num', 'user_num','total'));
-//echo "$user";
-
 }
 }

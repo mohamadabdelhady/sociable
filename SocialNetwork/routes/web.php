@@ -27,6 +27,9 @@ Route::get('main',  ['as' => 'main', 'uses' => 'App\Http\Controllers\mainpage@ge
 Route::get('/return-home', function () {
     return view('home');
 });
+Route::get('/senti', function () {
+    return view('sentimental_analysis');
+});
 Route::get('/chat', function () {
     return view('chat');
 });
@@ -63,3 +66,7 @@ Route::POST('settings', [App\Http\Controllers\settings::class, 'get_settings'])-
 Route::GET('accept{id}', [App\Http\Controllers\follow::class, 'accept_req'])->name('accept{id}')->middleware('auth');
 Route::GET('decline{id}', [App\Http\Controllers\follow::class, 'decline'])->name('decline{id}')->middleware('auth');
 Route::GET('get_request{id}', [App\Http\Controllers\follow::class, 'get_all_request'])->name('get_request{id}')->middleware('auth');
+Route::GET('get_sent', [App\Http\Controllers\sentiment::class, 'sentiment'])->name('get_sent')->middleware('auth');
+Route::GET('get_all_sent', [App\Http\Controllers\sentiment::class, 'all_sentiment'])->name('get_all_sent')->middleware('auth');
+Route::GET('post_search_sentiment', [App\Http\Controllers\sentiment::class, 'post_search_sentiment'])->name('post_search_sentiment')->middleware('auth');
+Route::GET('comment_search_sentiment', [App\Http\Controllers\sentiment::class, 'comment_search_sentiment'])->name('comment_search_sentiment')->middleware('auth');

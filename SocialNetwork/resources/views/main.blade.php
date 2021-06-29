@@ -11,12 +11,14 @@
     <script src="{{ asset('js/script1.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script2.js') }}" defer></script>
-
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>--}}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style-post.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 </head>
 <body>
 <nav class="navbar navbar-dark"id="nav-bar" >
@@ -72,12 +74,8 @@
 		<hr>
 		<ul><li><a href="#"><img src="/groups_icon.png" class="side_icon"><span>My groups</span></a></li></ul>
 	<ul><li><a href="#"><img src="/flag_icon.png" class="side_icon"><span>My pages</span></a></li></ul>
-{{--		<hr>--}}
-{{--		<ul><li><a href="#"><img src="/market_icon.png" class="side_icon"><span>Market</span></a></li></ul>--}}
-{{--		<ul><li><a href="#"><img src="/product_icon.png" class="side_icon"><span>My products</span></a></li></ul>--}}
-{{--		--}}
+
         <hr>
-{{--		<ul><li><a href="#"><img src="/event_icon.png" class="side_icon"><span>Events</span></a></li></ul>--}}
 		<ul><li><a href="#"><img src="/trending_icon.png" class="side_icon"><span>Trending</span></a></li></ul>
 </div>
 <div class="col-xl-5 col-lg-5 ">
@@ -130,6 +128,7 @@
     <div id="post-result">
         @if($post_num!=0)
             <br>
+            <div class="scrolling-pagination">
             @foreach($posts as $post)
                 <div class="card">
                     @if(\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')!=null)
@@ -165,6 +164,8 @@
                 </div>
                 <br />
             @endforeach
+                {{ $posts->links() }}
+            </div>
         @endif
     </div>
     </div>
@@ -197,6 +198,21 @@
     </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('ul.pagination').hide();
+    $(function() {
+        $('.scrolling-pagination').jscroll({
+            autoTrigger: true,
+            padding: 0,
+            nextSelector: '.pagination li.active + li a',
+            contentSelector: 'div.scrolling-pagination',
+            callback: function() {
+                $('ul.pagination').remove();
+            }
+        });
+    });
+</script>
 <script>
     function like(post_id)
     {
@@ -217,7 +233,6 @@
                     _token: _token
                 },
                 success: function (response) {
-                    // console.log(response);
                     if (response) {
 
                         document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
@@ -287,7 +302,6 @@
                         for (var i = 0; i < response.length; i++)
                         {
                             var temp=response[i];
-
                             document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
                             +"<p>"+temp['comment_content']+"</p><hr>";
 
@@ -327,7 +341,7 @@
                     _token: _token
                 },
                 success: function (response) {
-                    // console.log(response);
+                     console.log(response);
                     if (response) {
 
                         document.getElementById("comment_box" + post_id).value = "";

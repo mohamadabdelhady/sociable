@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\posts;
 use Illuminate\Http\Request;
 
 use DB;
@@ -11,11 +12,21 @@ class mainpage extends Controller
     {
 
         $id=auth()->id();
-        $posts= DB::select("SELECT *  FROM posts WHERE user_id IN (SELECT follower_id FROM followers where id =$id)OR user_id=$id;");
+//        $posts= DB::select("SELECT *  FROM posts WHERE user_id IN (SELECT follower_id FROM followers where id =$id)OR user_id=$id;");
+        $posts = posts::whereIn('user_id', function ($query) use ($id) {
+            $query->select('follower_id')
+                ->from('followers')
+                ->where('id', $id);
+        })->orWhere('user_id', $id)->orderBy('created_at','desc')
+            ->paginate(6);
         $post_num=count($posts);
         $followers= DB::select("SELECT id,first_name,last_name,profile_img FROM users WHERE id IN (SELECT follower_id FROM followers where id =$id);");
         $current=$request->path();
 
+        if($request->ajax()){
+            $view = view('data',compact('posts'))->render();
+            return response()->json(['html'=>$view]);
+        }
         return view("$current")->with(compact('post_num','posts','followers'));
     }
 }

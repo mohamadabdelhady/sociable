@@ -20,6 +20,9 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('comment_content')->nullable();
+            $table->float('Sentiment Score')->nullable();
+            $table->float('Sentiment magnitude')->nullable();
+            $table->tinyText('Sentiment_class')->nullable();
             $table->timestamps();
         });
     }

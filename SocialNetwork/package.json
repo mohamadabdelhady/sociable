@@ -25,5 +25,8 @@
         "vue": "^2.5.17",
         "vue-loader": "^15.9.7",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "jscroll": "^2.4.1"
     }
 }

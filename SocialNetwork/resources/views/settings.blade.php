@@ -17,7 +17,6 @@
         <form class="navbar-nav ml-auto mr-auto" id="Search-form" method="get" action="{{route('search-results')}}">@csrf
             <input class="form-control " type="search" placeholder="Search" aria-label="Search" id="search-input" name="q">
         </form>
-
         <button class="btn mybtn mr-3" style="border: none;box-shadow: none;" onclick="event.preventDefault(); document.getElementById('home-form').submit();">
             <form action="{{route('main')}}" method="get" style="display: none;" id="home-form"></form>
             <img src="/home_icon.png" id="home_icon">
@@ -55,7 +54,7 @@
 
             </div>
         </div>
-    </div>composer require antoineaugusti/laravel-sentiment-analysis
+    </div>
 </nav>
 <div class=" container-fluid"style="min-height: 100vh; width: 100%" id="content">
 <div class="row">
