@@ -70,3 +70,4 @@ Route::GET('get_sent', [App\Http\Controllers\sentiment::class, 'sentiment'])->na
 Route::GET('get_all_sent', [App\Http\Controllers\sentiment::class, 'all_sentiment'])->name('get_all_sent')->middleware('auth');
 Route::GET('post_search_sentiment', [App\Http\Controllers\sentiment::class, 'post_search_sentiment'])->name('post_search_sentiment')->middleware('auth');
 Route::GET('comment_search_sentiment', [App\Http\Controllers\sentiment::class, 'comment_search_sentiment'])->name('comment_search_sentiment')->middleware('auth');
+Route::GET('settings', [App\Http\Controllers\settings::class, 'get_settings'])->name('settings')->middleware('auth');

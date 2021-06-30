@@ -65,14 +65,67 @@
 
 </div>
     <div class="col-xl-4 col-lg-4">
-        <div>
-        <label>First name</label><input type="text" class="form-control"value="{{auth()->user()->first_name}}">
-        <label>Last name</label><input type="text" class="form-control" value="{{auth()->user()->last_name}}">
+
+       <form method="POST" action="{{ route('user-profile-information.update') }}">
+           @csrf
+           @method('PUT')
+        <div class="form-group">
+            <label>First name</label>
+            <input type="firstname" class="form-control @if($errors->updateProfileInformation->has('first_name')) is-invalid @endif" id="Inputusername"  placeholder="" value="{{auth()->user()->first_name}}" name="first_name">
+            @if($errors->updateProfileInformation->has('first_name'))
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->updateProfileInformation->first('first_name') }}</strong>
+                                    </span>
+            @endif
+
         </div>
-        <div>
-            <label>Email</label><input type="text" class="form-control" value="{{auth()->user()->email}}">
-            <label>Password</label><input type="text" class="form-control">
+        <div class="form-group">
+            <label>Last name</label>
+            <input type="firstname" class="form-control @if($errors->updateProfileInformation->has('last_name')) is-invalid @endif" id="Inputusername"  value="{{auth()->user()->last_name}}" name="last_name">
+            @if($errors->updateProfileInformation->has('last_name'))
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->updateProfileInformation->first('last_name') }}</strong>
+                                    </span>
+            @endif
         </div>
+           <div class="form-group">
+               <label>Email</label>
+               <input type="email" class="form-control @if($errors->updateProfileInformation->has('email')) is-invalid @endif" id="InputEmail"  value="{{auth()->user()->email}}" name="email">
+               @if($errors->updateProfileInformation->has('email'))
+                   <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->updateProfileInformation->first('email') }}</strong>
+                                    </span>
+               @endif
+           </div>
+            <button class="btn btn-primary m-2" type="submit">Update information</button>
+       </form>
+        <hr>
+        <form method="POST" action="{{route('user-password.update')}}">
+            @csrf
+            @method('PUT')
+            <p>Change the password</p>
+            <div class="form-group">
+                <input type="password" class="form-control @if($errors->updatePassword->has('current_password')) is-invalid @endif" id="InputPassword" placeholder="Current password" name="current_password">
+                @if($errors->updatePassword->has('current_password'))
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->updatePassword->first('current_password') }}</strong>
+                                    </span>
+                @endif
+            </div>
+            <div class="form-group">
+
+                <input type="password" class="form-control @if($errors->updatePassword->has('password')) is-invalid @endif" id="InputPassword" placeholder="Password" name="password">
+                @if($errors->updatePassword->has('password'))
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->updatePassword->first('password') }}</strong>
+                                    </span>
+                @endif
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control  " id="InputConfirmPassword" placeholder="Confirm password" name="password_confirmation">
+            </div>
+            <button class="btn btn-primary m-2" type="submit">Update password</button>
+        </form>
 
     </div>
 </div>
