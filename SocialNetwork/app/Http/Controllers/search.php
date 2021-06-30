@@ -30,10 +30,11 @@ public function search(Request $request)
 //    ->get();
     $posts= DB::table('users AS u')
         ->join('posts As p', 'u.id', '=', 'p.user_id' )
-        ->select('p.id as post_id','post_content','image_dir','video_dir','p.created_at as post_date','first_name','last_name','profile_img')
+        ->select('p.id as post_id','post_content','image_dir','video_dir','p.user_id','p.updated_at','p.id')
         ->Where('post_content', 'like', "%{$key}%")
         ->orderBy('p.created_at', 'desc')
         ->get();
+//    dd($posts);
     $user = User::query()
         ->where('first_name', 'like', "%{$key}%")
         ->orWhere('last_name', 'like', "%{$key}%")

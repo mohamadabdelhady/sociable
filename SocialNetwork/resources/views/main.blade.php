@@ -128,7 +128,7 @@
     <div id="post-result">
         @if($post_num!=0)
             <br>
-            <div class="scrolling-pagination">
+
             @foreach($posts as $post)
                 <div class="card">
                     @if(\Illuminate\Support\Facades\DB::table('users')->where('id',$post->user_id)->value('profile_img')!=null)
@@ -165,8 +165,7 @@
                 </div>
                 <br />
             @endforeach
-                {{ $posts->links() }}
-            </div>
+
         @endif
     </div>
     </div>
@@ -199,21 +198,6 @@
     </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $('ul.pagination').hide();
-    $(function() {
-        $('.scrolling-pagination').jscroll({
-            autoTrigger: true,
-            padding: 0,
-            nextSelector: '.pagination li.active + li a',
-            contentSelector: 'div.scrolling-pagination',
-            callback: function() {
-                $('ul.pagination').remove();
-            }
-        });
-    });
-</script>
 <script>
     function like(post_id)
     {
