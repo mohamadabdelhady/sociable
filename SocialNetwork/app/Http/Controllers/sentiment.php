@@ -25,7 +25,7 @@ $magnitude=$sentiment['magnitude'];
 $class="";
 if ($score==0||$score<=0.3)
     $class="neutral";
-elseif ($score>0)
+elseif ($score>0.3)
     $class="positive";
 elseif ($score<0)
     $class="negative";
