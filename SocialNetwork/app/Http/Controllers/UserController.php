@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
-    public function userOnlineStatus()
+    public function birthday_notification()
     {
-       return view('chat');
+
     }
 }

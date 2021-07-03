@@ -88,14 +88,14 @@
         <hr>
         <div class="btn-group btn-group-lg m-2 btn-cover" role="group" aria-label="Second group">
             @if($is_exist==false && $is_request==false)
-            <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon" onclick="event.preventDefault(); document.getElementById('follow').submit();"><p>Follow</p></button>
+            <button type="button" class="btn btn-light"><img src="/following_icon.png" id="home_icon" onclick="event.preventDefault(); document.getElementById('follow').submit();"><p>Send friend request</p></button>
                 <form action="{{ route('follow') }}" method="POST" id="follow" style="display: none;">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ $userdata->id }}">
 
                 </form>
             @elseif($is_exist==true)
-                <button type="button" class="btn btn-light active"><img src="/followed_icon.png" id="home_icon" onclick="event.preventDefault(); document.getElementById('unfollow').submit();"><p>Followed</p></button>
+                <button type="button" class="btn btn-light active"><img src="/followed_icon.png" id="home_icon" onclick="event.preventDefault(); document.getElementById('unfollow').submit();"><p>friended</p></button>
                 <form action="{{ route('unfollow') }}" method="POST" id="unfollow" style="display: none;">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ $userdata->id }}">

@@ -11,9 +11,8 @@
     <script src="{{ asset('js/script1.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script2.js') }}" defer></script>
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>--}}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style-post.css') }}" rel="stylesheet">
@@ -125,6 +124,18 @@
             </div>
 
         </div>
+    <div id="myModal2" class="modal">
+        <div class="modal-content" style="width: 400px;">
+            <a id="close2" style="text-decoration: none;color: black;"onclick="event.preventDefault(); document.getElementById('close-btn').click()"><span></span></a>
+            <button id="close-btn" style="display: none"></button>
+<p class="h3">Sentiment results</p><br>
+            <p style="color: green;">positive :<span id="pos_num"></span></p>
+            <p style="color: red;">negative :<span id="neg_num"></span></p>
+            <p style="color:grey;">neutral :<span id="neut_num"></span></p>
+            <span id="span1" style="background-color: green; height: 5px; width: 20px; display: inline;"></span> <span id="span2" style="background-color: red; height: 5px; width: 20px; display: inline;"></span> <span id="span3" style="background-color: grey; height: 5px; width: 20px; display: inline"></span>
+        </div>
+
+    </div>
     <div id="post-result">
         @if($post_num!=0)
             <br>
@@ -155,6 +166,8 @@
                         <input type="hidden" id="post_id" value="{{$post->id}}">
                         <a href="#" class="" style="color: black;text-decoration: none;font-size: 20px;" onclick="event.preventDefault(); loadcomment({{$post->id}})"><img src="/comment_icon.png" style="height: 40px;width: 40px;">
                             <span id="comment_num{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("comments")->where("post_id",$post->id)->count()}}</span></a>
+                        <a href="#" class="ml-auto mr-auto" style="text-decoration: none;" onclick="event.preventDefault(); get_sentiment({{$post->id}});"><img style="height: 40px;width: 40px;" class="ml-5" src="chart_icon.png"></a>
+{{--                        <button id="get_sentiment" style="display: none" onclick="get_sentiment({{$posts->id}})"></button>--}}
                         <span  style="float: right;"><a href="#"  onclick="event.preventDefault(); like({{$post->id}})"><img src="/likes_icon.png" style="height: 40px;width: 40px;"></a><span id="likenum{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("likes")}}</span>
                                 <a href="#" onclick="event.preventDefault(); dislike({{$post->id}})"><img src="/dislike_icon.png" style="height: 40px;width: 40px;"></a><span id="dislikenum{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("dislikes")}}</span></span>
                         <div style="display: none" id="comment_sec{{$post->id}}">
@@ -201,6 +214,7 @@
 <script>
     function like(post_id)
     {
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -362,7 +376,9 @@
         }
 
     }
+
 </script>
+
 </body>
 
 </html>

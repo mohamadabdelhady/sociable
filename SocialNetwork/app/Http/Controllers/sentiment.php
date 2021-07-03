@@ -52,4 +52,10 @@ $senti=DB::select('SELECT Sentiment_class FROM comments');
         $senti=DB::select("select Sentiment_class FROM comments where comment_content='$q'");
         return response()->json($senti);
     }
+    public function get_post_sentiment($id)
+    {
+
+        $senti=DB::select("SELECT Sentiment_class FROM comments where post_id='$id'");
+        return response()->json($senti);
+    }
 }

@@ -18,15 +18,16 @@ class mainpage extends Controller
                 ->from('followers')
                 ->where('id', $id);
         })->orWhere('user_id', $id)->orderBy('created_at','desc')
-            ->paginate(6);
+            ->paginate(10);
+
         $post_num=count($posts);
         $followers= DB::select("SELECT id,first_name,last_name,profile_img FROM users WHERE id IN (SELECT follower_id FROM followers where id =$id);");
         $current=$request->path();
 
-        if($request->ajax()){
-            $view = view('data',compact('posts'))->render();
-            return response()->json(['html'=>$view]);
-        }
+//        if($request->ajax()){
+//            $view = view($current,compact('posts'))->render();
+//            return response()->json(['html'=>$view]);
+//        }
         return view("$current")->with(compact('post_num','posts','followers'));
     }
 }

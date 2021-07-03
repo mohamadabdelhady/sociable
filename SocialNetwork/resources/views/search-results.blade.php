@@ -96,7 +96,9 @@
                 @endforeach
             @endif
         </div>
+
                     <div id="post-result">
+                        <p style="font-size: 25px">Posts</p><hr>
                         @if($post_num!=0)
                             <br>
 
