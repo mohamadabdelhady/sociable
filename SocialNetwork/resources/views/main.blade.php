@@ -85,7 +85,7 @@
             @endif
             </div>
             <div class="h5 ml-auto mr-auto"><p>{{auth()->user()->first_name." ".auth()->user()->last_name}}</p></div>
-            <div class="mr-auto ml-auto"><span class="mr-2">Posts: {{$post_num}}</span><span class="mr-2">Following: {{$following_num}}</span><span class="mr-2">followers: {{$followers_num}}</span></div>
+            <div class="mr-auto ml-auto"><span class="mr-2">Posts: {{$post_num}}</span><span class="mr-2"><span class="mr-2">Friends: {{$followers_num}}</span></div>
             <hr class="ml-auto mr-auto">
             <ul><li class="m-2"><a href="profile"><img src="/profile_icon.png" class="side_icon"><span>show my profile</span></a></li></ul>
 
