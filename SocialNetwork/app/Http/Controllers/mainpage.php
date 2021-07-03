@@ -22,12 +22,15 @@ class mainpage extends Controller
 
         $post_num=count($posts);
         $followers= DB::select("SELECT id,first_name,last_name,profile_img FROM users WHERE id IN (SELECT follower_id FROM followers where id =$id);");
+        $following=DB::select("select * from followers where id=$id;");
+        $following_num=count($following);
+        $followers_num=count($followers);
         $current=$request->path();
 
 //        if($request->ajax()){
 //            $view = view($current,compact('posts'))->render();
 //            return response()->json(['html'=>$view]);
 //        }
-        return view("$current")->with(compact('post_num','posts','followers'));
+        return view("$current")->with(compact('post_num','posts','followers','followers_num','following_num'));
     }
 }

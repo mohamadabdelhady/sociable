@@ -9,7 +9,7 @@ class showprofile extends Controller
 {
     public function get_all_data(Request $request,$id)
     {
-        $userdata=DB::table('users')->select('id','first_name','last_name','profile_img','cover_img')
+        $userdata=DB::table('users')->select('id','first_name','last_name','profile_img','cover_img','bio')
             ->where('id',$id)->first();
         $is_exist=false;
         $is_request=false;

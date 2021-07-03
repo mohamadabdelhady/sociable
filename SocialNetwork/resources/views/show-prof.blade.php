@@ -157,6 +157,11 @@
         </div>
     </div>
     <div class="col-xl-4 col-lg-4">
+        <div class="card m-2" style="height: 19rem;">
+            <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">bio</p>
+            <p style="min-height: 10rem; " class="m-2" id="bio_view">{{$userdata->bio}}</p>
+
+        </div>
         <div class="card m-2" style="height: 18rem;">
             <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">Followers</p>
             @foreach($followers as $follower)

@@ -73,3 +73,4 @@ Route::GET('comment_search_sentiment', [App\Http\Controllers\sentiment::class, '
 Route::GET('settings', [App\Http\Controllers\settings::class, 'get_settings'])->name('settings')->middleware('auth');
 Route::POST('get_post_sentiment', [App\Http\Controllers\sentiment::class, 'get_post_sentiment'])->name('get_post_sentiment')->middleware('auth');
 Route::GET('get_post_sentiment/{id}', [App\Http\Controllers\sentiment::class, 'get_post_sentiment'])->name('get_post_sentiment/{id}')->middleware('auth');
+Route::POST('save_bio', [App\Http\Controllers\profilepage::class, 'save_bio'])->name('save_bio')->middleware('auth');

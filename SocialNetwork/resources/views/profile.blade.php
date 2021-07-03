@@ -69,7 +69,7 @@
 
         <div class="dropdown editbtn">
             <button class="btn btn-light ml-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Edit cover
+                Edit cover/profile
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('upload-img_prof').click();">Change profile image</a>
@@ -156,10 +156,17 @@
             </div>
         </div>
         <div class="col-xl-4 col-lg-4">
-            <div class="card m-2" style="height: 18rem;">
+            <div class="card m-2" style="height: 19rem;">
                 <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">bio</p>
-                <p style="min-height: 10rem;"></p>
-                <button class="btn btn-primary ml-auto mr-auto" style="width: 90%;">update your bio</button>
+                <p style="min-height: 10rem; " class="m-2" id="bio_view">{{auth()->user()->bio}}</p>
+                <button class="btn btn-primary ml-auto mr-auto" style="width: 90%;" id="update-bio" onclick="show_bio()">update your bio</button>
+                <form method="POST" action="{{route('save_bio')}}">
+                    @csrf
+                <textarea class="form-control" name="bio" style="min-height: 10rem;display: none;" id="bio_text"></textarea>
+                <button type="submit" class="btn btn-primary ml-auto mr-auto form-control" style="width: 90%; display: none;" id="save-bio">save your bio</button>
+
+                </form>
+                <button class="btn btn-danger ml-auto mr-auto mt-1" id="abort_save" style="width: 90%; display: none;">Abort</button>
             </div>
             <div class="card m-2" style="height: 18rem;">
                 <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">Followers</p>
@@ -322,7 +329,7 @@
                                 _token: _token
                             },
                             success: function (data) {
-                                console.log(response);
+                                // console.log(response);
                                 if (data) {
                                     for (var i = 0; i < data.length; i++) {
                                         var temp = data[i];
@@ -343,6 +350,21 @@
             });
         }
 
+    }
+    function show_bio(){
+        document.getElementById('update-bio').style.display='none';
+        document.getElementById('bio_view').style.display='none';
+        document.getElementById('save-bio').style.display='block';
+        document.getElementById('bio_text').style.display='block';
+        document.getElementById('abort_save').style.display='block';
+    }
+    var abo=document.getElementById('abort_save');
+    abo.onclick=function(){
+        document.getElementById('update-bio').style.display='block';
+        document.getElementById('bio_view').style.display='block';
+        document.getElementById('save-bio').style.display='none';
+        document.getElementById('bio_text').style.display='none';
+        document.getElementById('abort_save').style.display='none';
     }
 </script>
 </body>

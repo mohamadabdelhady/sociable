@@ -69,13 +69,27 @@
 <div class=" container-fluid"style="min-height: 100vh; width: 100%" id="content">
     <div class="row">
 	<div class="col-xl-3 col-lg-3 ml-4 " id="icons_area" style="">
-		<ul><li><a href="profile"><img src="/profile_icon.png" class="side_icon"><span>My profile</span></a></li></ul>
-		<hr>
-		<ul><li><a href="#"><img src="/groups_icon.png" class="side_icon"><span>My groups</span></a></li></ul>
-	<ul><li><a href="#"><img src="/flag_icon.png" class="side_icon"><span>My pages</span></a></li></ul>
+{{--		<ul><li><a href="profile"><img src="/profile_icon.png" class="side_icon"><span>My profile</span></a></li></ul>--}}
+{{--		<hr>--}}
+{{--		<ul><li><a href="#"><img src="/groups_icon.png" class="side_icon"><span>My groups</span></a></li></ul>--}}
+{{--	<ul><li><a href="#"><img src="/flag_icon.png" class="side_icon"><span>My pages</span></a></li></ul>--}}
 
-        <hr>
-		<ul><li><a href="#"><img src="/trending_icon.png" class="side_icon"><span>Trending</span></a></li></ul>
+{{--        <hr>--}}
+{{--		<ul><li><a href="#"><img src="/trending_icon.png" class="side_icon"><span>Trending</span></a></li></ul>--}}
+        <div class="card">
+            <div class="mr-auto ml-auto m-2 p-1" style="border:solid 1px black;">
+            @if(auth()->user()->profile_img)
+                <img src="{{url('/images/users_profile_img/'.auth()->user()->profile_img)}}" style="height: 200px;width: 200px;"  id="">
+            @else
+                <img src="/images/user_default.png" style="height: 200px;width: 200px;"  id="">
+            @endif
+            </div>
+            <div class="h5 ml-auto mr-auto"><p>{{auth()->user()->first_name." ".auth()->user()->last_name}}</p></div>
+            <div class="mr-auto ml-auto"><span class="mr-2">Posts: {{$post_num}}</span><span class="mr-2">Following: {{$following_num}}</span><span class="mr-2">followers: {{$followers_num}}</span></div>
+            <hr class="ml-auto mr-auto">
+            <ul><li class="m-2"><a href="profile"><img src="/profile_icon.png" class="side_icon"><span>show my profile</span></a></li></ul>
+
+        </div>
 </div>
 <div class="col-xl-5 col-lg-5 ">
 
