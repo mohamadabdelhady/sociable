@@ -169,6 +169,11 @@
         </div>
         <div class="col-xl-4 col-lg-4">
             <div class="card m-2" style="height: 18rem;">
+                <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">bio</p>
+                <p style="min-height: 10rem;"></p>
+                <button class="btn btn-primary ml-auto mr-auto" style="width: 90%;">update your bio</button>
+            </div>
+            <div class="card m-2" style="height: 18rem;">
                 <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">Followers</p>
                 @foreach($followers as $follower)
                     @if($follower->profile_img!=null)

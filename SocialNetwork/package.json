@@ -27,6 +27,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "jscroll": "^2.4.1"
+        "carbonjs": "^1.0.0",
+        "jscroll": "^2.4.1",
+        "moment": "^2.29.1"
     }
 }

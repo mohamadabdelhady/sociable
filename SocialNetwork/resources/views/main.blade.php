@@ -11,8 +11,8 @@
     <script src="{{ asset('js/script1.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script2.js') }}" defer></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style-post.css') }}" rel="stylesheet">
@@ -167,7 +167,6 @@
                         <a href="#" class="" style="color: black;text-decoration: none;font-size: 20px;" onclick="event.preventDefault(); loadcomment({{$post->id}})"><img src="/comment_icon.png" style="height: 40px;width: 40px;">
                             <span id="comment_num{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("comments")->where("post_id",$post->id)->count()}}</span></a>
                         <a href="#" class="ml-auto mr-auto" style="text-decoration: none;" onclick="event.preventDefault(); get_sentiment({{$post->id}});"><img style="height: 40px;width: 40px;" class="ml-5" src="chart_icon.png"></a>
-{{--                        <button id="get_sentiment" style="display: none" onclick="get_sentiment({{$posts->id}})"></button>--}}
                         <span  style="float: right;"><a href="#"  onclick="event.preventDefault(); like({{$post->id}})"><img src="/likes_icon.png" style="height: 40px;width: 40px;"></a><span id="likenum{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("likes")}}</span>
                                 <a href="#" onclick="event.preventDefault(); dislike({{$post->id}})"><img src="/dislike_icon.png" style="height: 40px;width: 40px;"></a><span id="dislikenum{{$post->id}}">{{\Illuminate\Support\Facades\DB::table("posts")->where("id",$post->id)->value("dislikes")}}</span></span>
                         <div style="display: none" id="comment_sec{{$post->id}}">
@@ -300,8 +299,10 @@
                         document.getElementById("comment_num"+post_id).innerHTML =response.length;
                         for (var i = 0; i < response.length; i++)
                         {
-                            var temp=response[i];
-                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a>"
+                            var temp=response[i]
+                            let date=temp['updated_at'];
+
+                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a><span style='color: #166678'>"+date+"</span>"
                             +"<p>"+temp['comment_content']+"</p><hr>";
 
                         }
@@ -358,9 +359,10 @@
                                 if (data) {
                                     for (var i = 0; i < data.length; i++) {
                                         var temp = data[i];
+                                        let date=temp['updated_at'];
 
-                                        document.getElementById("comment-sec" + post_id).innerHTML +=  "<a href='../get-profile/" + temp['user_id'] + "'><p>@" + temp['first_name'] + " " + temp['last_name'] + "</p></a>"
-                                            + "<p>" + temp['comment_content'] + "</p><hr>";
+                                        document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a><span style='color: #166678'>"+date+"</span>"
+                                            +"<p>"+temp['comment_content']+"</p><hr>";
 
                                     }
 
