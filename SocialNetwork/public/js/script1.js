@@ -30,7 +30,7 @@ window.onclick = function(event) {
 var modal2 = document.getElementById("myModal2");
 
 // Get the button that opens the modal
-// var btn2 = document.getElementById("get_sentiment");
+
 
 // Get the <span> element that closes the modal
 var span2 = document.getElementById("close-btn");
@@ -53,7 +53,7 @@ function get_sentiment(post_id)
         url: "get_post_sentiment/"+id,
         type: "GET",
         success: function (response) {
-            // console.log(response);
+
             let positive=0;
             let negative=0;
             let neutral=0;

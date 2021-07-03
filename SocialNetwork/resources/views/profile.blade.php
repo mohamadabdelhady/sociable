@@ -99,21 +99,9 @@
     @endif
   </div>
   <div class="cover-text">
-
     <p>{{auth()->user()->first_name." ".auth()->user()->last_name}}</p>
-
   </div>
-
-
-
-
   <hr>
-{{--  <div class="btn-group btn-group-lg m-2 btn-cover" role="group" aria-label="Second group">--}}
-{{--    <button type="button" class="btn btn-light"><img src="/timeline_icon.png" id="home_icon"><p>Timeline</p></button>--}}
-{{--    <button type="button" class="btn btn-light"><img src="/followers_icon.png" id="home_icon"><p>Followers</p></button>--}}
-{{--</div>--}}
-
-
 </div>
 
 	<div class="col-xl-1 col-lg-1" id="action_area"></div>
