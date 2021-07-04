@@ -62,7 +62,7 @@ Route::GET('chat/{id}', [App\Http\Controllers\chat::class, 'get_user'])->name('c
 Route::POST('send_message', [App\Http\Controllers\chat::class, 'send_message'])->name('send_message')->middleware('auth');
 Route::GET('get_messages{id}', [App\Http\Controllers\chat::class, 'get_all_message'])->name('get_messages{id}')->middleware('auth');
 Route::GET('get_followers', [App\Http\Controllers\chat::class, 'get_followers'])->name('get_followers')->middleware('auth');
-Route::POST('settings', [App\Http\Controllers\settings::class, 'get_settings'])->name('settings')->middleware('auth');
+Route::POST('settings', [App\Http\Controllers\UserController::class, 'get_settings'])->name('settings')->middleware('auth');
 Route::GET('accept{id}', [App\Http\Controllers\follow::class, 'accept_req'])->name('accept{id}')->middleware('auth');
 Route::GET('decline{id}', [App\Http\Controllers\follow::class, 'decline'])->name('decline{id}')->middleware('auth');
 Route::GET('get_request{id}', [App\Http\Controllers\follow::class, 'get_all_request'])->name('get_request{id}')->middleware('auth');
@@ -70,7 +70,6 @@ Route::GET('get_sent', [App\Http\Controllers\sentiment::class, 'sentiment'])->na
 Route::GET('get_all_sent', [App\Http\Controllers\sentiment::class, 'all_sentiment'])->name('get_all_sent')->middleware('auth');
 Route::GET('post_search_sentiment', [App\Http\Controllers\sentiment::class, 'post_search_sentiment'])->name('post_search_sentiment')->middleware('auth');
 Route::GET('comment_search_sentiment', [App\Http\Controllers\sentiment::class, 'comment_search_sentiment'])->name('comment_search_sentiment')->middleware('auth');
-Route::GET('settings', [App\Http\Controllers\settings::class, 'get_settings'])->name('settings')->middleware('auth');
 Route::POST('get_post_sentiment', [App\Http\Controllers\sentiment::class, 'get_post_sentiment'])->name('get_post_sentiment')->middleware('auth');
 Route::GET('get_post_sentiment/{id}', [App\Http\Controllers\sentiment::class, 'get_post_sentiment'])->name('get_post_sentiment/{id}')->middleware('auth');
 Route::POST('save_bio', [App\Http\Controllers\profilepage::class, 'save_bio'])->name('save_bio')->middleware('auth');

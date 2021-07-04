@@ -20,12 +20,13 @@ class sentiment extends Controller
 $score=$sentiment['score'];
 $magnitude=$sentiment['magnitude'];
 $class="";
-if ($score==0||$score<=0.3)
-    $class="neutral";
-elseif ($score>0.3)
+
+if ($score>0.3)
     $class="positive";
 elseif ($score<0)
     $class="negative";
+elseif ($score==0||$score<=0.1)
+    $class="neutral";
 
         return(compact('score','magnitude','class'));
     }

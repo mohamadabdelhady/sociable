@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
-    public function birthday_notification()
+    public function get_settings()
     {
-
+return view('settings');
     }
 }
