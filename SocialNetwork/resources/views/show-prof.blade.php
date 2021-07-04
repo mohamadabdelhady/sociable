@@ -163,7 +163,7 @@
 
         </div>
         <div class="card m-2" style="height: 18rem;">
-            <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">Followers</p>
+            <p class="ml-auto mr-auto mt-2" style="font-size: 20px;">Friends</p>
             @foreach($followers as $follower)
                 @if($follower->profile_img!=null)
                     <div class="m-2"><img src="{{url('/images/users_profile_img/'.$follower->profile_img)}}" id="userAvatar">
