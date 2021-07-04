@@ -35,7 +35,8 @@ event(new MessageSend($request->message,Auth::id(),$request->id));
 }
 public function get_all_message($id)
 {
-$messages=DB::table('messages')->where('sender',Auth::id())->orwhere('sender',$id)->orderby('updated_at','ASC')->get();
+
+$messages=DB::table('messages')->where('receiver',$id)->where('sender',\auth()->id())->orderby('updated_at','ASC')->get();
 
 return response(json_encode($messages));
 }
