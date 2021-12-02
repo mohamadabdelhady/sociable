@@ -21,11 +21,11 @@ $score=$sentiment['score'];
 $magnitude=$sentiment['magnitude'];
 $class="";
 
-if ($score>0.3)
+if ($score>0)
     $class="positive";
 elseif ($score<0)
     $class="negative";
-elseif ($score==0||$score<=0.1)
+elseif ($score==0)
     $class="neutral";
 
         return(compact('score','magnitude','class'));
