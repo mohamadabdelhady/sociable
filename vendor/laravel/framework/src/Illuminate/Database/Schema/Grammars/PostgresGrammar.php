@@ -19,7 +19,7 @@ class PostgresGrammar extends Grammar
      *
      * @var string[]
      */
-    protected $modifiers = ['Primary', 'Collate', 'Increment', 'Nullable', 'Default', 'VirtualAs', 'StoredAs'];
+    protected $modifiers = ['Collate', 'Increment', 'Nullable', 'Default', 'VirtualAs', 'StoredAs'];
 
     /**
      * The columns available as serials.
@@ -173,6 +173,30 @@ class PostgresGrammar extends Grammar
             $this->wrapTable($blueprint),
             $command->algorithm ? ' using '.$command->algorithm : '',
             $this->columnize($command->columns)
+        );
+    }
+
+    /**
+     * Compile a fulltext index key command.
+     *
+     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \Illuminate\Support\Fluent  $command
+     * @return string
+     *
+     * @throws \RuntimeException
+     */
+    public function compileFulltext(Blueprint $blueprint, Fluent $command)
+    {
+        $language = $command->language ?: 'english';
+
+        $columns = array_map(function ($column) use ($language) {
+            return "to_tsvector({$this->quoteString($language)}, {$this->wrap($column)})";
+        }, $command->columns);
+
+        return sprintf('create index %s on %s using gin ((%s))',
+            $this->wrap($command->index),
+            $this->wrapTable($blueprint),
+            implode(' || ', $columns)
         );
     }
 
@@ -357,6 +381,18 @@ class PostgresGrammar extends Grammar
     public function compileDropIndex(Blueprint $blueprint, Fluent $command)
     {
         return "drop index {$this->wrap($command->index)}";
+    }
+
+    /**
+     * Compile a drop fulltext index command.
+     *
+     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \Illuminate\Support\Fluent  $command
+     * @return string
+     */
+    public function compileDropFullText(Blueprint $blueprint, Fluent $command)
+    {
+        return $this->compileDropIndex($blueprint, $command);
     }
 
     /**
@@ -977,20 +1013,6 @@ class PostgresGrammar extends Grammar
     protected function modifyNullable(Blueprint $blueprint, Fluent $column)
     {
         return $column->nullable ? ' null' : ' not null';
-    }
-
-    /**
-     * Get the SQL for a primary column modifier.
-     *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-     * @param  \Illuminate\Support\Fluent  $column
-     * @return string|null
-     */
-    public function modifyPrimary(Blueprint $blueprint, Fluent $column)
-    {
-        if (! $column->autoIncrement && ! is_null($column->primary)) {
-            return ' primary key';
-        }
     }
 
     /**

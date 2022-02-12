@@ -56,6 +56,7 @@ class ModuleConcatenationPlugin {
 	 * @returns {void}
 	 */
 	apply(compiler) {
+		const { _backCompat: backCompat } = compiler;
 		compiler.hooks.compilation.tap("ModuleConcatenationPlugin", compilation => {
 			const moduleGraph = compilation.moduleGraph;
 			const bailoutReasonMap = new Map();
@@ -366,7 +367,8 @@ class ModuleConcatenationPlugin {
 								rootModule,
 								modules,
 								concatConfiguration.runtime,
-								compiler.root
+								compiler.root,
+								compilation.outputOptions.hashFunction
 							);
 
 							const build = () => {
@@ -388,8 +390,10 @@ class ModuleConcatenationPlugin {
 							};
 
 							const integrate = () => {
-								ChunkGraph.setChunkGraphForModule(newModule, chunkGraph);
-								ModuleGraph.setModuleGraphForModule(newModule, moduleGraph);
+								if (backCompat) {
+									ChunkGraph.setChunkGraphForModule(newModule, chunkGraph);
+									ModuleGraph.setModuleGraphForModule(newModule, moduleGraph);
+								}
 
 								for (const warning of concatConfiguration.getWarningsSorted()) {
 									moduleGraph

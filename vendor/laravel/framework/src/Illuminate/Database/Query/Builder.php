@@ -2,6 +2,7 @@
 
 namespace Illuminate\Database\Query;
 
+use BackedEnum;
 use Closure;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
@@ -12,8 +13,6 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Query\Processors\Processor;
-use Illuminate\Pagination\CursorPaginationException;
-use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -22,6 +21,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
+use LogicException;
 use RuntimeException;
 
 class Builder
@@ -197,7 +197,7 @@ class Builder
     public $operators = [
         '=', '<', '>', '<=', '>=', '<>', '!=', '<=>',
         'like', 'like binary', 'not like', 'ilike',
-        '&', '|', '^', '<<', '>>',
+        '&', '|', '^', '<<', '>>', '&~',
         'rlike', 'not rlike', 'regexp', 'not regexp',
         '~', '~*', '!~', '!~*', 'similar to',
         'not similar to', 'not ilike', '~~*', '!~~*',
@@ -409,6 +409,7 @@ class Builder
     /**
      * Force the query to only return distinct results.
      *
+     * @param  mixed  ...$distinct
      * @return $this
      */
     public function distinct()
@@ -1241,7 +1242,7 @@ class Builder
     /**
      * Add a "where date" statement to the query.
      *
-     * @param  string  $column
+     * @param  \Illuminate\Database\Query\Expression|string  $column
      * @param  string  $operator
      * @param  \DateTimeInterface|string|null  $value
      * @param  string  $boolean
@@ -1821,6 +1822,39 @@ class Builder
     }
 
     /**
+     * Add a "where fulltext" clause to the query.
+     *
+     * @param  string|string[]  $columns
+     * @param  string  $value
+     * @param  string  $boolean
+     * @return $this
+     */
+    public function whereFullText($columns, $value, array $options = [], $boolean = 'and')
+    {
+        $type = 'Fulltext';
+
+        $columns = (array) $columns;
+
+        $this->wheres[] = compact('type', 'columns', 'value', 'options', 'boolean');
+
+        $this->addBinding($value);
+
+        return $this;
+    }
+
+    /**
+     * Add a "or where fulltext" clause to the query.
+     *
+     * @param  string|string[]  $columns
+     * @param  string  $value
+     * @return $this
+     */
+    public function orWhereFullText($columns, $value, array $options = [])
+    {
+        return $this->whereFulltext($columns, $value, $options, 'or');
+    }
+
+    /**
      * Add a "group by" clause to the query.
      *
      * @param  array|string  ...$groups
@@ -1961,7 +1995,7 @@ class Builder
     /**
      * Add an "order by" clause to the query.
      *
-     * @param  \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string  $column
+     * @param  \Closure|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string  $column
      * @param  string  $direction
      * @return $this
      *
@@ -1994,7 +2028,7 @@ class Builder
     /**
      * Add a descending "order by" clause to the query.
      *
-     * @param  string  $column
+     * @param  \Closure|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string  $column
      * @return $this
      */
     public function orderByDesc($column)
@@ -2005,7 +2039,7 @@ class Builder
     /**
      * Add an "order by" clause for a timestamp to the query.
      *
-     * @param  string  $column
+     * @param  \Closure|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string  $column
      * @return $this
      */
     public function latest($column = 'created_at')
@@ -2016,7 +2050,7 @@ class Builder
     /**
      * Add an "order by" clause for a timestamp to the query.
      *
-     * @param  string  $column
+     * @param  \Closure|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string  $column
      * @return $this
      */
     public function oldest($column = 'created_at')
@@ -2101,7 +2135,7 @@ class Builder
         $property = $this->unions ? 'unionLimit' : 'limit';
 
         if ($value >= 0) {
-            $this->$property = $value;
+            $this->$property = ! is_null($value) ? (int) $value : null;
         }
 
         return $this;
@@ -2162,7 +2196,7 @@ class Builder
     /**
      * Remove all existing orders and optionally add a new order.
      *
-     * @param  string|null  $column
+     * @param  \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string|null  $column
      * @param  string  $direction
      * @return $this
      */
@@ -2406,37 +2440,12 @@ class Builder
      * @param  int|null  $perPage
      * @param  array  $columns
      * @param  string  $cursorName
-     * @param  string|null  $cursor
-     * @return \Illuminate\Contracts\Pagination\Paginator
-     * @throws \Illuminate\Pagination\CursorPaginationException
+     * @param  \Illuminate\Pagination\Cursor|string|null  $cursor
+     * @return \Illuminate\Contracts\Pagination\CursorPaginator
      */
     public function cursorPaginate($perPage = 15, $columns = ['*'], $cursorName = 'cursor', $cursor = null)
     {
-        $cursor = $cursor ?: CursorPaginator::resolveCurrentCursor($cursorName);
-
-        $orders = $this->ensureOrderForCursorPagination(! is_null($cursor) && $cursor->pointsToPreviousItems());
-
-        $orderDirection = $orders->first()['direction'] ?? 'asc';
-
-        $comparisonOperator = $orderDirection === 'asc' ? '>' : '<';
-
-        $parameters = $orders->pluck('column')->toArray();
-
-        if (! is_null($cursor)) {
-            if (count($parameters) === 1) {
-                $this->where($column = $parameters[0], $comparisonOperator, $cursor->parameter($column));
-            } elseif (count($parameters) > 1) {
-                $this->whereRowValues($parameters, $comparisonOperator, $cursor->parameters($parameters));
-            }
-        }
-
-        $this->limit($perPage + 1);
-
-        return $this->cursorPaginator($this->get($columns), $perPage, $cursor, [
-            'path' => Paginator::resolveCurrentPath(),
-            'cursorName' => $cursorName,
-            'parameters' => $parameters,
-        ]);
+        return $this->paginateUsingCursor($perPage, $columns, $cursorName, $cursor);
     }
 
     /**
@@ -2444,17 +2453,10 @@ class Builder
      *
      * @param  bool  $shouldReverse
      * @return \Illuminate\Support\Collection
-     * @throws \Illuminate\Pagination\CursorPaginationException
      */
     protected function ensureOrderForCursorPagination($shouldReverse = false)
     {
         $this->enforceOrderBy();
-
-        $orderDirections = collect($this->orders)->pluck('direction')->unique();
-
-        if ($orderDirections->count() > 1) {
-            throw new CursorPaginationException('Only a single order by direction is supported when using cursor pagination.');
-        }
 
         if ($shouldReverse) {
             $this->orders = collect($this->orders)->map(function ($order) {
@@ -2577,7 +2579,7 @@ class Builder
     }
 
     /**
-     * Get an array with the values of a given column.
+     * Get a collection instance containing the values of a given column.
      *
      * @param  string  $column
      * @param  string|null  $key
@@ -3034,6 +3036,27 @@ class Builder
     }
 
     /**
+     * Update records in a PostgreSQL database using the update from syntax.
+     *
+     * @param  array  $values
+     * @return int
+     */
+    public function updateFrom(array $values)
+    {
+        if (! method_exists($this->grammar, 'compileUpdateFrom')) {
+            throw new LogicException('This database engine does not support the updateFrom method.');
+        }
+
+        $this->applyBeforeQueryCallbacks();
+
+        $sql = $this->grammar->compileUpdateFrom($this, $values);
+
+        return $this->connection->update($sql, $this->cleanBindings(
+            $this->grammar->prepareBindingsForUpdateFrom($this->bindings, $values)
+        ));
+    }
+
+    /**
      * Insert or update a record matching the attributes, and fill it with values.
      *
      * @param  array  $attributes
@@ -3269,12 +3292,30 @@ class Builder
         }
 
         if (is_array($value)) {
-            $this->bindings[$type] = array_values(array_merge($this->bindings[$type], $value));
+            $this->bindings[$type] = array_values(array_map(
+                [$this, 'castBinding'],
+                array_merge($this->bindings[$type], $value),
+            ));
         } else {
-            $this->bindings[$type][] = $value;
+            $this->bindings[$type][] = $this->castBinding($value);
         }
 
         return $this;
+    }
+
+    /**
+     * Cast the given binding value.
+     *
+     * @param  mixed  $value
+     * @return mixed
+     */
+    public function castBinding($value)
+    {
+        if (function_exists('enum_exists') && $value instanceof BackedEnum) {
+            return $value->value;
+        }
+
+        return $value;
     }
 
     /**
@@ -3298,9 +3339,13 @@ class Builder
      */
     public function cleanBindings(array $bindings)
     {
-        return array_values(array_filter($bindings, function ($binding) {
-            return ! $binding instanceof Expression;
-        }));
+        return collect($bindings)
+                    ->reject(function ($binding) {
+                        return $binding instanceof Expression;
+                    })
+                    ->map([$this, 'castBinding'])
+                    ->values()
+                    ->all();
     }
 
     /**
@@ -3435,7 +3480,7 @@ class Builder
     /**
      * Die and dump the current SQL and bindings.
      *
-     * @return void
+     * @return never
      */
     public function dd()
     {

@@ -31,15 +31,21 @@ class SqlServerGrammar extends Grammar
             return parent::compileSelect($query);
         }
 
-        // If an offset is present on the query, we will need to wrap the query in
-        // a big "ANSI" offset syntax block. This is very nasty compared to the
-        // other database systems but is necessary for implementing features.
         if (is_null($query->columns)) {
             $query->columns = ['*'];
         }
 
+        $components = $this->compileComponents($query);
+
+        if (! empty($components['orders'])) {
+            return parent::compileSelect($query)." offset {$query->offset} rows fetch next {$query->limit} rows only";
+        }
+
+        // If an offset is present on the query, we will need to wrap the query in
+        // a big "ANSI" offset syntax block. This is very nasty compared to the
+        // other database systems but is necessary for implementing features.
         return $this->compileAnsiOffset(
-            $query, $this->compileComponents($query)
+            $query, $components
         );
     }
 
@@ -217,12 +223,12 @@ class SqlServerGrammar extends Grammar
         }
 
         return Arr::first($query->orders, function ($value) {
-            return $this->isExpression($value['column']);
+            return $this->isExpression($value['column'] ?? null);
         }, false) !== false;
     }
 
     /**
-     * Move the order bindings to be after the "select" statement to account for a order by subquery.
+     * Move the order bindings to be after the "select" statement to account for an order by subquery.
      *
      * @param  \Illuminate\Database\Query\Builder  $query
      * @return array

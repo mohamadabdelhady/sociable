@@ -33,6 +33,8 @@ class Presenter
     ];
     private $styles = [
         'num'       => 'number',
+        'integer'   => 'integer',
+        'float'     => 'float',
         'const'     => 'const',
         'str'       => 'string',
         'cchr'      => 'default',
@@ -91,7 +93,7 @@ class Presenter
      *
      * @return string
      */
-    public function presentRef($value)
+    public function presentRef($value): string
     {
         return $this->present($value, 0);
     }
@@ -107,7 +109,7 @@ class Presenter
      *
      * @return string
      */
-    public function present($value, $depth = null, $options = 0)
+    public function present($value, int $depth = null, int $options = 0): string
     {
         $data = $this->cloner->cloneVar($value, !($options & self::VERBOSE) ? Caster::EXCLUDE_VERBOSE : 0);
 

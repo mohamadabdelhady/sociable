@@ -5,6 +5,7 @@ use Laravel\Fortify\Features;
 return [
     'guard' => 'web',
     'middleware' => ['web'],
+    'auth_middleware' => 'auth',
     'passwords' => 'users',
     'username' => 'email',
     'email' => 'email',
@@ -14,6 +15,14 @@ return [
     'domain' => null,
     'limiters' => [
         'login' => null,
+    ],
+    'redirects' => [
+        'login' => null,
+        'logout' => null,
+        'password-confirmation' => null,
+        'register' => null,
+        'email-verification' => null,
+        'password-reset' => null,
     ],
     'features' => [
         Features::registration(),

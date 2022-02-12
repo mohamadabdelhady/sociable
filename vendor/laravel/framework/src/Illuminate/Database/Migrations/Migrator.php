@@ -2,6 +2,7 @@
 
 namespace Illuminate\Database\Migrations;
 
+use Doctrine\DBAL\Schema\SchemaException;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Events\MigrationEnded;
@@ -157,7 +158,7 @@ class Migrator
 
         $step = $options['step'] ?? false;
 
-        $this->fireMigrationEvent(new MigrationsStarted);
+        $this->fireMigrationEvent(new MigrationsStarted('up'));
 
         // Once we have the array of migrations, we will spin through them and run the
         // migrations "up" so the changes are made to the databases. We'll then log
@@ -170,7 +171,7 @@ class Migrator
             }
         }
 
-        $this->fireMigrationEvent(new MigrationsEnded);
+        $this->fireMigrationEvent(new MigrationsEnded('up'));
     }
 
     /**
@@ -264,7 +265,7 @@ class Migrator
 
         $this->requireFiles($files = $this->getMigrationFiles($paths));
 
-        $this->fireMigrationEvent(new MigrationsStarted);
+        $this->fireMigrationEvent(new MigrationsStarted('down'));
 
         // Next we will run through all of the migrations and call the "down" method
         // which will reverse each migration in order. This getLast method on the
@@ -286,7 +287,7 @@ class Migrator
             );
         }
 
-        $this->fireMigrationEvent(new MigrationsEnded);
+        $this->fireMigrationEvent(new MigrationsEnded('down'));
 
         return $rolledBack;
     }
@@ -411,16 +412,22 @@ class Migrator
      */
     protected function pretendToRun($migration, $method)
     {
-        foreach ($this->getQueries($migration, $method) as $query) {
+        try {
+            foreach ($this->getQueries($migration, $method) as $query) {
+                $name = get_class($migration);
+
+                $reflectionClass = new ReflectionClass($migration);
+
+                if ($reflectionClass->isAnonymous()) {
+                    $name = $this->getMigrationName($reflectionClass->getFileName());
+                }
+
+                $this->note("<info>{$name}:</info> {$query['query']}");
+            }
+        } catch (SchemaException $e) {
             $name = get_class($migration);
 
-            $reflectionClass = new ReflectionClass($migration);
-
-            if ($reflectionClass->isAnonymous()) {
-                $name = $this->getMigrationName($reflectionClass->getFileName());
-            }
-
-            $this->note("<info>{$name}:</info> {$query['query']}");
+            $this->note("<info>{$name}:</info> failed to dump queries. This may be due to changing database columns using Doctrine, which is not supported while pretending to run migrations.");
         }
     }
 

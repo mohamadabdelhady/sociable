@@ -19,7 +19,7 @@ class SqlServerGrammar extends Grammar
      *
      * @var string[]
      */
-    protected $modifiers = ['Primary', 'Increment', 'Collate', 'Nullable', 'Default', 'Persisted'];
+    protected $modifiers = ['Increment', 'Collate', 'Nullable', 'Default', 'Persisted'];
 
     /**
      * The columns available as serials.
@@ -239,7 +239,7 @@ class SqlServerGrammar extends Grammar
 
         $sql = "DECLARE @sql NVARCHAR(MAX) = '';";
         $sql .= "SELECT @sql += 'ALTER TABLE [dbo].[{$tableName}] DROP CONSTRAINT ' + OBJECT_NAME([default_object_id]) + ';' ";
-        $sql .= 'FROM SYS.COLUMNS ';
+        $sql .= 'FROM sys.columns ';
         $sql .= "WHERE [object_id] = OBJECT_ID('[dbo].[{$tableName}]') AND [name] in ({$columns}) AND [default_object_id] <> 0;";
         $sql .= 'EXEC(@sql)';
 
@@ -830,20 +830,6 @@ class SqlServerGrammar extends Grammar
     protected function typeComputed(Fluent $column)
     {
         return "as ({$column->expression})";
-    }
-
-    /**
-     * Get the SQL for a primary column modifier.
-     *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-     * @param  \Illuminate\Support\Fluent  $column
-     * @return string|null
-     */
-    public function modifyPrimary(Blueprint $blueprint, Fluent $column)
-    {
-        if (! $column->autoIncrement && ! is_null($column->primary)) {
-            return ' primary key';
-        }
     }
 
     /**
