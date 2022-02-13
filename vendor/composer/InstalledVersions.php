@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '5661daf2d741c7e3645ad89392251b280b759e3c',
+    'reference' => '1a48d2cb84f8c8295c3e8b78960cc04795d48d79',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -576,7 +576,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '5661daf2d741c7e3645ad89392251b280b759e3c',
+      'reference' => '1a48d2cb84f8c8295c3e8b78960cc04795d48d79',
     ),
     'laravel/sail' => 
     array (
@@ -616,12 +616,12 @@ private static $installed = array (
     ),
     'league/commonmark' => 
     array (
-      'pretty_version' => '2.2.1',
-      'version' => '2.2.1.0',
+      'pretty_version' => '2.2.2',
+      'version' => '2.2.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f8afb78f087777b040e0ab8a6b6ca93f6fc3f18a',
+      'reference' => '13d7751377732637814f0cda0e3f6d3243f9f769',
     ),
     'league/config' => 
     array (
@@ -997,8 +997,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0|2.0',
-        1 => '1.0.0 || 2.0.0 || 3.0.0',
+        0 => '1.0.0 || 2.0.0 || 3.0.0',
+        1 => '1.0|2.0',
       ),
     ),
     'psr/simple-cache' => 
