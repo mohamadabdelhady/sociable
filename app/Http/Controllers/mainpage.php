@@ -30,6 +30,6 @@ class mainpage extends Controller
 //            $view = view($current,compact('posts'))->render();
 //            return response()->json(['html'=>$view]);
 //        }
-        return view("$current")->with(compact('post_num','posts','followers','followers_num'));
+        return view("pages.main")->with(compact('post_num','posts','followers','followers_num'));
     }
 }

@@ -1,8 +1,37 @@
-#logo-img{
+.navbar-brand{
 	width: 171px;
 	height: 40px;
-background: url('/images/logo_size.png');
+background: url('/images/Sociable-logo.png');
 background-repeat: no-repeat;
+}
+.form-control:focus{
+    border-color: #1877f2;
+    box-shadow: 0px 1px 1px rgb(183, 209, 245) inset, 0px 0px 8px rgb(150, 191, 246);
+}
+.btn:focus{
+    border-color: #1877f2;
+    box-shadow: 0px 1px 1px rgb(183, 209, 245) inset, 0px 0px 8px rgb(150, 191, 246);
+}
+.btn{
+    background-color: #1877f2;
+    color: #fcfcfd;
+}
+.btn:hover{
+    background-color: #fcfcfd;
+    color:black ;
+    border: 1px solid #96BFF6FF;
+}
+.card{
+    padding: 20px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(136, 136, 136, 0.3), 0 1px 1px rgba(136, 136, 136, 0.3);
+}
+.card a{
+    font-size: 1.3em;
+
+}
+.users-name{
+    font-weight: bolder;
 }
 #background{
 	min-height: 96vh;
@@ -22,13 +51,18 @@ background-repeat: no-repeat;
 	display: none;
 }
 
-#nav-bar{
+.navbar{
     position: fixed;
     top: 0;
     width: 100%;
-	background-color: #189AB4;
-	border-bottom: 1px solid #05445E;
+	background-color:#fcfcfd;
 	z-index: 1;
+    box-shadow: 0 4px 2px -2px rgba(136, 136, 136, 0.3);
+}
+.userAvatar{
+    width: 40px;
+    height: 40px;
+    border-radius:15%;
 }
 #content{
 	 padding-top: 100px;
@@ -46,21 +80,16 @@ background-repeat: no-repeat;
 
 }
 #search-input{
-	 border-radius: 25px;
+	 border-radius: 15px;
 	 border: none;
-	 box-shadow: none;
-	 background-color: #D4F1F4;
-	 width: 300px;
+	 background-color: #f4f5f8;
+	 width: 350px;
 }
 #userlogindrop{
 	border: none;
 	box-shadow: none;
 }
-#userAvatar{
-	width: 30px;
-	height: 30px;
-	 border-radius: 50%;
-}
+
 .cover-profile{
 	position: absolute;
   top: 50%;

@@ -43,7 +43,7 @@
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="input-group">
                                 <input type="text" class="form-control"  placeholder="Type your message" v-model="mymessage" @keyup.enter="send_message()">
-                                <button class="btn btn-primary ml-2"  v-on:click="send_message()":disabled="mymessage==''">Send</button>
+                                <button class="btn btn-primary ml-2"  v-on:click="send_message()" :disabled="mymessage==''">Send</button>
 
                             </div>
                         </div>
