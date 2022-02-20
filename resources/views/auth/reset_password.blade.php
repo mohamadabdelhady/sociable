@@ -10,6 +10,11 @@
     <link href="{{ asset('css/loginstyle.css') }}" rel="stylesheet">
 </head>
 <body>
+<div class="notification">
+    <ul>
+        <p id="notification-message"></p>
+    </ul>
+</div>
 <div class="container-fluid" style="background-color: #f1f7fc; min-height: 100vh;">
 
     <div class="login-photo ml-auto mr-auto" style="max-width: 400px !important;">
@@ -44,5 +49,11 @@
         </div>
     </div>
 </div>
+@if(session('status'))
+    <script type="text/javascript">
+        document.getElementById('notification').style.display="block";
+        document.getElementById("notification-message").innerHTML += "<li><i class='fas fa-exclamation-circle'></i>"+"{{ session('status') }}"+"</li>";
+    </script>
+@endif
 </body>
 </html>

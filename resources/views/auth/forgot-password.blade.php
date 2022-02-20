@@ -10,6 +10,11 @@
     <link href="{{ asset('css/loginstyle.css') }}" rel="stylesheet">
 </head>
 <body>
+<div class="notification">
+    <ul>
+        <p id="notification-message"></p>
+    </ul>
+</div>
 <div class="container-fluid" style="background-color: #f1f7fc; min-height: 100vh;">
 
 
@@ -29,11 +34,15 @@
             </div>
             <div class="form-group"><button class="btn m-2 btn-block btn-log" type="submit">Reset pssword</button></div><a class="already" href="/">You alredy have an account? Log in here.</a>
         </form>
-         @if(session('status'))
-            <script type="text/javascript">alert("{{session('status')}}");</script>
-            @endif
+
     </div>
 </div>
 </div>
+@if(session('status'))
+    <script type="text/javascript">
+        document.getElementById('notification').style.display="block";
+        document.getElementById("notification-message").innerHTML += "<li><i class='fas fa-exclamation-circle'></i>"+"{{ session('status') }}"+"</li>";
+    </script>
+@endif
 </body>
 </html>

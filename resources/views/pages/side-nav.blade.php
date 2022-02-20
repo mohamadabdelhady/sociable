@@ -12,8 +12,7 @@
         </div>
     </div>
     <div class="card mt-4">
-        <a style="font-family:Arial, FontAwesome">&#xf015;<span class="ms-2">Home</span></a>
-        <hr>
+
         <a style="font-family:Arial, FontAwesome">&#xf500;<span class="ms-2">Friends</span></a>
         <hr>
         <a style="font-family:Arial, FontAwesome">&#xf03e;<span class="ms-2">Photos</span></a>
