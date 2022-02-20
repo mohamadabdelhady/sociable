@@ -28,5 +28,5 @@ Vue.component('news_feed_crt_post', require('./components/news_feed_crt_post.vue
  */
 
 const app = new Vue({
-    el: '#news_feed_crt_post',
+    el: 'news_feed_crt_post',
 });

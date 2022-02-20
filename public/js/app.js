@@ -22561,7 +22561,7 @@ Vue.component('news_feed_crt_post', (__webpack_require__(/*! ./components/news_f
  */
 
 var app = new Vue({
-  el: '#news_feed_crt_post'
+  el: 'news_feed_crt_post'
 });
 
 /***/ }),

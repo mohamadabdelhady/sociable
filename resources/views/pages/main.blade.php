@@ -34,10 +34,13 @@
 					</div>
 				</div>
 			</a>
+
 			<news_feed_crt_post></news_feed_crt_post>
 		</div>
 	</div>
-
+</div>
+</body>
+</html>
 
 
 
@@ -198,7 +201,7 @@
 {{--        </div>--}}
 {{--    </div>--}}
 {{--    </div>--}}
-</div>
+{{--</div>--}}
 {{--<script>--}}
 {{--    function like(post_id)--}}
 {{--    {--}}
@@ -370,6 +373,6 @@
 
 {{--</script>--}}
 
-</body>
+{{--</body>--}}
 
-</html>
+{{--</html>--}}

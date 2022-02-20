@@ -5,8 +5,10 @@ namespace Illuminate\Database\Eloquent;
 use BadMethodCallException;
 use Closure;
 use Exception;
+use Illuminate\Contracts\Database\Eloquent\Builder as BuilderContract;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Concerns\BuildsQueries;
+use Illuminate\Database\Eloquent\Concerns\QueriesRelationships;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -23,11 +25,10 @@ use ReflectionMethod;
  *
  * @mixin \Illuminate\Database\Query\Builder
  */
-class Builder
+class Builder implements BuilderContract
 {
-    use Concerns\QueriesRelationships, ForwardsCalls;
-    use BuildsQueries {
-        sole as baseSole;
+    use BuildsQueries, ForwardsCalls, QueriesRelationships {
+        BuildsQueries::sole as baseSole;
     }
 
     /**
@@ -434,16 +435,22 @@ class Builder
         $id = $id instanceof Arrayable ? $id->toArray() : $id;
 
         if (is_array($id)) {
-            if (count($result) === count(array_unique($id))) {
-                return $result;
+            if (count($result) !== count(array_unique($id))) {
+                throw (new ModelNotFoundException)->setModel(
+                    get_class($this->model), array_diff($id, $result->modelKeys())
+                );
             }
-        } elseif (! is_null($result)) {
+
             return $result;
         }
 
-        throw (new ModelNotFoundException)->setModel(
-            get_class($this->model), $id
-        );
+        if (is_null($result)) {
+            throw (new ModelNotFoundException)->setModel(
+                get_class($this->model), $id
+            );
+        }
+
+        return $result;
     }
 
     /**
@@ -638,7 +645,7 @@ class Builder
             // For nested eager loads we'll skip loading them here and they will be set as an
             // eager load on the query to retrieve the relation so that they will be eager
             // loaded on that query, because that is where they get hydrated as models.
-            if (strpos($name, '.') === false) {
+            if (! str_contains($name, '.')) {
                 $models = $this->eagerLoadRelation($models, $name, $constraints);
             }
         }
@@ -736,7 +743,7 @@ class Builder
      */
     protected function isNestedUnder($relation, $name)
     {
-        return Str::contains($name, '.') && Str::startsWith($name, $relation.'.');
+        return str_contains($name, '.') && str_starts_with($name, $relation.'.');
     }
 
     /**
@@ -1361,7 +1368,7 @@ class Builder
             if (is_numeric($name)) {
                 $name = $constraints;
 
-                [$name, $constraints] = Str::contains($name, ':')
+                [$name, $constraints] = str_contains($name, ':')
                             ? $this->createSelectWithConstraint($name)
                             : [$name, static function () {
                                 //
@@ -1389,7 +1396,7 @@ class Builder
     {
         return [explode(':', $name)[0], static function ($query) use ($name) {
             $query->select(array_map(static function ($column) use ($query) {
-                if (Str::contains($column, '.')) {
+                if (str_contains($column, '.')) {
                     return $column;
                 }
 

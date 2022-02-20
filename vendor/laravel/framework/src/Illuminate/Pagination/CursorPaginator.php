@@ -132,7 +132,9 @@ class CursorPaginator extends AbstractCursorPaginator implements Arrayable, Arra
             'data' => $this->items->toArray(),
             'path' => $this->path(),
             'per_page' => $this->perPage(),
+            'next_cursor' => $this->nextCursor()?->encode(),
             'next_page_url' => $this->nextPageUrl(),
+            'prev_cursor' => $this->previousCursor()?->encode(),
             'prev_page_url' => $this->previousPageUrl(),
         ];
     }
@@ -142,8 +144,7 @@ class CursorPaginator extends AbstractCursorPaginator implements Arrayable, Arra
      *
      * @return array
      */
-    #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }
