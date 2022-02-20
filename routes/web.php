@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//routes that don't require authentication or verification
 Route::get('/', function () {
     if (Auth::check()) {
 
@@ -25,7 +26,7 @@ Route::get('/', function () {
 });
 Route::get('/signup', function () {return view('auth.signup');});
 Route::get('/login',['as'=>'login','uses'=> function () {return view('auth.login');}]);
-//routes that do require authentication and verification and subscription
+//routes that do require authentication and verification
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', ['as' => 'home', 'uses' => function () {
         return view('pages.home');

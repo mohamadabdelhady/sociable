@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -18,7 +19,7 @@
             @include('pages.side-nav')
         </div>
         <div class="col-xl-6 col-lg-6">
-            <a href="#" style="text-decoration: none; color: black;">
+            <a href="#" onclick="event.preventDefault(); $('#myModal').modal('show');" style="text-decoration: none; color: black;">
                 <div class="card">
                     <div>
                         @if(auth()->user()->profile_img&&auth()->user()->google_id)
@@ -32,8 +33,7 @@
                     </div>
                 </div>
             </a>
-
-            <example-component></example-component>
+            <home></home>
         </div>
     </div>
 </div>
