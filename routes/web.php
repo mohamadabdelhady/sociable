@@ -14,5 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+
+        return redirect()->route('home');
+    }
+    else
+    {
+        return view('auth.login');
+    }
+});
+Route::get('/signup', function () {return view('auth.signup');});
+Route::get('/login',['as'=>'login','uses'=> function () {return view('auth.login');}]);
+//routes that do require authentication and verification and subscription
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', ['as' => 'home', 'uses' => function () {
+        return view('pages.home');
+    }]);
 });

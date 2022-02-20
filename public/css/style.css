@@ -1,0 +1,223 @@
+.navbar-brand{
+	width: 171px;
+	height: 40px;
+background: url('/images/Sociable-logo.png');
+background-repeat: no-repeat;
+}
+.form-control:focus{
+    border-color: #1877f2;
+    box-shadow: 0px 1px 1px rgb(183, 209, 245) inset, 0px 0px 8px rgb(150, 191, 246);
+}
+.btn:focus{
+    border-color: #1877f2;
+    box-shadow: 0px 1px 1px rgb(183, 209, 245) inset, 0px 0px 8px rgb(150, 191, 246);
+}
+.btn{
+    background-color: #1877f2;
+    color: #fcfcfd;
+}
+.btn:hover{
+    background-color: #fcfcfd;
+    color:black ;
+    border: 1px solid #96BFF6FF;
+}
+.card{
+    padding: 20px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(136, 136, 136, 0.3), 0 1px 1px rgba(136, 136, 136, 0.3);
+}
+.card a{
+    font-size: 1.3em;
+
+}
+.users-name{
+    font-weight: bolder;
+}
+#background{
+	min-height: 96vh;
+	width: 100%;
+
+}
+#forms{
+	padding-top: 100px;
+	float: right;
+
+}
+
+#signupform{
+	display: none;
+}
+#loginbtn{
+	display: none;
+}
+
+.navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+	background-color:#fcfcfd;
+	z-index: 1;
+    box-shadow: 0 4px 2px -2px rgba(136, 136, 136, 0.3);
+}
+.userAvatar{
+    width: 40px;
+    height: 40px;
+    border-radius:15%;
+}
+#content{
+	 padding-top: 100px;
+}
+#content_profile{
+	padding-top: 43px;
+}
+.container {
+  position: relative;
+}
+.editbtn{
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+
+}
+#search-input{
+	 border-radius: 15px;
+	 border: none;
+	 background-color: #f4f5f8;
+	 width: 350px;
+}
+#userlogindrop{
+	border: none;
+	box-shadow: none;
+}
+
+.cover-profile{
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.btn-cover{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.cover-profile img {
+	border:5px solid white;
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+}
+.cover-text{
+	position: absolute;
+  top: 72%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	font-size: 30px;
+	margin:0 auto;
+}
+
+#home_icon{
+	width: 30px;
+	height: 30px;
+}
+#user_icons{
+width: 20px;
+height: 20px;
+}
+.comments:hover{color: #D4F1F4;}
+.mybtn:hover{
+	background-color: #D4F1F4;
+}
+.side_icon{
+	width: 30px;
+	height: 30px;
+}
+.left-side{
+	background-color:#D4F1F4;
+
+
+}
+#cover{
+	width: 100%;
+	height: 266px;
+}
+
+#icons_area a{
+	text-decoration: none;
+	color: black;
+
+}
+#icons_area span{
+	margin-left: 10px;
+	font-size: 15px;
+
+}
+#icons_area hr{
+	margin-left: 0;
+	margin-right: 0;
+	width: 70%;
+	  border: none;
+    height: 1px;
+    color: #05445E;
+    background-color: #05445E;
+}
+#icons_area ul {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+  margin-top: 10px;
+}
+.btn-group { margin: auto; display: flex; flex-direction: row; justify-content: center; }
+.post-input:focus{
+	outline:none;
+
+}
+.box{
+    background-color:#D4F1F4 ;
+    color: black;
+    border-radius: 25px;
+}
+.sidemenu {
+    height: 100%; /* 100% Full-height */
+    width: 350px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #D4F1F4; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    color: #05445E;
+}
+.sidemenu a{
+    padding: 8px 8px 4px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #05445E;
+    display: block;
+}
+.sidemenu hr{
+    margin-left: 5px;
+    margin-right: 0;
+    width: 70%;
+    border: none;
+    height: 1px;
+    color: #05445E;
+    background-color: #05445E;
+}
+.sidemenu a:hover {
+    color: black;
+}
+#search-prof{
+    margin: 20px 20px 20px 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+#search-username{
+font-size: 20px;
+}
+#post_img{
+    height: 95%;
+    width: 95%;
+}
