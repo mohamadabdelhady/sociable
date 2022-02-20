@@ -27,6 +27,23 @@
 		<div class="col-xl-3 col-lg-3">
 			@include('pages.side-nav')
 		</div>
+		<div class="col-xl-6 col-lg-6">
+			<a href="#" style="text-decoration: none; color: black;">
+				<div class="card">
+					<div>
+					@if(auth()->user()->profile_img&&auth()->user()->google_id)
+						<img src="{{url(auth()->user()->profile_img)}}" class="userAvatar">
+					@elseif(auth()->user()->profile_img)
+						<img src="{{url('/images/users_profile_img/' . auth()->user()->profile_img)}}" class="userAvatar">
+					@else
+						<img src="/images/users_profile_img/user_default.png" class="userAvatar">
+					@endif
+					<span class="ml-2">What's on your mind, <span class="users-name">{{auth()->user()->first_name}}</span>?</span>
+					</div>
+				</div>
+			</a>
+			<news_feed_crt_post></news_feed_crt_post>
+		</div>
 	</div>
 
 
@@ -190,176 +207,176 @@
 {{--    </div>--}}
 {{--    </div>--}}
 </div>
-<script>
-    function like(post_id)
-    {
+{{--<script>--}}
+{{--    function like(post_id)--}}
+{{--    {--}}
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-            let id = post_id;
-            let _token = $('meta[name="csrf-token"]').attr('content');
+{{--        $.ajaxSetup({--}}
+{{--            headers: {--}}
+{{--                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--            }--}}
+{{--        });--}}
+{{--            let id = post_id;--}}
+{{--            let _token = $('meta[name="csrf-token"]').attr('content');--}}
 
-            $.ajax({
-                url: "{{route('like')}}",
-                type: "POST",
-                data: {
+{{--            $.ajax({--}}
+{{--                url: "{{route('like')}}",--}}
+{{--                type: "POST",--}}
+{{--                data: {--}}
 
-                    id: id,
-                    _token: _token
-                },
-                success: function (response) {
-                    if (response) {
+{{--                    id: id,--}}
+{{--                    _token: _token--}}
+{{--                },--}}
+{{--                success: function (response) {--}}
+{{--                    if (response) {--}}
 
-                        document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
-                        document.getElementById("likenum"+post_id).innerHTML = response['likes'];
+{{--                        document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];--}}
+{{--                        document.getElementById("likenum"+post_id).innerHTML = response['likes'];--}}
 
-                    }
-                },
-            });
+{{--                    }--}}
+{{--                },--}}
+{{--            });--}}
 
-    }
-    function dislike(post_id)
-    {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        let id = post_id;
-        let _token = $('meta[name="csrf-token"]').attr('content');
+{{--    }--}}
+{{--    function dislike(post_id)--}}
+{{--    {--}}
+{{--        $.ajaxSetup({--}}
+{{--            headers: {--}}
+{{--                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--            }--}}
+{{--        });--}}
+{{--        let id = post_id;--}}
+{{--        let _token = $('meta[name="csrf-token"]').attr('content');--}}
 
-        $.ajax({
-            url: "{{route('dislike')}}",
-            type: "POST",
-            data: {
+{{--        $.ajax({--}}
+{{--            url: "{{route('dislike')}}",--}}
+{{--            type: "POST",--}}
+{{--            data: {--}}
 
-                id: id,
-                _token: _token
-            },
-            success: function (response) {
-                // console.log(response);
-                if (response) {
+{{--                id: id,--}}
+{{--                _token: _token--}}
+{{--            },--}}
+{{--            success: function (response) {--}}
+{{--                // console.log(response);--}}
+{{--                if (response) {--}}
 
-                    document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];
-                    document.getElementById("likenum"+post_id).innerHTML = response['likes'];
+{{--                    document.getElementById("dislikenum"+post_id).innerHTML = response['dislikes'];--}}
+{{--                    document.getElementById("likenum"+post_id).innerHTML = response['likes'];--}}
 
-                }
-            },
-        });
+{{--                }--}}
+{{--            },--}}
+{{--        });--}}
 
-    }
-    function loadcomment(post_id)
-    {
-        var commentsec=document.getElementById('comment_sec'+post_id).style.display;
-        if(commentsec=='none'){
-            document.getElementById('comment-sec'+post_id).innerHTML="";
-        document.getElementById('comment_sec'+post_id).style.display='block';
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            let id = post_id;
-            let _token = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                url: "{{route('loadcomment')}}",
-                type: "POST",
-                data: {
+{{--    }--}}
+{{--    function loadcomment(post_id)--}}
+{{--    {--}}
+{{--        var commentsec=document.getElementById('comment_sec'+post_id).style.display;--}}
+{{--        if(commentsec=='none'){--}}
+{{--            document.getElementById('comment-sec'+post_id).innerHTML="";--}}
+{{--        document.getElementById('comment_sec'+post_id).style.display='block';--}}
+{{--            $.ajaxSetup({--}}
+{{--                headers: {--}}
+{{--                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--                }--}}
+{{--            });--}}
+{{--            let id = post_id;--}}
+{{--            let _token = $('meta[name="csrf-token"]').attr('content');--}}
+{{--            $.ajax({--}}
+{{--                url: "{{route('loadcomment')}}",--}}
+{{--                type: "POST",--}}
+{{--                data: {--}}
 
-                    id: id,
-                    _token: _token
-                },
-                success: function (response) {
-                    console.log(response);
-                    if (response) {
+{{--                    id: id,--}}
+{{--                    _token: _token--}}
+{{--                },--}}
+{{--                success: function (response) {--}}
+{{--                    console.log(response);--}}
+{{--                    if (response) {--}}
 
-                        document.getElementById("comment_num"+post_id).innerHTML =response.length;
-                        for (var i = 0; i < response.length; i++)
-                        {
-                            var temp=response[i]
-                            let date=temp['updated_at'];
+{{--                        document.getElementById("comment_num"+post_id).innerHTML =response.length;--}}
+{{--                        for (var i = 0; i < response.length; i++)--}}
+{{--                        {--}}
+{{--                            var temp=response[i]--}}
+{{--                            let date=temp['updated_at'];--}}
 
-                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a><span style='color: #166678'>"+date+"</span>"
-                            +"<p>"+temp['comment_content']+"</p><hr>";
+{{--                            document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a><span style='color: #166678'>"+date+"</span>"--}}
+{{--                            +"<p>"+temp['comment_content']+"</p><hr>";--}}
 
-                        }
+{{--                        }--}}
 
-                    }
-                },
-            });
+{{--                    }--}}
+{{--                },--}}
+{{--            });--}}
 
-        }
-        else
-            document.getElementById('comment_sec'+post_id).style.display='none';
-    }
-    function postcomment(post_id)
-    {
-        var num=parseInt(document.getElementById("comment_num"+post_id).innerHTML );
+{{--        }--}}
+{{--        else--}}
+{{--            document.getElementById('comment_sec'+post_id).style.display='none';--}}
+{{--    }--}}
+{{--    function postcomment(post_id)--}}
+{{--    {--}}
+{{--        var num=parseInt(document.getElementById("comment_num"+post_id).innerHTML );--}}
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        let id = post_id;
-        let comment=$("#comment_box"+post_id).val();
+{{--        $.ajaxSetup({--}}
+{{--            headers: {--}}
+{{--                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--            }--}}
+{{--        });--}}
+{{--        let id = post_id;--}}
+{{--        let comment=$("#comment_box"+post_id).val();--}}
 
-        let _token = $('meta[name="csrf-token"]').attr('content');
-        if(comment!="") {
-            num=num+1;
-            document.getElementById("comment_num"+post_id).innerHTML =num;
-            $.ajax({
-                url: "{{route('postcomment')}}",
-                type: "POST",
-                data: {
+{{--        let _token = $('meta[name="csrf-token"]').attr('content');--}}
+{{--        if(comment!="") {--}}
+{{--            num=num+1;--}}
+{{--            document.getElementById("comment_num"+post_id).innerHTML =num;--}}
+{{--            $.ajax({--}}
+{{--                url: "{{route('postcomment')}}",--}}
+{{--                type: "POST",--}}
+{{--                data: {--}}
 
-                    id: id,
-                    comment: comment,
-                    _token: _token
-                },
-                success: function (response) {
-                     console.log(response);
-                    if (response) {
+{{--                    id: id,--}}
+{{--                    comment: comment,--}}
+{{--                    _token: _token--}}
+{{--                },--}}
+{{--                success: function (response) {--}}
+{{--                     console.log(response);--}}
+{{--                    if (response) {--}}
 
-                        document.getElementById("comment_box" + post_id).value = "";
-                        document.getElementById('comment-sec' + post_id).innerHTML = "";
-                        $.ajax({
-                            url: "{{route('loadcomment')}}",
-                            type: "POST",
-                            data: {
+{{--                        document.getElementById("comment_box" + post_id).value = "";--}}
+{{--                        document.getElementById('comment-sec' + post_id).innerHTML = "";--}}
+{{--                        $.ajax({--}}
+{{--                            url: "{{route('loadcomment')}}",--}}
+{{--                            type: "POST",--}}
+{{--                            data: {--}}
 
-                                id: id,
-                                _token: _token
-                            },
-                            success: function (data) {
-                                console.log(response);
-                                if (data) {
-                                    for (var i = 0; i < data.length; i++) {
-                                        var temp = data[i];
-                                        let date=temp['updated_at'];
+{{--                                id: id,--}}
+{{--                                _token: _token--}}
+{{--                            },--}}
+{{--                            success: function (data) {--}}
+{{--                                console.log(response);--}}
+{{--                                if (data) {--}}
+{{--                                    for (var i = 0; i < data.length; i++) {--}}
+{{--                                        var temp = data[i];--}}
+{{--                                        let date=temp['updated_at'];--}}
 
-                                        document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a><span style='color: #166678'>"+date+"</span>"
-                                            +"<p>"+temp['comment_content']+"</p><hr>";
+{{--                                        document.getElementById("comment-sec"+post_id).innerHTML = document.getElementById("comment-sec"+post_id).innerHTML+"<a href='../get-profile/"+temp['user_id']+"'><p>@"+temp['first_name']+" "+temp['last_name']+"</p></a><span style='color: #166678'>"+date+"</span>"--}}
+{{--                                            +"<p>"+temp['comment_content']+"</p><hr>";--}}
 
-                                    }
+{{--                                    }--}}
 
-                                }
-                            },
-                        });
+{{--                                }--}}
+{{--                            },--}}
+{{--                        });--}}
 
-                    }
+{{--                    }--}}
 
-                },
+{{--                },--}}
 
-            });
-        }
+{{--            });--}}
+{{--        }--}}
 
-    }
+{{--    }--}}
 
-</script>
+{{--</script>--}}
 
 </body>
 

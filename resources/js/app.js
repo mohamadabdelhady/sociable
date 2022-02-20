@@ -20,17 +20,8 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('chat_box', require('./components/chat_box.vue').default);
-
+Vue.component('news_feed_crt_post', require('./components/news_feed_crt_post.vue').default);
 const app = new Vue({
-    el: '#app',
-});
-Vue.component('notifications', require('./components/notifications.vue').default);
 
-const notifications = new Vue({
-    el: '#notifications',
-});
-Vue.component('friends_requests', require('./components/friends_requests.vue').default);
-const friends_requests = new Vue({
-    el: '#friends_requests',
+    el: 'news_feed_crt_post',
 });
