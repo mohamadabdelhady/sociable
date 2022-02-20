@@ -12,14 +12,14 @@
 <body>
 <div class="container-fluid" style="background-color: #f1f7fc; min-height: 100vh;">
 
-   
-      
-<div class="login-photo ml-auto mr-auto" style="max-width: 400px !important;">
+
+
+<div class="login-photo ms-auto me-auto" style="max-width: 400px !important;">
     <div class="form-container">
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
-            <div id="logo-img"class="ml-auto mr-auto" ></div>
-        
+            <div id="logo-img"class="ms-auto me-auto" ></div>
+
         <p class="h4 form-group">You must verify your email adress, please check your email for vertification link.</p>
         <div class="form-group"><button type="submit" class="btn btn-block btn-log">Resend email</button></div>
        <a class="already" href="/">You alredy have an account? Log in here.</a>
