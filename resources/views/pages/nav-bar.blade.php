@@ -12,7 +12,7 @@
         @elseif(auth()->user()->profile_img)
             <img src="{{url('/images/users_profile_img/' . auth()->user()->profile_img)}}" class="userAvatar">
         @else
-            <img src="/images/users_profile_img/user_default.png" class="userAvatar">
+            <img src="/images/users_profile_img/user_default.svg" class="userAvatar">
         @endif
     <button class="btn ms-2" style="font-family:Arial, FontAwesome">&#xf0f3;</button>
     <button class="btn ms-2" style="font-family:Arial, FontAwesome">&#xf107;</button>

@@ -28,7 +28,7 @@
 					@elseif(auth()->user()->profile_img)
 						<img src="{{url('/images/users_profile_img/' . auth()->user()->profile_img)}}" class="userAvatar">
 					@else
-						<img src="/images/users_profile_img/user_default.png" class="userAvatar">
+						<img src="/images/users_profile_img/user_default.svg" class="userAvatar">
 					@endif
 					<span class="ms-2">What's on your mind, <span class="users-name">{{auth()->user()->first_name}}</span>?</span>
 					</div>
