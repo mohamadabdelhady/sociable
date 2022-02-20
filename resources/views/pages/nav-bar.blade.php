@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a href="/"><div class="navbar-brand"></div></a>
 <div  class="" style="display: inline-flex">
-        <div class="search-bar mr-3">
+        <div class="search-bar me-3">
             <form class="navbar-nav" method="post" action="{{route('search-results')}}">@csrf
                 <input class="form-control " type="search" placeholder="&#xF002; Search" aria-label="Search" id="search-input" name="q" style="font-family:Arial, FontAwesome">
             </form>
@@ -14,9 +14,8 @@
         @else
             <img src="/images/users_profile_img/user_default.png" class="userAvatar">
         @endif
-    <button class="btn ml-2" style="font-family:Arial, FontAwesome">&#xf0f3;</button>
-    <button class="btn ml-2" style="font-family:Arial, FontAwesome">&#xf107;</button>
-
+    <button class="btn ms-2" style="font-family:Arial, FontAwesome">&#xf0f3;</button>
+    <button class="btn ms-2" style="font-family:Arial, FontAwesome">&#xf107;</button>
 </div>
     </div>
 </nav>

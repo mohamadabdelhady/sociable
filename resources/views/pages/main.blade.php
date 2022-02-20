@@ -2,20 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
 	 <meta charset="UTF-8">
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="{{ asset('js/script1.js') }}" defer></script>
+   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/script2.js') }}" defer></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/style-post.css') }}" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/df75158e35.js" crossorigin="anonymous"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -38,7 +30,7 @@
 					@else
 						<img src="/images/users_profile_img/user_default.png" class="userAvatar">
 					@endif
-					<span class="ml-2">What's on your mind, <span class="users-name">{{auth()->user()->first_name}}</span>?</span>
+					<span class="ms-2">What's on your mind, <span class="users-name">{{auth()->user()->first_name}}</span>?</span>
 					</div>
 				</div>
 			</a>
