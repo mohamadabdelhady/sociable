@@ -26,4 +26,8 @@ class posts extends Controller
 
         return response('The post posted successfully.',200);
     }
+    public function load_news_feed()
+    {
+
+    }
 }
