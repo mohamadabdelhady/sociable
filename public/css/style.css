@@ -60,6 +60,10 @@ background-repeat: no-repeat;
     max-width: 100%;
     max-width: 100%;
 }
+.profile_img img{
+    max-width: 100%;
+    max-width: 100%;
+}
 .cover-img .btn {
     position: absolute;
     bottom: 25%;

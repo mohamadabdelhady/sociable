@@ -38,12 +38,16 @@
         <div class="col-xl-6 col-lg-6">
             <div class="card">
             <div class="cover-img">
-                @if(auth()->user()->profile_img)
-                    <img src="/storage/{{auth()->user()->profile_img}}">
+                @if(auth()->user()->cover_img)
+                    <img src="/storage/{{auth()->user()->cover_img}}">
                 @else
                     <img src="/images/cover_default.png">
                 @endif
-                    <button class="btn" style="font-family:Arial, FontAwesome" title="change cover">&#xf03e;</button>
+                    <form id="cover-upload" action="upload/cover" method="POST"  style="display: none;" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file"  directory  accept="image/*" style="display: none;" id="upload-cover" class="form-control" name="cover" onchange="document.getElementById('cover-upload').submit()">
+                    </form>
+                    <button class="btn" style="font-family:Arial, FontAwesome" title="change cover" onclick="document.getElementById('upload-cover').click();">&#xf03e;</button>
             </div>
             </div>
         </div>

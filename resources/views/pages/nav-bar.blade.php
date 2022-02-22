@@ -8,9 +8,7 @@
             </form>
         </div>
               @if(auth()->user()->profile_img)
-            <img src="{{url(auth()->user()->profile_img)}}" class="userAvatar">
-        @elseif(auth()->user()->profile_img)
-            <img src="{{url('/storage/' . auth()->user()->profile_img)}}" class="userAvatar">
+            <img src="/storage/{{auth()->user()->profile_img}}" class="userAvatar">
         @else
             <img src="/images/user_default.svg" class="userAvatar">
         @endif

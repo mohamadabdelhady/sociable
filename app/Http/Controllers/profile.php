@@ -17,6 +17,15 @@ class profile extends Controller
             $path=Storage::disk('public')->putFile('users-profiles', $request->file('profile'));
             $user=User::find(auth()->user()->id);
             $user->profile_img=$path;
+            $user->save();
+        return back();
+    }
+    public function upload_cover(Request $request)
+    {
+        $path=Storage::disk('public')->putFile('users-covers', $request->file('cover'));
+        $user=User::find(auth()->user()->id);
+        $user->cover_img=$path;
+        $user->save();
         return back();
     }
 }

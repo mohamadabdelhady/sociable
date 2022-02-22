@@ -23,10 +23,8 @@
                 <div class="card">
                     <div>
                         @if(auth()->user()->profile_img)
-                            <img src="{{url(auth()->user()->profile_img)}}" class="userAvatar">
-                        @elseif(auth()->user()->profile_img)
-                            <img src="{{url('/storage/'. auth()->user()->profile_img)}}" class="userAvatar">
-                        @else
+                            <img src="/storage/{{auth()->user()->profile_img}}" class="userAvatar">
+                           @else
                             <img src="/images/user_default.svg" class="userAvatar">
                         @endif
                         <span class="ms-2">What's on your mind, <span class="users-name">{{auth()->user()->first_name}}</span>?</span>
