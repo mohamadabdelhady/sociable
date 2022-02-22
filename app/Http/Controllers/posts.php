@@ -19,7 +19,7 @@ class posts extends Controller
             $request->validate([
                 'media' => 'mimes:avi,mpeg,png,jpg,mp3|max:66560'
             ]);
-            $post->media=Storage::putFile('media_files', $request->file('media'));
+            $post->media=Storage::disk('public')->putFile('media_files', $request->file('media'));
             $post->media_type=$request->type;
         }
         $post->save();

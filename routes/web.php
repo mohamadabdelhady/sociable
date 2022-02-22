@@ -33,5 +33,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
         return view('pages.home');
     }]);
     Route::post('/create_post',[\App\Http\Controllers\posts::class,'create_post']);
-    Route::get('/create_post',[\App\Http\Controllers\posts::class,'create_post']);
+    Route::get('/profile',[\App\Http\Controllers\profile::class,'get_my_profile']);
+    Route::post('/upload/profile',[\App\Http\Controllers\profile::class,'upload_profile']);
 });

@@ -1,12 +1,12 @@
 
     <div class="card">
         <div>
-            @if(auth()->user()->profile_img&&auth()->user()->google_id)
+            @if(auth()->user()->profile_img)
                 <img src="{{url(auth()->user()->profile_img)}}" class="userAvatar">
             @elseif(auth()->user()->profile_img)
-                <img src="{{url('/images/users_profile_img/' . auth()->user()->profile_img)}}" class="userAvatar">
+                <img src="{{url('/storage' . auth()->user()->profile_img)}}" class="userAvatar">
             @else
-                <img src="/images/users_profile_img/user_default.svg" class="userAvatar">
+                <img src="/images/user_default.svg" class="userAvatar">
             @endif
             <span class="ms-2 users-name">{{auth()->user()->first_name." ".auth()->user()->last_name}}</span>
         </div>
