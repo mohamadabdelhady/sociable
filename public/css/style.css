@@ -33,6 +33,10 @@ background-repeat: no-repeat;
 .users-name{
     font-weight: bolder;
 }
+.rm_text_decoration{
+    text-decoration: none;
+    color: inherit;
+}
 #background{
 	min-height: 96vh;
 	width: 100%;

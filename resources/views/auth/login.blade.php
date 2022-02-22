@@ -13,11 +13,11 @@
 
 <div class="login-photo">
     <div class="form-container">
-        <div class="image-holder"></div>
+        <div class="image-holder"><h2 class="display-5 ms-2">Welcome</h2>
+            <p class="lead ms-2">Sociable is a social network website that connect you with people all around the world.</p>></div>
         <form method="POST" action="{{ route('login') }}">
             @csrf
-            <div class="ms-auto me-auto navbar-brand" ></div>
-
+            <div class="navbar-brand ms-auto me-auto" ></div>
             <div class="form-group ]"><input class="form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder="Email">@error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

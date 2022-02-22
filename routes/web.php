@@ -32,4 +32,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/home', ['as' => 'home', 'uses' => function () {
         return view('pages.home');
     }]);
+    Route::post('/create_post',[\App\Http\Controllers\posts::class,'create_post']);
+    Route::get('/create_post',[\App\Http\Controllers\posts::class,'create_post']);
 });

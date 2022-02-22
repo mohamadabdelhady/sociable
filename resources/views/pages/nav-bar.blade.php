@@ -19,7 +19,7 @@
     <div class="dropdown">
         <button class="btn dropdown-toggle ms-2 me-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" ></button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="srttings">Settings</a></li>
+            <li><a class="dropdown-item" href="srttings" style="font-family:Arial, FontAwesome">&#xf013; Settings</a></li>
             <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a></li>
             <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
                 @csrf

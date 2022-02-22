@@ -64,15 +64,6 @@
             <div class="mt-2 form-group">
                 <input type="password" class="form-control  " id="InputConfirmPassword" placeholder="Confirm password" name="password_confirmation">
             </div>
-{{--            <div class="btn-group btn-group-toggle form-group" data-toggle="buttons" name="gender" style="width: 100%;">--}}
-{{--  <label class="btn btn-secondary active">--}}
-{{--    <input type="radio" name="gender" id="male" autocomplete="off" checked value="male"> Male--}}
-{{--  </label>--}}
-{{--  <label class="btn btn-secondary">--}}
-{{--    <input type="radio" name="gender" id="female" autocomplete="off" value="female"> Female--}}
-{{--  </label>--}}
-{{--</div>--}}
-
             <div class="btn-group mt-2" role="group" aria-label="Basic radio toggle button group" style="width: 100%;">
                 <input type="radio" class="btn-check" name="gender" id="male" value="male" autocomplete="off" checked>
                 <label class="btn btn-outline-primary" for="male">Male</label>
