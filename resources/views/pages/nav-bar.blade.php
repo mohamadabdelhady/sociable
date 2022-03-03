@@ -1,9 +1,9 @@
 <nav class="navbar" id="nav-bar">
     <div class="container-fluid">
-        <a href="/"><div class="navbar-brand"></div></a>
+        <a href="/" title="Home"><div class="navbar-brand"></div></a>
 <div  class="" style="display: inline-flex">
         <div class="search-bar me-3">
-            <form class="navbar-nav" method="post" action="">@csrf
+            <form class="navbar-nav" method="post" action="search">@csrf
                 <input class="form-control " type="search" placeholder="&#xF002; Search" aria-label="Search" id="search-input" name="q" style="font-family:Arial, FontAwesome">
             </form>
         </div>

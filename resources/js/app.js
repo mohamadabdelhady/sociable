@@ -20,7 +20,7 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('home', require('./components/home.vue').default);
-
+Vue.component('search_results', require('./components/search_results.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,4 +29,7 @@ Vue.component('home', require('./components/home.vue').default);
 
 const app = new Vue({
     el: 'home',
+});
+const app1 = new Vue({
+    el: 'search_results',
 });

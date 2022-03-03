@@ -76,6 +76,13 @@ background-repeat: no-repeat;
     box-shadow: 0 2px 5px rgba(136, 136, 136, 0.3), 0 1px 1px rgba(136, 136, 136, 0.3);
     border-radius: 50%;
 }
+.result-num{
+    padding: 1px 8px 1px 8px;
+    color: white;
+    background-color: #212529;
+    border-radius: 15%;
+    float: right;
+}
 #background{
 	min-height: 96vh;
 	width: 100%;

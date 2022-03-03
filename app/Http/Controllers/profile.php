@@ -28,4 +28,15 @@ class profile extends Controller
         $user->save();
         return back();
     }
+    public function get_profile($id)
+    {
+        $profile=User::where('id','=',$id)->select('id','first_name','last_name','profile_img','cover_img')->first();
+        if (auth()->user()->id!=$id) {
+            return view('pages.users_profile')->with(compact('profile'));
+        }
+        else
+        {
+            return view('pages.profile');
+        }
+    }
 }

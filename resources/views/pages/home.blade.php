@@ -21,6 +21,7 @@
         <div class="col-xl-6 col-lg-6">
             <a href="#" onclick="event.preventDefault(); $('#myModal').modal('show');" style="text-decoration: none; color: black;">
                 <div class="card">
+
                     <div>
                         @if(auth()->user()->profile_img)
                             <img src="/storage/{{auth()->user()->profile_img}}" class="userAvatar">
