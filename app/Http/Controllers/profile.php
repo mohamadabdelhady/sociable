@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\RealTimeNotification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -38,5 +39,9 @@ class profile extends Controller
         {
             return view('pages.profile');
         }
+    }
+    public function test()
+    {
+        event(new RealTimeNotification('hello world'));
     }
 }

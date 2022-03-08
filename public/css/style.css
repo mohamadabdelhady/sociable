@@ -292,3 +292,18 @@ font-size: 20px;
     height: 95%;
     width: 95%;
 }
+@media only screen and (min-width: 992px) {
+    .right-side{
+        position: fixed;
+        right: 0;
+    }
+    .Left-side{
+        position: fixed;
+        left: 0;
+    }
+    .center{
+        position: absolute;
+        left: 25%;
+
+    }
+}

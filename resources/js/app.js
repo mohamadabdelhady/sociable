@@ -21,6 +21,10 @@ window.Vue = require('vue').default;
 
 Vue.component('home', require('./components/home.vue').default);
 Vue.component('search_results', require('./components/search_results.vue').default);
+Vue.component('notification_home', require('./components/notification_home.vue').default);
+Vue.component('request_home', require('./components/request_home.vue').default);
+Vue.component('contacts', require('./components/contacts.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -32,4 +36,13 @@ const app = new Vue({
 });
 const app1 = new Vue({
     el: 'search_results',
+});
+const app2 = new Vue({
+    el: 'notification_home',
+});
+const app3 = new Vue({
+    el: 'request_home',
+});
+const app4 = new Vue({
+    el: 'contacts',
 });

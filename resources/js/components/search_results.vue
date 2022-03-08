@@ -3,7 +3,6 @@
         <div class="col-xl-3 col-lg-3">
             <div class="card search-btn">
                 <h4 align="center" class="mb-4">Search results</h4>
-
                 <a v-on:click="()=>this.selected='people'" style="font-family:Arial, FontAwesome">&#xf500;<span class="ms-2">People</span>
                     <span class="result-num">{{people.length}}</span>
                 </a>
@@ -25,9 +24,9 @@
                 <span style="font-family:Arial, FontAwesome" class="add-btn" v-on:click="send_friend_request(person['id'])">&#xf234;</span>
             </div>
             </div>
-            <div class="posts-results card">
-                opopop
-                <div v-for="(post, index) in posts">
+            <div class="posts-results">
+
+                <div v-for="(post, index) in posts" class="card">
 
                 </div>
             </div>

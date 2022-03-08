@@ -1,5 +1,5 @@
     <a href="profile" class="rm_text_decoration" style="color: black;">
-    <div class="card" >
+    <div class="card" title="profile" >
         <div>
             @if(auth()->user()->profile_img)
                 <img src="/storage/{{auth()->user()->profile_img}}" class="userAvatar">
@@ -10,11 +10,15 @@
         </div>
     </div>
     </a>
-    <div class="card mt-4">
-
-        <a style="font-family:Arial, FontAwesome">&#xf500;<span class="ms-2">Friends</span></a>
-        <hr>
-        <a style="font-family:Arial, FontAwesome">&#xf03e;<span class="ms-2">Photos</span></a>
-        <hr>
-        <a style="font-family:Arial, FontAwesome">&#xf008;<span class="ms-2">Videos</span></a>
+    <div class="mt-4">
+    <contacts></contacts>
     </div>
+{{--    <div class="card mt-4">--}}
+
+{{--        <a style="font-family:Arial, FontAwesome">&#xf500;<span class="ms-2">Friends</span></a>--}}
+{{--        <hr>--}}
+{{--        <a style="font-family:Arial, FontAwesome">&#xf03e;<span class="ms-2">Photos</span></a>--}}
+{{--        <hr>--}}
+{{--        <a style="font-family:Arial, FontAwesome">&#xf008;<span class="ms-2">Videos</span></a>--}}
+{{--    </div>--}}
+

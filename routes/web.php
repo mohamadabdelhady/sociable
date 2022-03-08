@@ -26,7 +26,7 @@ Route::get('/', function () {
 });
 Route::get('/signup', function () {return view('auth.signup');});
 Route::get('/login',['as'=>'login','uses'=> function () {return view('auth.login');}]);
-
+Route::get('/test',[\App\Http\Controllers\profile::class,'test']);
 //routes that do require authentication and verification
 Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/home', ['as' => 'home', 'uses' => function () {
@@ -38,4 +38,5 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::post('/upload/cover',[\App\Http\Controllers\profile::class,'upload_cover']);
     Route::post('/search',[\App\Http\Controllers\search::class,'search']);
     Route::get('/get_profile/{id}',[\App\Http\Controllers\profile::class,'get_profile']);
+
 });

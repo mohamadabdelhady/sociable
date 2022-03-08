@@ -15,10 +15,11 @@
 @include('pages.nav-bar')
 <div class=" container-fluid"style="min-height: 100vh; width: 100%" id="content">
     <div class="row">
-        <div class="col-xl-3 col-lg-3">
+        <div class="col-xl-3 col-lg-3 Left-side">
             @include('pages.side-nav')
+
         </div>
-        <div class="col-xl-6 col-lg-6">
+        <div class="col-xl-6 col-lg-6 center" style="min-height: 1000px">
             <a href="#" onclick="event.preventDefault(); $('#myModal').modal('show');" style="text-decoration: none; color: black;">
                 <div class="card">
 
@@ -33,6 +34,10 @@
                 </div>
             </a>
             <home></home>
+        </div>
+        <div class="col-xl-3 col-lg-3 right-side">
+            <notification_home></notification_home>
+            <request_home></request_home>
         </div>
     </div>
 </div>
