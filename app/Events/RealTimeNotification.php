@@ -21,10 +21,12 @@ class RealTimeNotification implements ShouldBroadcast
      */
 
     public string $message;
+    public string $receiver;
 
-    public function __construct(string $message)
+    public function __construct(string $message,string $receiver)
     {
         $this->message=$message;
+        $this->receiver=$receiver;
     }
 
     /**
@@ -32,8 +34,8 @@ class RealTimeNotification implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn():Channel
     {
-        return new PrivateChannel('notifications');
+        return new PrivateChannel('notifications.'.$this->receiver);
     }
 }

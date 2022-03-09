@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RealTimeRequests
+class RealTimeRequests implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,9 +19,18 @@ class RealTimeRequests
      *
      * @return void
      */
-    public function __construct()
+
+    public string $message;
+    public string $receiver;
+    public string $requester;
+    public string $avatar;
+
+    public function __construct(string $message,string $receiver,string $requester,string $avatar)
     {
-        //
+        $this->message=$message;
+        $this->receiver=$receiver;
+        $this->requester=$requester;
+        $this->avatar=$avatar;
     }
 
     /**
@@ -29,8 +38,8 @@ class RealTimeRequests
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn():Channel
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('requests.'.$this->receiver);
     }
 }
