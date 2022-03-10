@@ -17,11 +17,13 @@
 
             <div v-for="(person, index) in people_result" class="card people-card mb-3">
                 <a :href="'get_profile/'+person['id']">
+                    <div>
                 <img v-if="person['profile_img']" :src="'storage/'+person['profile_img']" class="prof-img">
                     <img v-else src="/images/user_default.svg" class="userAvatar">
                 <span class="ms-2">{{person['first_name']+" "+person['last_name']}}</span>
+                    </div>
                     </a>
-                <span style="font-family:Arial, FontAwesome" class="add-btn" v-on:click="send_friend_request(person['id'])">&#xf234;</span>
+<!--                <span style="font-family:Arial, FontAwesome" class="add-btn" v-on:click="send_friend_request(person['id'])">&#xf234;</span>-->
             </div>
             </div>
             <div class="posts-results">
@@ -49,9 +51,7 @@ export default {
     methods:{
         send_friend_request(id)
         {
-            axios.post('send_friend_request',{
-                friend_id:id,
-            })
+            axios.get('send_friend_request/'+id)
                 .then((res)=>{
 
                 })

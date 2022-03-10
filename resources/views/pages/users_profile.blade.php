@@ -8,6 +8,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/df75158e35.js" crossorigin="anonymous"></script>
+{{--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>--}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
@@ -25,8 +26,10 @@
                     @else
                         <img src="/images/user_default.svg">
                     @endif
+                        <button class="btn" style="font-family:Arial, FontAwesome" title="send friend request" onclick="send_friend_request({{$profile->id}})" id="req-btn">&#xf234;</button>
                      </div>
                 <p class="users-name mt-2 m-auto">{{$profile->first_name." ".$profile->last_name}}</p>
+
 
             </div>
         </div>
@@ -51,5 +54,18 @@
 
     </div>
 </div>
+<script>
+   function send_friend_request(id)
+    {
+        axios.get('/send_friend_request/'+id)
+            .then((res)=>{
+                $('#req-btn').text('');
+                $('#req-btn').prop('title','remove from friends');
+            })
+            .catch((error)=>{
+
+            });
+    }
+</script>
 </body>
 </html>

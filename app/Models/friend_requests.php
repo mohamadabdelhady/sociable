@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class friend_requests extends Model
 {
+    protected $table = 'friend_requests';
     use HasFactory;
 }

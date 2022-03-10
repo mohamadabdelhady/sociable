@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('friend_requests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('requester')->references('id')->on('users');
+            $table->foreignId('receiver')->references('id')->on('users');
             $table->timestamps();
         });
     }

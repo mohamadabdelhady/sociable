@@ -15,8 +15,10 @@ class search extends Controller
     public function search(Request $request)
     {
         $key = trim($request->input('q'));
-        $people=User::where(DB::raw('lower(first_name)'),'like','%'.$key.'%')
-            ->orWhere(DB::raw('lower(last_name)'),'like','%'.$key.'%')->select('id','first_name','last_name','profile_img')->get();
+        $people=User::where(DB::raw('lower(first_name)'),'like','%'.$key.'%')->where('id','!=', auth()->user()->id)
+            ->orWhere(DB::raw('lower(last_name)'),'like','%'.$key.'%')
+            ->select('id','first_name','last_name','profile_img')
+            ->get();
         return view('pages.search_results')->with(compact('people'));
     }
 }
