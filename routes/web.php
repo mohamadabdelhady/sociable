@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::post('/upload/cover',[\App\Http\Controllers\profile::class,'upload_cover']);
     Route::post('/search',[\App\Http\Controllers\search::class,'search']);
     Route::get('/get_profile/{id}',[\App\Http\Controllers\profile::class,'get_profile']);
-    Route::get('/send_friend_request/{id}',[\App\Http\Controllers\friends::class,'send_friend_request']);
-
+    Route::post('/send_friend_request',[\App\Http\Controllers\friends::class,'send_friend_request']);
+    Route::get('/load_request',[\App\Http\Controllers\friends::class,'load_friend_request']);
+    Route::get('/decline/{requester}',[\App\Http\Controllers\friends::class,'decline']);
 });

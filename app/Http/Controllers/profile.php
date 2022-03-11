@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\RealTimeNotification;
 use App\Events\RealTimeRequests;
+use App\Models\friend_requests;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +35,10 @@ class profile extends Controller
     {
         $profile=User::where('id','=',$id)->select('id','first_name','last_name','profile_img','cover_img')->first();
         if (auth()->user()->id!=$id) {
-            return view('pages.users_profile')->with(compact('profile'));
+            $F_request=friend_requests::where('receiver',$id)->first();
+            $friend=\App\Models\friends::where('friend_id',$id)->first();
+//            dd($F_request);
+            return view('pages.users_profile')->with(compact('profile','F_request','friend'));
         }
         else
         {

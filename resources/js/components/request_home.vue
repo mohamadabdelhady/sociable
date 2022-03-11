@@ -1,10 +1,11 @@
 <template>
-    <div class="mt-4 wrapper">
-        <p class="noti">FRIEND REQUESTS<span class="result-num">{{requests_num}}</span></p>
+    <div class="wrapper">
+        <p class="noti">FRIEND REQUESTS<span class="result-num">{{requests.length}}</span></p>
 
         <div class="card mb-2 me-2" v-for="(request, index) in requests">
-            <a style="font-family:Arial, FontAwesome" href="#" class="close rm_text_decoration" v-on:click.prevent="rm_notification">&#xf00d</a>
-            <img :src="'storage/'+request.avatar" class="user-avatar">
+<!--            <a style="font-family:Arial, FontAwesome" href="#" class="close rm_text_decoration" v-on:click.prevent="rm_notification">&#xf00d</a>-->
+            <img :src="'storage/'+request.avatar" class="user-avatar" v-if="request.avatar!=null && request.avatar!='default'">
+            <img :src="'images/user_default.svg'" class="user-avatar" v-else>
             <p>{{request.message}}</p>
             <div>
                 <button class="accept-btn btn me-4" v-on:click="accept_request(request.requester)">Accept</button>
@@ -23,7 +24,6 @@ export default {
     {
         return{
             requests:[],
-            requests_num:0,
         }
     },
     methods:{
@@ -41,10 +41,33 @@ export default {
         {
             axios.get('decline/'+requester)
                 .then((res) => {
-                    console.log('ac')
+                    let self=this.requests;
+                    this.requests.forEach(function(request, index,self){
+                        if(request.requester==requester)
+                        {
+                           self.splice(index,1);
+                        }
+                    })
                 })
                 .catch((error) => {
-                    console.log('error')
+                    console.log(error)
+                });
+        },
+        load_requests()
+        {
+            let self=this;
+            axios.get('/load_request')
+                .then((res) => {
+                    res.data.forEach(request=>{
+                       let R={
+                           "message":request.first_name+' '+request.last_name+' want to be your friend.',
+                           "requester":request.id,
+                           "avatar":request.profile_img,
+                       }
+                        this.requests.unshift(R);
+                    });
+                })
+                .catch((error) => {
                 });
         }
     },
@@ -59,10 +82,10 @@ export default {
                     "requester":requester,
                     "avatar":avatar,
                 }
-                this.requests_num++;
                 this.requests.unshift(request);
             })
-    }
+        this.load_requests();
+    },
 }
 </script>
 

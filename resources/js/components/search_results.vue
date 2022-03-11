@@ -49,16 +49,7 @@ export default {
         }
     },
     methods:{
-        send_friend_request(id)
-        {
-            axios.get('send_friend_request/'+id)
-                .then((res)=>{
 
-                })
-                .catch((error)=>{
-
-                    });
-        }
     },
     watch:{
         selected:function(newVal,oldVal)

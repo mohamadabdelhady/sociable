@@ -26,10 +26,15 @@
                     @else
                         <img src="/images/user_default.svg">
                     @endif
-                        <button class="btn" style="font-family:Arial, FontAwesome" title="send friend request" onclick="send_friend_request({{$profile->id}})" id="req-btn">&#xf234;</button>
+                    @if($F_request==null)
+                            <button class="btn" style="font-family:Arial, FontAwesome" title="send friend request" onclick="send_friend_request({{$profile->id}})" id="req-btn">&#xf234;</button>
+                        @elseif($friend==null)
+                            <button class="btn" style="font-family:Arial, FontAwesome" title="Friend request sent" id="req-btn">&#xf4fc;</button>
+                        @else
+                            <button class="btn" style="font-family:Arial, FontAwesome" title="your friends">&#xf500;</button>
+                    @endif
                      </div>
                 <p class="users-name mt-2 m-auto">{{$profile->first_name." ".$profile->last_name}}</p>
-
 
             </div>
         </div>
@@ -57,14 +62,14 @@
 <script>
    function send_friend_request(id)
     {
-        axios.get('/send_friend_request/'+id)
-            .then((res)=>{
-                $('#req-btn').text('');
-                $('#req-btn').prop('title','remove from friends');
-            })
-            .catch((error)=>{
-
-            });
+            axios.post('/send_friend_request', {friend_id: id})
+                .then((res) => {
+                    $('#req-btn').text('');
+                    $('#req-btn').prop('title', 'remove from friends');
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
     }
 </script>
 </body>
