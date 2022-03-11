@@ -8,9 +8,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/df75158e35.js" crossorigin="anonymous"></script>
-{{--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>--}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-
 </head>
 <body>
 @include('pages.nav-bar')

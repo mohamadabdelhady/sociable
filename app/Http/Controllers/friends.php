@@ -33,13 +33,6 @@ class friends extends Controller
             return response('The request has already been sent.',403);
         }
     }
-    public function add_friend(Request $request)
-    {
-        $friend=new \App\Models\friends();
-        $friend->user_id=auth()->user()->id;
-        $friend->friend_id=$request->friend_id;
-        $friend->save();
-    }
     public function accept($requester)
     {
         $friend=new \App\Models\friends();
@@ -47,6 +40,12 @@ class friends extends Controller
         $friend->friend_id=$requester;
         $friend->save();
         friend_requests::where('requester',$requester)->delete();
+        $message=auth()->user()->first_name.' '.auth()->user()->last_name.' accepted your friend request.';
+        event(new RealTimeNotification($message,$requester));
+        $notification=new \App\Models\notifications();
+        $notification->message=$message;
+        $notification->receiver=$requester;
+        $notification->save();
         return response('request accepted successfully',200);
     }
     public function decline($requester)
@@ -54,14 +53,9 @@ class friends extends Controller
         friend_requests::where('requester',$requester)->delete();
         return response('request declined successfully',200);
     }
-    public function remove_request($request)
-    {
-
-    }
     public function load_friend_request()
     {
    $requests=DB::select('select id,first_name,last_name,profile_img from users where id IN (select requester from friend_requests where receiver='.auth()->id().');');
-
         return response($requests);
     }
 }

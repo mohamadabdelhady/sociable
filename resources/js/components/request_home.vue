@@ -31,7 +31,13 @@ export default {
         {
             axios.get('accept/'+requester)
                 .then((res) => {
-                    console.log('ac')
+                    let self=this.requests;
+                    this.requests.forEach(function(request, index,self){
+                        if(request.requester==requester)
+                        {
+                            self.splice(index,1);
+                        }
+                    })
                 })
                 .catch((error) => {
                     console.log('error')
@@ -55,7 +61,6 @@ export default {
         },
         load_requests()
         {
-            let self=this;
             axios.get('/load_request')
                 .then((res) => {
                     res.data.forEach(request=>{

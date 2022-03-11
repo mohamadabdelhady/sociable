@@ -42,4 +42,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::post('/send_friend_request',[\App\Http\Controllers\friends::class,'send_friend_request']);
     Route::get('/load_request',[\App\Http\Controllers\friends::class,'load_friend_request']);
     Route::get('/decline/{requester}',[\App\Http\Controllers\friends::class,'decline']);
+    Route::get('/accept/{requester}',[\App\Http\Controllers\friends::class,'accept']);
+    Route::get('/remove_notification/{id}',[\App\Http\Controllers\notifications::class,'remove_notification']);
+    Route::get('/load_notification',[\App\Http\Controllers\notifications::class,'load_notifications']);
 });
