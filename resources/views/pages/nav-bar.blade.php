@@ -12,7 +12,7 @@
         @else
             <img src="/images/user_default.svg" class="userAvatar">
         @endif
-    <div class="dropdown">
+    <div class="dropdown" id="noti-btn">
     <button class="btn ms-2" onclick="show_menu()"  style="font-family:Arial, FontAwesome">&#xf0f3;</button>
         <div class="notification-menu">
             <div class="close"><a style="font-family:Arial, FontAwesome; float: right" href="#" class="rm_text_decoration" onclick="event.preventDefault(); hide_menu()">&#xf00d</a></div>
@@ -40,5 +40,11 @@
     function hide_menu()
     {
         $(".notification-menu").hide();
+    }
+    window.onload=function () {
+        let url = window.location.pathname
+        if (url == "/home") {
+            $("#noti-btn").hide();
+        }
     }
 </script>
