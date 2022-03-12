@@ -36,7 +36,7 @@
             <home></home>
         </div>
         <div class="col-xl-3 col-lg-3 right-side">
-            <request_home id="{{auth()->user()->id}}"></request_home>
+            <request_home id="{{auth()->user()->id}}" class="mt-4"></request_home>
             <notification_home id="{{auth()->user()->id}}"></notification_home>
         </div>
     </div>

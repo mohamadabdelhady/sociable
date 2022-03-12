@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper mt-4">
+    <div class="wrapper">
        <p class="noti">NOTIFICATIONS<span class="result-num">{{notifications.length}}</span></p>
         <div class="card mb-2 me-2" v-for="(notification, index) in notifications">
             <div class="close"><a style="font-family:Arial, FontAwesome" href="#" class="rm_text_decoration" v-on:click.prevent="rm_notification(notification.receiver)">&#xf00d</a></div>

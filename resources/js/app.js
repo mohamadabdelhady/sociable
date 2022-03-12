@@ -24,6 +24,7 @@ Vue.component('search_results', require('./components/search_results.vue').defau
 Vue.component('notification_home', require('./components/notification_home.vue').default);
 Vue.component('request_home', require('./components/request_home.vue').default);
 Vue.component('contacts', require('./components/contacts.vue').default);
+Vue.component('notifications_menu', require('./components/notifications_menu.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -45,4 +46,7 @@ const app3 = new Vue({
 });
 const app4 = new Vue({
     el: 'contacts',
+});
+const app5 = new Vue({
+    el: 'notifications_menu',
 });

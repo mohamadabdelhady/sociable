@@ -12,11 +12,16 @@
         @else
             <img src="/images/user_default.svg" class="userAvatar">
         @endif
-    <button class="btn ms-2" style="font-family:Arial, FontAwesome">&#xf0f3;</button>
-
+    <div class="dropdown">
+    <button class="btn ms-2" onclick="show_menu()"  style="font-family:Arial, FontAwesome">&#xf0f3;</button>
+        <div class="notification-menu">
+            <div class="close"><a style="font-family:Arial, FontAwesome; float: right" href="#" class="rm_text_decoration" onclick="event.preventDefault(); hide_menu()">&#xf00d</a></div>
+            <notifications_menu></notifications_menu>
+        </div>
+    </div>
     <div class="dropdown">
         <button class="btn dropdown-toggle ms-2 me-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" ></button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <ul class="dropdown-menu user_menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="srttings" style="font-family:Arial, FontAwesome">&#xf013; Settings</a></li>
             <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a></li>
             <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
@@ -27,3 +32,13 @@
 </div>
     </div>
 </nav>
+<script>
+    function show_menu()
+    {
+        $(".notification-menu").show();
+    }
+    function hide_menu()
+    {
+        $(".notification-menu").hide();
+    }
+</script>
