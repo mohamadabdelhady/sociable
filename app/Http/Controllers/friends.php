@@ -39,6 +39,11 @@ class friends extends Controller
         $friend->user_id=auth()->user()->id;
         $friend->friend_id=$requester;
         $friend->save();
+
+        $friend2=new \App\Models\friends();
+        $friend2->user_id=$requester;
+        $friend2->friend_id=auth()->user()->id;
+        $friend2->save();
         friend_requests::where('requester',$requester)->delete();
         $message=auth()->user()->first_name.' '.auth()->user()->last_name.' accepted your friend request.';
         event(new RealTimeNotification($message,$requester));

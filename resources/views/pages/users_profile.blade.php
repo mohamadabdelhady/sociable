@@ -24,7 +24,7 @@
                     @else
                         <img src="/images/user_default.svg">
                     @endif
-                    @if($F_request==null)
+                    @if($F_request==null&&$friend==null)
                             <button class="btn" style="font-family:Arial, FontAwesome" title="send friend request" onclick="send_friend_request({{$profile->id}})" id="req-btn">&#xf234;</button>
                         @elseif($friend==null)
                             <button class="btn" style="font-family:Arial, FontAwesome" title="Friend request sent" id="req-btn">&#xf4fc;</button>

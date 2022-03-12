@@ -7,6 +7,7 @@ use App\Events\RealTimeRequests;
 use App\Models\friend_requests;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class profile extends Controller
@@ -44,6 +45,11 @@ class profile extends Controller
         {
             return view('pages.profile');
         }
+    }
+    public function get_contacts($id)
+    {
+        $contacts=DB::select('select id,first_name,last_name,profile_img from users where id IN(select friend_id from friends where user_id='.$id.');');
+        return response($contacts,200);
     }
 
 }

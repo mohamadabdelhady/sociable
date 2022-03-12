@@ -11,7 +11,7 @@
     </div>
     </a>
     <div class="mt-4">
-    <contacts></contacts>
+    <contacts id="{{json_encode(auth()->id())}}"></contacts>
     </div>
 {{--    <div class="card mt-4">--}}
 
