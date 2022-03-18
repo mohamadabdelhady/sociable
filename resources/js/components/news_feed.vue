@@ -1,18 +1,24 @@
 <template>
 <div>
     <div class="row">
-        <div class="card" v-for="(post, index) in posts">
-            <div class="card-header">
-            <span style="float: left"><img src="" class="user-avatar"><p></p></span>
+        <div class="card mt-4" v-for="(post, index) in posts">
+            <div class="">
+            <span style="float: left"><img v-if="post['profile_img']!=null" :src="'/storage/'+post['profile_img']" class="userAvatar">
+                <img v-else src="images/user_default.svg" class="userAvatar">
+                <a style="font-size: 1em !important;" :href="'/get_profile/'+post['user_id']" class="rm_text_decoration"><span>{{post['first_name']+" "+post['last_name']}}</span></a>
+            </span>
                 <span style="float:right;"></span>
             </div>
             <div class="card-body">
 
             </div>
-            <div class="card-footer">
-                <span style="float: left"><i style="font-family:Arial, FontAwesome">&#xf086;</i></span>
-                <span style="float: right"><i style="font-family:Arial, FontAwesome">&#xf062;</i>
-                <i style="font-family:Arial, FontAwesome">&#xf063;</i>
+            <div>
+                <a class="rm_text_decoration" href="#" style="float: left"><i style="font-family:Arial, FontAwesome">&#xf086;</i></a>
+                <span style="float: right">
+                    <a class="rm_text_decoration" href="#"><i style="font-family:Arial, FontAwesome">&#xf062;</i></a>
+                    <span>{{post['likes']}}</span>
+                    <a class="rm_text_decoration" href="#"><i style="font-family:Arial, FontAwesome">&#xf063;</i></a>
+                    <span>{{post['dislikes']}}</span>
                 </span>
             </div>
 
@@ -43,7 +49,7 @@ export default {
             this.page++;
         }
     },
-    created() {
+    beforeMount() {
         this.load_news_feed();
     },
     mounted() {

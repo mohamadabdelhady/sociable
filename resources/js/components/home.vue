@@ -23,12 +23,15 @@
 
       </div>
     </div>
+      <news_feed></news_feed>
   </div>
 </template>
 
 <script>
+import News_feed from "./news_feed";
 export default {
   name: "home",
+    components: {News_feed},
     data()
     {
         return{

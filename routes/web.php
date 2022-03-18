@@ -46,4 +46,5 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/remove_notification/{id}',[\App\Http\Controllers\notifications::class,'remove_notification']);
     Route::get('/load_notification',[\App\Http\Controllers\notifications::class,'load_notifications']);
     Route::get('/get_contact/{id}',[\App\Http\Controllers\profile::class,'get_contacts']);
+    Route::get('/load_news_feed',[\App\Http\Controllers\posts::class,'load_news_feed']);
 });
