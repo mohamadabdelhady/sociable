@@ -9,7 +9,7 @@
                 <a :href="'get_profile/'+contact.id" class="rm_text_decoration">
                 <span style="vertical-align:bottom" class="ms-2">{{contact.first_name+" "+contact.last_name}}</span>
                 </a>
-                <a href="#"><apan class="chat">Chat</apan></a>
+                <a href="#"><span class="chat">Chat</span></a>
             </div>
         </div>
     </div>
@@ -35,7 +35,6 @@ export default {
                 axios.get('/get_contact/'+this.id)
                     .then((res) => {
                         this.contacts=res.data;
-                        console.log(res.data)
                     })
                     .catch((error) => {
                         // error.response.status Check status code

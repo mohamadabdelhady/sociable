@@ -9,15 +9,20 @@
             </span>
                 <span style="float:right;"></span>
             </div>
-            <div class="card-body">
-
+            <div class="card-body mt-2">
+                <div class="mb-3">{{post['post_text']}}</div>
+                <div v-if="post['media_type']=='image'">
+                    <img :src="'/storage/'+post['media']" class="image-post">
+                </div>
+                <div v-if="post['media_type']=='video'"></div>
+                <div v-if="post['media_type']=='audio'"></div>
             </div>
             <div>
                 <a class="rm_text_decoration" href="#" style="float: left"><i style="font-family:Arial, FontAwesome">&#xf086;</i></a>
                 <span style="float: right">
-                    <a class="rm_text_decoration" href="#"><i style="font-family:Arial, FontAwesome">&#xf062;</i></a>
+                    <a class="rm_text_decoration" href="#" v-on:click.prevent="like(post['id'])"><i style="font-family:Arial, FontAwesome">&#xf062;</i></a>
                     <span>{{post['likes']}}</span>
-                    <a class="rm_text_decoration" href="#"><i style="font-family:Arial, FontAwesome">&#xf063;</i></a>
+                    <a class="rm_text_decoration" href="#" v-on:click.prevent="dislike(post['id'])"><i style="font-family:Arial, FontAwesome">&#xf063;</i></a>
                     <span>{{post['dislikes']}}</span>
                 </span>
             </div>
@@ -44,12 +49,47 @@ export default {
             axios.get('load_news_feed'+'?page='+this.page).then(response=>{
                 $.each(response.data.data, (key, v) => {
                     this.posts.push(v);
+                    if (response.data.current_page==response.data.last_page){
+                        this.last_page=true;
+                    }
                 });
             });
             this.page++;
+        },
+        like(id)
+        {
+            axios.get('like/'+id)
+            .then((res)=>{
+                this.posts.forEach(function(post, index,self){
+                    if(post.id==id)
+                    {
+                        post.likes=res.data.likes;
+                        post.dislikes=res.data.dislikes;
+                    }
+                })
+            }).
+                catch((error)=>{
+
+            });
+        },
+        dislike(id)
+        {
+            axios.get('dislike/'+id)
+                .then((res)=>{
+                    this.posts.forEach(function(post, index,self){
+                        if(post.id==id)
+                        {
+                            post.likes=res.data.likes;
+                            post.dislikes=res.data.dislikes;
+                        }
+                    })
+                }).
+            catch((error)=>{
+
+            });
         }
     },
-    beforeMount() {
+    created() {
         this.load_news_feed();
     },
     mounted() {
@@ -69,5 +109,8 @@ export default {
 </script>
 
 <style scoped>
-
+.image-post{
+    width: 100%;
+    border: 1px solid grey;
+}
 </style>
