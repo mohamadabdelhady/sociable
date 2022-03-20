@@ -115,6 +115,12 @@ background-repeat: no-repeat;
     height: 40px;
     border-radius:15%;
 }
+.userAvatar-sm{
+    width: 30px;
+    height: 30px;
+    border-radius:15%;
+
+}
 .notification{
     display: none;
     background-color: #e83f3f;

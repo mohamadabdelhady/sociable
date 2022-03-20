@@ -49,4 +49,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/load_news_feed',[\App\Http\Controllers\posts::class,'load_news_feed']);
     Route::get('/like/{id}',[\App\Http\Controllers\posts::class,'like_post']);
     Route::get('/dislike/{id}',[\App\Http\Controllers\posts::class,'dislike_post']);
+    Route::get('/load_comment/{id}',[\App\Http\Controllers\posts::class,'load_comment']);
+    Route::post('/post_comment',[\App\Http\Controllers\posts::class,'post_comment']);
 });

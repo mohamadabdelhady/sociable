@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\comments;
 use App\Models\reactions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -85,5 +86,20 @@ class posts extends Controller
         {
             return response('You already disliked this post',403);
         }
+    }
+    public function load_comment($id)
+    {
+        $comments=comments::from('comments as c')->where('post_id',$id)->join('users as u','u.id','=','c.user_id')
+            ->select('u.id','u.first_name','u.last_name','u.profile_img','c.comment_content','c.created_at')->paginate(10);
+        return $comments;
+    }
+    public function post_comment(Request $request)
+    {
+        $comment=new comments;
+        $comment->user_id=auth()->id();
+        $comment->comment_content=$request->comment;
+        $comment->post_id=$request->post_id;
+        $comment->save();
+        return response('successful',200);
     }
 }

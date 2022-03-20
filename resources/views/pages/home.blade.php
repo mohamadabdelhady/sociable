@@ -21,7 +21,7 @@
         </div>
         <div class="col-xl-6 col-lg-6 center" style="min-height: 1000px">
             <a href="#" onclick="event.preventDefault(); $('#myModal').modal('show');" style="text-decoration: none; color: black;">
-                <div class="card">
+                <div class="card mb-4">
 
                     <div>
                         @if(auth()->user()->profile_img)
