@@ -35,7 +35,7 @@
                 <hr>
                 <p class="h5 mt-3" :id="'comment-not'+post['id']" align="center" style="display: none">We didn't find any comments on this post, be the first one to comment</p>
             </div>
-                <p align="center"><button class="btn " :disabled="comment_last_page">Load more comments</button></p>
+                <p align="center"><button class="btn" :disabled="comment_last_page">Load more comments</button></p>
             </div>
         </div>
     </div>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
     name: "news_feed",
     data() {
@@ -96,13 +97,15 @@ export default {
         load_comment(id) {
             $('.comment'+id).toggle();
             $('#comment-not'+id).hide();
+            $('.comment-section'+id).html(' ');
             axios.get('load_comment/' + id + '?page=' + this.page).then(response => {
                 if (response.data.data.length>0) {
                     $.each(response.data.data, (key, v) => {
+
                         $('.comment-section'+id).append('<div class="mt-3">' +
                             '<div><img src="/storage/' + v.profile_img + ' "class="userAvatar-sm">' +
                             '<a class="rm_text_decoration ms-2" style="font-size: 1em" href="/get_profile/' + v.id + '">' + '<span class="ms-2">' + v.first_name + ' ' + v.last_name + '</span></a>' +
-                            '<span style="float: right">' + v.created_at + '</span></div>' +
+                            '<span style="float: right">' +moment([v.created_at],'YYYY-MM-DD HH:mm:ss').fromNow()+ '</span></div>' +
                             '<div class="comment">' + v.comment_content + '</div>' +
                             '<hr>' +
                             '</div>')
@@ -125,7 +128,7 @@ export default {
                 .then((res) => {
 
                 })
-        }
+        },
     },
         created() {
             this.load_news_feed();
@@ -141,7 +144,8 @@ export default {
                     }
                 }
             })
-        }
+        },
+
 }
 </script>
 
