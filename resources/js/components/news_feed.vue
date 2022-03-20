@@ -26,7 +26,8 @@
                     <span>{{post['dislikes']}}</span>
                 </span>
             </div>
-            <div style="display: none;" :class="'comment-section'+post['id']">
+            <div style="display:none;" :class="'comment'+post['id']">
+            <div :class="'comment-section'+post['id']">
                 <div class="mt-2">
                     <textarea class="comment-text" v-model="user_comment"></textarea>
                     <button class="btn" v-on:click="post_comment(post['id'])">Post</button>
@@ -34,7 +35,8 @@
                 <hr>
                 <p class="h5 mt-3" :id="'comment-not'+post['id']" align="center" style="display: none">We didn't find any comments on this post, be the first one to comment</p>
             </div>
-
+                <p align="center"><button class="btn " :disabled="comment_last_page">Load more comments</button></p>
+            </div>
         </div>
     </div>
 </div>
@@ -92,19 +94,18 @@ export default {
             });
         },
         load_comment(id) {
-            $('.comment-section'+id).toggle();
+            $('.comment'+id).toggle();
             $('#comment-not'+id).hide();
             axios.get('load_comment/' + id + '?page=' + this.page).then(response => {
-                console.log(response.data.data.length);
                 if (response.data.data.length>0) {
-                    console.log('jkjk');
                     $.each(response.data.data, (key, v) => {
                         $('.comment-section'+id).append('<div class="mt-3">' +
                             '<div><img src="/storage/' + v.profile_img + ' "class="userAvatar-sm">' +
-                            '<a class="rm_text_decoration ms-2" style="font-size: 1em" href="/get_profile/' + v.id + '>' + '<span class="ms-2">' + v.first_name + ' ' + v.last_name + '</span></a>' +
+                            '<a class="rm_text_decoration ms-2" style="font-size: 1em" href="/get_profile/' + v.id + '">' + '<span class="ms-2">' + v.first_name + ' ' + v.last_name + '</span></a>' +
                             '<span style="float: right">' + v.created_at + '</span></div>' +
                             '<div class="comment">' + v.comment_content + '</div>' +
-                            '<hr></div>')
+                            '<hr>' +
+                            '</div>')
                     })
                 } else {
                     $('#comment-not'+id).show();
@@ -113,11 +114,10 @@ export default {
                 .catch((error) => {
 
                 });
-            this.comment_last_page++;
+            this.page_comment++;
         },
         post_comment(id)
         {
-            console.log('jdkj');
             axios.post('post_comment',{
                 post_id:id,
                 comment:this.user_comment
