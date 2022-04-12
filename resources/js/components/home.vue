@@ -17,13 +17,13 @@
               <a href="#" class="rm_text_decoration" style="font-family:Arial, FontAwesome" v-on:click.prevent="upload('audio')">&#xf001;</a>
                 <input type="file" id="post_media" name="media" v-on:change="get_file($event)" style="display:none;">
             </div>
-            <p align="center"><button class="btn" v-on:click="create_post">Post</button></p>
+            <p align="center"><button class="btn" v-on:click="create_post" >Post</button></p>
           </div>
         </div>
 
       </div>
     </div>
-      <news_feed></news_feed>
+      <news_feed :key="k"></news_feed>
   </div>
 </template>
 
@@ -39,6 +39,7 @@ export default {
             post_media:"",
             media_type:"",
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            k:1,
         }
     },
     methods:{
@@ -55,7 +56,8 @@ export default {
                   'Content-Type': 'multipart/form-data'
               }
           }).then((res)=>{
-                        console.log(res)
+                        $('#myModal').modal('hide');
+                        this.k++;
                     }).catch((error)=>{
                         console.log(error);
                     });
