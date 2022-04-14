@@ -5,6 +5,7 @@
     <div class="mt-2" :id="'comments'+post_id" style="display: none;">
         <textarea class="comment-text" v-model="user_comment"></textarea>
         <button class="btn" v-on:click="post_comment(post_id)">Post</button>
+        <p class="mt-2">comments number: {{comments.length}}</p>
     <hr>
     <p v-if="comments.length===0" class="h5 mt-3" :id="'comment-not'+post_id" align="center">We didn't find any comments on this post, be the first one to comment</p>
         <div v-else>
@@ -49,7 +50,9 @@ export default {
                 comment:this.user_comment
             })
                 .then((res) => {
-
+                    this.user_comment="";
+                    this.page=1;
+                    this.load_comments()
                 })
         },
         load_comments()
