@@ -1,11 +1,9 @@
 <template>
 <div>
-    <p align="center" v-on:click="show(post_id)" :id="'show'+post_id" class="comment">Show comments</p>
-    <p align="center" v-on:click="show(post_id)" :id="'hide'+post_id" style="display:none;" class="comment">Hide comments</p>
+    <p align="center" v-on:click="show(post_id)" class="comment"><i style="font-family:Arial, FontAwesome">&#xf086;</i> {{comments.length}}</p>
     <div class="mt-2" :id="'comments'+post_id" style="display: none;">
         <textarea class="comment-text" v-model="user_comment"></textarea>
         <button class="btn" v-on:click="post_comment(post_id)">Post</button>
-        <p class="mt-2">comments number: {{comments.length}}</p>
     <hr>
     <p v-if="comments.length===0" class="h5 mt-3" :id="'comment-not'+post_id" align="center">We didn't find any comments on this post, be the first one to comment</p>
         <div v-else>
@@ -41,7 +39,7 @@ export default {
     methods:{
         get_date(date)
         {
-            return moment([date],'YYYY-MM-DD HH:mm:ss').fromNow();
+            return moment(date).fromNow();
         },
         post_comment(id)
         {
@@ -68,8 +66,6 @@ export default {
         show(id)
         {
             $('#comments'+id).toggle();
-            $('#show'+id).toggle();
-            $('#hide'+id).toggle();
         }
     },
     beforeMount() {
@@ -81,6 +77,7 @@ export default {
 <style scoped>
 .comment{
     cursor: pointer;
+    font-size: 1.5em;
 }
 .comment:hover {
     background-color: hsl(0deg 0% 95%);

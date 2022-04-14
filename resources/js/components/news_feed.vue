@@ -7,7 +7,7 @@
                 <img v-else src="images/user_default.svg" class="userAvatar">
                 <a style="font-size: 1em !important;" :href="'/get_profile/'+post['user_id']" class="rm_text_decoration"><span>{{post['first_name']+" "+post['last_name']}}</span></a>
             </span>
-                <span style="float:right;"></span>
+                <span style="float:right;">{{get_date(post['created_at'])}}</span>
             </div>
             <div class="card-body mt-2">
                 <div class="mb-3">{{post['post_text']}}</div>
@@ -18,6 +18,9 @@
                 <div v-if="post['media_type']=='audio'"></div>
             </div>
             <div>
+                <span>
+
+                </span>
                 <span style="float: right">
                     <a class="rm_text_decoration" href="#" v-on:click.prevent="like(post['id'])"><i style="font-family:Arial, FontAwesome">&#xf062;</i></a>
                     <span>{{post['likes']}}</span>
@@ -93,7 +96,11 @@ export default {
         show_comment(id)
         {
             $('comment'+id).toggle();
-        }
+        },
+        get_date(date)
+        {
+            return moment(date).fromNow();
+        },
     },
         created() {
             this.load_news_feed();

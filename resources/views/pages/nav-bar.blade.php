@@ -19,7 +19,7 @@
             <notifications_menu></notifications_menu>
         </div>
     </div>
-    <div class="dropdown">
+    <div class="dropdown" >
         <button class="btn dropdown-toggle ms-2 me-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" ></button>
         <ul class="dropdown-menu user_menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="srttings" style="font-family:Arial, FontAwesome">&#xf013; Settings</a></li>
