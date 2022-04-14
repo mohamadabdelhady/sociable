@@ -149,6 +149,21 @@ class FilesystemAdapter implements CloudFilesystemContract
     }
 
     /**
+     * Assert that the given directory is empty.
+     *
+     * @param  string  $path
+     * @return $this
+     */
+    public function assertDirectoryEmpty($path)
+    {
+        PHPUnit::assertEmpty(
+            $this->allFiles($path), "Directory [{$path}] is not empty."
+        );
+
+        return $this;
+    }
+
+    /**
      * Determine if a file or directory exists.
      *
      * @param  string  $path
@@ -303,7 +318,7 @@ class FilesystemAdapter implements CloudFilesystemContract
      * @param  string  $path
      * @param  \Psr\Http\Message\StreamInterface|\Illuminate\Http\File|\Illuminate\Http\UploadedFile|string|resource  $contents
      * @param  mixed  $options
-     * @return bool
+     * @return string|bool
      */
     public function put($path, $contents, $options = [])
     {
@@ -329,7 +344,7 @@ class FilesystemAdapter implements CloudFilesystemContract
             is_resource($contents)
                 ? $this->driver->writeStream($path, $contents, $options)
                 : $this->driver->write($path, $contents, $options);
-        } catch (UnableToWriteFile $e) {
+        } catch (UnableToWriteFile|UnableToSetVisibility $e) {
             throw_if($this->throwsExceptions(), $e);
 
             return false;
@@ -566,7 +581,7 @@ class FilesystemAdapter implements CloudFilesystemContract
     {
         try {
             $this->driver->writeStream($path, $resource, $options);
-        } catch (UnableToWriteFile $e) {
+        } catch (UnableToWriteFile|UnableToSetVisibility $e) {
             throw_if($this->throwsExceptions(), $e);
 
             return false;
@@ -764,7 +779,7 @@ class FilesystemAdapter implements CloudFilesystemContract
     {
         try {
             $this->driver->createDirectory($path);
-        } catch (UnableToCreateDirectory $e) {
+        } catch (UnableToCreateDirectory|UnableToSetVisibility $e) {
             throw_if($this->throwsExceptions(), $e);
 
             return false;

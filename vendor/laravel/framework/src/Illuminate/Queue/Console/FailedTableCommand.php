@@ -21,6 +21,8 @@ class FailedTableCommand extends Command
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
+     *
+     * @deprecated
      */
     protected static $defaultName = 'queue:failed-table';
 
@@ -71,7 +73,7 @@ class FailedTableCommand extends Command
             $this->createBaseMigration($table), $table
         );
 
-        $this->info('Migration created successfully!');
+        $this->info('Migration created successfully.');
 
         $this->composer->dumpAutoloads();
     }

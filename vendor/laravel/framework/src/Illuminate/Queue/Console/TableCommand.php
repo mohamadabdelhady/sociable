@@ -21,6 +21,8 @@ class TableCommand extends Command
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
+     *
+     * @deprecated
      */
     protected static $defaultName = 'queue:table';
 
@@ -71,7 +73,7 @@ class TableCommand extends Command
             $this->createBaseMigration($table), $table
         );
 
-        $this->info('Migration created successfully!');
+        $this->info('Migration created successfully.');
 
         $this->composer->dumpAutoloads();
     }

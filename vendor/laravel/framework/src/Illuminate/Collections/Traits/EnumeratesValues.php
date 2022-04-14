@@ -311,7 +311,7 @@ trait EnumeratesValues
     /**
      * Get the first item by the given key value pair.
      *
-     * @param  string  $key
+     * @param  callable|string  $key
      * @param  mixed  $operator
      * @param  mixed  $value
      * @return TValue|null
@@ -548,7 +548,7 @@ trait EnumeratesValues
     /**
      * Filter items by the given key value pair.
      *
-     * @param  string  $key
+     * @param  callable|string  $key
      * @param  mixed  $operator
      * @param  mixed  $value
      * @return static
@@ -679,8 +679,10 @@ trait EnumeratesValues
     /**
      * Filter the items, removing any items that don't match the given type(s).
      *
-     * @param  class-string|array<array-key, class-string>  $type
-     * @return static
+     * @template TWhereInstanceOf
+     *
+     * @param  class-string<TWhereInstanceOf>|array<array-key, class-string<TWhereInstanceOf>>  $type
+     * @return static<TKey, TWhereInstanceOf>
      */
     public function whereInstanceOf($type)
     {
@@ -995,13 +997,17 @@ trait EnumeratesValues
     /**
      * Get an operator checker callback.
      *
-     * @param  string  $key
+     * @param  callable|string  $key
      * @param  string|null  $operator
      * @param  mixed  $value
      * @return \Closure
      */
     protected function operatorForWhere($key, $operator = null, $value = null)
     {
+        if ($this->useAsCallable($key)) {
+            return $key;
+        }
+
         if (func_num_args() === 1) {
             $value = true;
 

@@ -19,6 +19,8 @@ class ClearResetsCommand extends Command
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
+     *
+     * @deprecated
      */
     protected static $defaultName = 'auth:clear-resets';
 
@@ -38,6 +40,6 @@ class ClearResetsCommand extends Command
     {
         $this->laravel['auth.password']->broker($this->argument('name'))->getRepository()->deleteExpired();
 
-        $this->info('Expired reset tokens cleared!');
+        $this->info('Expired reset tokens cleared successfully.');
     }
 }

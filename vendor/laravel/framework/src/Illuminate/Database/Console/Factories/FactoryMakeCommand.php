@@ -21,6 +21,8 @@ class FactoryMakeCommand extends GeneratorCommand
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
+     *
+     * @deprecated
      */
     protected static $defaultName = 'make:factory';
 
@@ -77,11 +79,9 @@ class FactoryMakeCommand extends GeneratorCommand
 
         $model = class_basename($namespaceModel);
 
-        if (Str::startsWith($namespaceModel, $this->rootNamespace().'Models')) {
-            $namespace = Str::beforeLast('Database\\Factories\\'.Str::after($namespaceModel, $this->rootNamespace().'Models\\'), '\\');
-        } else {
-            $namespace = 'Database\\Factories';
-        }
+        $namespace = $this->getNamespace(
+            Str::replaceFirst($this->rootNamespace(), 'Database\\Factories\\', $this->qualifyClass($this->getNameInput()))
+        );
 
         $replace = [
             '{{ factoryNamespace }}' => $namespace,

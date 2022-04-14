@@ -20,6 +20,8 @@ class StubPublishCommand extends Command
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
+     *
+     * @deprecated
      */
     protected static $defaultName = 'stub:publish';
 
@@ -43,6 +45,7 @@ class StubPublishCommand extends Command
 
         $files = [
             __DIR__.'/stubs/cast.stub' => $stubsPath.'/cast.stub',
+            __DIR__.'/stubs/cast.inbound.stub' => $stubsPath.'/cast.inbound.stub',
             __DIR__.'/stubs/console.stub' => $stubsPath.'/console.stub',
             __DIR__.'/stubs/event.stub' => $stubsPath.'/event.stub',
             __DIR__.'/stubs/job.queued.stub' => $stubsPath.'/job.queued.stub',
