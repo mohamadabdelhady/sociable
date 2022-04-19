@@ -51,4 +51,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/dislike/{id}',[\App\Http\Controllers\posts::class,'dislike_post']);
     Route::get('/load_comment/{id}',[\App\Http\Controllers\posts::class,'load_comment']);
     Route::post('/post_comment',[\App\Http\Controllers\posts::class,'post_comment']);
+    Route::post('/send_chat',[\App\Http\Controllers\chat::class,'send']);
+    Route::get('/get_chat/{id}',[\App\Http\Controllers\chat::class,'load']);
 });

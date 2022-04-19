@@ -27,7 +27,7 @@
 
         </div>
         <div class="chat-input mt-1">
-            <span><textarea type="text"></textarea><button class="btn ms-1">Chat</button></span>
+            <span><textarea type="text" v-model="message"></textarea><button class="btn ms-1" v-on:click="send">Chat</button></span>
         </div>
     </div>
     </div>
@@ -45,6 +45,7 @@ export default {
             chat_profile:"",
             chat_id:"",
             chat:[],
+            message:""
         }
     },
     beforeMount() {
@@ -69,7 +70,7 @@ export default {
                 this.chat_profile=profile;
                 $('.contact').toggle();
                 $('.chat-contact').toggle();
-                axios.get('/get_chat'+id)
+                axios.get('/get_chat/'+id)
                     .then((res)=>{
                         this.chat=res.data;
                     })
@@ -81,6 +82,19 @@ export default {
             {
                 $('.contact').toggle();
                 $('.chat-contact').toggle();
+            },
+            send()
+            {
+                axios.post('/send_chat',{
+                    user_id:this.chat_id,
+                    message:this.message
+            })
+                    .then((res)=>{
+
+                    })
+                    .catch((error)=>{
+
+                    });
             }
         }
 }

@@ -664,6 +664,7 @@ class ComposerStaticInit14a23432e0586f8dd6cee791b5657c43
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\chat' => __DIR__ . '/../..' . '/app/Models/chat.php',
         'App\\Models\\comments' => __DIR__ . '/../..' . '/app/Models/comments.php',
         'App\\Models\\friend_requests' => __DIR__ . '/../..' . '/app/Models/friend_requests.php',
         'App\\Models\\friends' => __DIR__ . '/../..' . '/app/Models/friends.php',
