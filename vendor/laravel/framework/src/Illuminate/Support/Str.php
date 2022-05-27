@@ -259,10 +259,7 @@ class Str
     public static function endsWith($haystack, $needles)
     {
         foreach ((array) $needles as $needle) {
-            if (
-                $needle !== '' && $needle !== null
-                && str_ends_with($haystack, $needle)
-            ) {
+            if ((string) $needle !== '' && str_ends_with($haystack, $needle)) {
                 return true;
             }
         }
@@ -498,10 +495,18 @@ class Str
             return $string;
         }
 
-        $start = mb_substr($string, 0, mb_strpos($string, $segment, 0, $encoding), $encoding);
-        $end = mb_substr($string, mb_strpos($string, $segment, 0, $encoding) + mb_strlen($segment, $encoding));
+        $strlen = mb_strlen($string, $encoding);
+        $startIndex = $index;
 
-        return $start.str_repeat(mb_substr($character, 0, 1, $encoding), mb_strlen($segment, $encoding)).$end;
+        if ($index < 0) {
+            $startIndex = $index < -$strlen ? 0 : $strlen + $index;
+        }
+
+        $start = mb_substr($string, 0, $startIndex, $encoding);
+        $segmentLen = mb_strlen($segment, $encoding);
+        $end = mb_substr($string, $startIndex + $segmentLen);
+
+        return $start.str_repeat(mb_substr($character, 0, 1, $encoding), $segmentLen).$end;
     }
 
     /**
@@ -889,7 +894,7 @@ class Str
      */
     public static function squish($value)
     {
-        return preg_replace('~(\s|\x{3164})+~u', ' ', preg_replace('~^\s+|\s+$~u', '', $value));
+        return preg_replace('~(\s|\x{3164})+~u', ' ', preg_replace('~^[\s﻿]+|[\s﻿]+$~u', '', $value));
     }
 
     /**
@@ -926,9 +931,7 @@ class Str
 
         $words = explode(' ', static::replace(['-', '_'], ' ', $value));
 
-        $studlyWords = array_map(function ($word) {
-            return static::ucfirst($word);
-        }, $words);
+        $studlyWords = array_map(fn ($word) => static::ucfirst($word), $words);
 
         return static::$studlyCache[$key] = implode($studlyWords);
     }

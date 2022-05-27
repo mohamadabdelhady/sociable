@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </a>
-            <home></home>
+            <home ></home>
         </div>
         <div class="col-xl-3 col-lg-3 right-side">
             <request_home id="{{auth()->user()->id}}" class="mt-4"></request_home>

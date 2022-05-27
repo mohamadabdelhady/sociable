@@ -24,7 +24,10 @@
         </a>
         </div>
         <div class="chat-area mt-1">
-
+        <div v-for="(message, index) in chat" class="mt-2">
+            <p><span v-if="message.user_from==id" style="background-color: #8989ff">{{message.content}}</span></p>
+            <p><span v-if="message.user_from==chat_id" style="float: right; background-color: #bdbdf8">{{message.content}}</span></p>
+        </div>
         </div>
         <div class="chat-input mt-1">
             <span><textarea type="text" v-model="message"></textarea><button class="btn ms-1" v-on:click="send">Chat</button></span>
@@ -124,6 +127,12 @@ export default {
     border: 1px solid grey;
     border-radius: 3px;
     min-height: 180px;
+}
+.chat-area span{
+    margin: 10px;
+    padding: 5px;
+    border-radius: 3px;
+
 }
 .chat-input textarea{
     border:1px solid grey;
