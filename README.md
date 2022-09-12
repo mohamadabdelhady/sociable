@@ -2,7 +2,7 @@
 <h2>About the project</h2>
 <p>
 A subscription-based service, that allow user to read and listen to a big collection of e-books, audiobooks, magazine and podcast in exchange for subscription.</p>
-<a href="#"><p>Screenshots</p></a>
+<a href="https://drive.google.com/drive/folders/1sIeJEeX398_4ElqYvRKbM5_WmCwwFlCV?usp=sharing"><p>Screenshots</p></a>
 <a href="#">video tour of the website</a>
 <h2>What is this website built with</h2>
 <ul>
