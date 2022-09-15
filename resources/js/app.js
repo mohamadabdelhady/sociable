@@ -26,6 +26,7 @@ Vue.component('request_home', require('./components/request_home.vue').default);
 Vue.component('contacts', require('./components/contacts.vue').default);
 Vue.component('notifications_menu', require('./components/notifications_menu.vue').default);
 Vue.component('comments_section', require('./components/comments_section.vue').default);
+Vue.component('user_posts', require('./components/user_posts.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -53,4 +54,7 @@ const app5 = new Vue({
 });
 const app6 = new Vue({
     el: 'comments_section',
+});
+const app7 = new Vue({
+    el: 'user_posts',
 });
