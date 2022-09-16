@@ -49,7 +49,7 @@
         </div>
         <div class="col-xl-3 col-lg-3">
             <div class="card over_flow">
-            <p class="m-auto" style="font-size:x-large">Bio</p>
+            <p class="m-auto users-name" style="font-size:x-large">Bio</p>
                 @if($bio->bio!=null)
                 <p>{{$bio->bio}}</p>
                 @else
@@ -61,9 +61,22 @@
 </div>
 <div class="container mt-5">
     <div class="row">
+        <div class="col-xl-3 col-lg-3">
+        </div>
+        <div class="col-xl-6 col-lg-6">
+            <i style="font-family:Arial, FontAwesome;font-size: xx-large">
+                &#xe29c;
+            </i>
+            <span style="float: right;font-size: xx-large">Time line</span>
+            <hr>
+            <user_posts :user_id="{{json_encode($id)}}"></user_posts>
+        </div>
+        <div>
 
+        </div>
     </div>
 </div>
+
 <script>
    function send_friend_request(id)
     {

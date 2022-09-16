@@ -55,7 +55,7 @@ export default {
         },
         load_comments()
         {
-            axios.get('load_comment/'+this.post_id + '?page=' + this.page).then(response => {
+            axios.get('../load_comment/'+this.post_id + '?page=' + this.page).then(response => {
                     this.comments=response.data.data;
                     if (response.data.current_page == response.data.last_page) {
                         this.last_page = true;

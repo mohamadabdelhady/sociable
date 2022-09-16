@@ -54,7 +54,7 @@
         <div class="col-xl-3 col-lg-3">
             <div class="card">
 
-                <p class="m-auto" style="font-size:x-large">Bio</p>
+                <p class="m-auto users-name" style="font-size:x-large">Bio</p>
                 <edit_user_bio :my_bio="{{json_encode(auth()->user()->bio)}}"></edit_user_bio>
             </div>
         </div>

@@ -37,10 +37,14 @@ class posts extends Controller
            ->orderBy('p.created_at', 'DESC')->paginate(10);
         return $posts;
     }
-    public function load_user_posts()
+    public function load_user_posts(Request $request)
     {
+//        dd($request->user_id);
+        if($request->user_id==null)
         $id=auth()->id();
-        $posts=\App\Models\posts::from('posts as p')->Where('user_id',auth()->id())->join('users As u','u.id','=','user_id')->select('p.id','user_id','post_text','likes','dislikes','media','media_type','p.created_at','u.first_name','u.last_name','u.profile_img')
+        else
+            $id=$request->user_id;
+        $posts=\App\Models\posts::from('posts as p')->Where('user_id',$id)->join('users As u','u.id','=','user_id')->select('p.id','user_id','post_text','likes','dislikes','media','media_type','p.created_at','u.first_name','u.last_name','u.profile_img')
             ->orderBy('p.created_at', 'DESC')->paginate(10);
         return $posts;
     }

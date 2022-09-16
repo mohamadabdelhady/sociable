@@ -4,7 +4,7 @@
             <div class="card mb-4" v-for="(post, index) in posts">
                 <div class="">
             <span style="float: left"><img v-if="post['profile_img']!=null" :src="'/storage/'+post['profile_img']" class="userAvatar">
-                <img v-else src="images/user_default.svg" class="userAvatar">
+                <img v-else src="/images/user_default.svg" class="userAvatar">
                 <a style="font-size: 1em !important;" :href="'/get_profile/'+post['user_id']" class="rm_text_decoration"><span>{{post['first_name']+" "+post['last_name']}}</span></a>
             </span>
                     <span style="float:right;">{{get_date(post['created_at'])}}</span>
@@ -38,6 +38,7 @@
 import moment from 'moment';
 export default {
     name: "user_posts",
+    props:['user_id'],
     data() {
         return {
             posts: [],
@@ -47,7 +48,7 @@ export default {
     },
     methods: {
         load_news_feed() {
-            axios.get('load_user_posts' + '?page=' + this.page).then(response => {
+            axios.post('../load_user_posts' + '?page=' + this.page,{user_id:this.user_id}).then(response => {
                 $.each(response.data.data, (key, v) => {
                     this.posts.push(v);
                     if (response.data.current_page == response.data.last_page) {
@@ -58,7 +59,7 @@ export default {
             this.page++;
         },
         like(id) {
-            axios.get('like/' + id)
+            axios.get('../like/' + id)
                 .then((res) => {
                     this.posts.forEach(function (post, index, self) {
                         if (post.id == id) {
@@ -71,7 +72,7 @@ export default {
             });
         },
         dislike(id) {
-            axios.get('dislike/' + id)
+            axios.get('../dislike/' + id)
                 .then((res) => {
                     this.posts.forEach(function (post, index, self) {
                         if (post.id == id) {
@@ -85,7 +86,7 @@ export default {
         },
         post_comment(id)
         {
-            axios.post('post_comment',{
+            axios.post('../post_comment',{
                 post_id:id,
                 comment:this.user_comment
             })

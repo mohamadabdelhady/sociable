@@ -41,7 +41,7 @@ class profile extends Controller
             $friend=\App\Models\friends::where('friend_id',$id)->first();
             $bio=User::where('id',$id)->select('bio')->first();
 //            dd($F_request);
-            return view('pages.users_profile')->with(compact('profile','F_request','friend','bio'));
+            return view('pages.users_profile')->with(compact('profile','F_request','friend','bio','id'));
         }
         else
         {
