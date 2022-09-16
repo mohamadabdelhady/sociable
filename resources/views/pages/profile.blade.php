@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-xl-1 col-lg-1">
         </div>
-        <div class="col-xl-2 col-lg-2">
+        <div class="col-xl-2 col-lg-2 col-sm-4 col-4 profile">
             <div class="card">
                 <div class="profile_img">
                 @if(auth()->user()->profile_img)
@@ -35,7 +35,7 @@
 
             </div>
         </div>
-        <div class="col-xl-6 col-lg-6">
+        <div class="col-xl-6 col-lg-6 col-sm-8 col-8">
             <div class="card">
             <div class="cover-img">
                 @if(auth()->user()->cover_img)
@@ -51,7 +51,7 @@
             </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-3">
+        <div class="col-xl-3 col-lg-3 col-sm-12 m-sm-4  col-12  bio">
             <div class="card">
 
                 <p class="m-auto users-name" style="font-size:x-large">Bio</p>

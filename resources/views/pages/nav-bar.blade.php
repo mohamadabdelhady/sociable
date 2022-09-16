@@ -8,10 +8,12 @@
             </form>
         </div>
               @if(auth()->user()->profile_img)
-            <img src="/storage/{{auth()->user()->profile_img}}" class="userAvatar">
+        <a href="/profile"><img src="/storage/{{auth()->user()->profile_img}}" class="userAvatar" id="user_profile"></a>
         @else
-            <img src="/images/user_default.svg" class="userAvatar">
+        <a href="/profile"><img src="/images/user_default.svg" class="userAvatar"></a>
         @endif
+    <button class="btn chat-btn ms-2 " onclick="window.href('/chat')"  style="font-family:Arial, FontAwesome">&#xF002;</button>
+        <button class="btn chat-btn ms-2 " onclick="window.href('/chat')"  style="font-family:Arial, FontAwesome">&#xf075;</button>
     <div class="dropdown" id="noti-btn">
     <button class="btn ms-2" onclick="show_menu()"  style="font-family:Arial, FontAwesome">&#xf0f3;</button>
         <div class="notification-menu">
@@ -46,5 +48,6 @@
         if (url == "/home") {
             $("#noti-btn").hide();
         }
+
     }
 </script>

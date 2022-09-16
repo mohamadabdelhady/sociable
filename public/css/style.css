@@ -62,7 +62,6 @@ background-repeat: no-repeat;
 }
 .profile_img img{
     max-width: 100%;
-    max-width: 100%;
 }
 .cover-img .btn {
     position: absolute;
@@ -178,7 +177,7 @@ background-repeat: no-repeat;
 }
 
 .cover-profile{
-	position: absolute;
+    position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -335,5 +334,40 @@ font-size: 20px;
         position: absolute;
         left: 25%;
 
+    }
+    .chat-btn{
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .right-side{
+        display: none;
+    }
+    .Left-side{
+        display: none;
+    }
+    .center{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #noti-btn{
+        display: block !important;
+    }
+    .chat-btn{
+        display: block ;
+    }
+    #search-input{
+        display: none;
+    }
+    .bio{
+        height: auto;
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 425px) {
+    .bio{
+        height: auto;
+        width: auto;
+        margin: 10px;
     }
 }

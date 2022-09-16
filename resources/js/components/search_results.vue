@@ -12,7 +12,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-xl-6 col-lg-6">
+        <div class="col-xl-6 col-lg-6 results">
             <div class="people-results">
 
             <div v-for="(person, index) in people_result" class="card people-card mb-3">
@@ -80,4 +80,14 @@ export default {
 
 }
 .people-card a{text-decoration: none; color: black;}
+@media only screen and (max-width: 768px) {
+    .results{
+        margin-top: 20px;
+    }
+}
+@media only screen and (max-width: 425px) {
+.results{
+    margin-top: 10px;
+}
+}
 </style>

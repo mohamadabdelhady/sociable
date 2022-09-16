@@ -13,12 +13,4 @@
     <div class="mt-4">
     <contacts id="{{json_encode(auth()->id())}}"></contacts>
     </div>
-{{--    <div class="card mt-4">--}}
-
-{{--        <a style="font-family:Arial, FontAwesome">&#xf500;<span class="ms-2">Friends</span></a>--}}
-{{--        <hr>--}}
-{{--        <a style="font-family:Arial, FontAwesome">&#xf03e;<span class="ms-2">Photos</span></a>--}}
-{{--        <hr>--}}
-{{--        <a style="font-family:Arial, FontAwesome">&#xf008;<span class="ms-2">Videos</span></a>--}}
-{{--    </div>--}}
 
