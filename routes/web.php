@@ -54,4 +54,5 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::post('/post_comment',[\App\Http\Controllers\posts::class,'post_comment']);
     Route::post('/send_chat',[\App\Http\Controllers\chat::class,'send']);
     Route::get('/get_chat/{id}',[\App\Http\Controllers\chat::class,'load']);
+    Route::post('/save_bio',[\App\Http\Controllers\profile::class,'save_bio']);
 });

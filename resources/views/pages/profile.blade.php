@@ -51,16 +51,11 @@
             </div>
             </div>
         </div>
-        <div class="col-xl-2 col-lg-2">
+        <div class="col-xl-3 col-lg-3">
             <div class="card">
 
-{{--                <a href="#" style="font-family:Arial, FontAwesome" class="rm_text_decoration">&#xf500;<span class="ms-2">Friends</span></a>--}}
-{{--                <hr>--}}
-{{--                <a href="#" style="font-family:Arial, FontAwesome" class="rm_text_decoration">&#xf03e;<span class="ms-2">Photos</span></a>--}}
-{{--                <hr>--}}
-{{--                <a href="#" style="font-family:Arial, FontAwesome" class="rm_text_decoration">&#xf008;<span class="ms-2">Videos</span></a>--}}
                 <p class="m-auto" style="font-size:x-large">Bio</p>
-                <p>kjfdlkj</p>
+                <edit_user_bio :my_bio="{{json_encode(auth()->user()->bio)}}"></edit_user_bio>
             </div>
         </div>
     </div>

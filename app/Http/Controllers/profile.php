@@ -34,12 +34,14 @@ class profile extends Controller
     }
     public function get_profile($id)
     {
+
         $profile=User::where('id','=',$id)->select('id','first_name','last_name','profile_img','cover_img')->first();
         if (auth()->user()->id!=$id) {
             $F_request=friend_requests::where('receiver',$id)->first();
             $friend=\App\Models\friends::where('friend_id',$id)->first();
+            $bio=User::where('id',$id)->select('bio')->first();
 //            dd($F_request);
-            return view('pages.users_profile')->with(compact('profile','F_request','friend'));
+            return view('pages.users_profile')->with(compact('profile','F_request','friend','bio'));
         }
         else
         {
@@ -50,6 +52,12 @@ class profile extends Controller
     {
         $contacts=DB::select('select id,first_name,last_name,profile_img from users where id IN(select friend_id from friends where user_id='.$id.');');
         return response($contacts,200);
+    }
+    public function save_bio(Request $request)
+    {
+        $bio=User::find(auth()->id());
+        $bio->bio=$request->bio;
+        $bio->save();
     }
 
 }

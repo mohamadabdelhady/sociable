@@ -47,8 +47,15 @@
                     </div>
             </div>
         </div>
-        <div class="col-xl-2 col-lg-2">
-
+        <div class="col-xl-3 col-lg-3">
+            <div class="card over_flow">
+            <p class="m-auto" style="font-size:x-large">Bio</p>
+                @if($bio->bio!=null)
+                <p>{{$bio->bio}}</p>
+                @else
+                <p>{{$profile->first_name." ".$profile->last_name}}'s bio is empty.</p>
+                @endif
+            </div>
         </div>
     </div>
 </div>

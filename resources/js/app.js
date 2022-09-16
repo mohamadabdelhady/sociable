@@ -27,6 +27,7 @@ Vue.component('contacts', require('./components/contacts.vue').default);
 Vue.component('notifications_menu', require('./components/notifications_menu.vue').default);
 Vue.component('comments_section', require('./components/comments_section.vue').default);
 Vue.component('user_posts', require('./components/user_posts.vue').default);
+Vue.component('edit_user_bio', require('./components/edit_user_bio.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -57,4 +58,7 @@ const app6 = new Vue({
 });
 const app7 = new Vue({
     el: 'user_posts',
+});
+const app8 = new Vue({
+    el: 'edit_user_bio',
 });

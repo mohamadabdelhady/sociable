@@ -76,6 +76,16 @@ background-repeat: no-repeat;
     box-shadow: 0 2px 5px rgba(136, 136, 136, 0.3), 0 1px 1px rgba(136, 136, 136, 0.3);
     border-radius: 50%;
 }
+.over_flow{
+    width: 100%;
+    height:200px;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.over_flow::-webkit-scrollbar {
+    display: none;
+}
 .result-num{
     padding: 1px 8px 1px 8px;
     color: white;
