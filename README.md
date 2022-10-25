@@ -1,7 +1,8 @@
 <p align="center"><img src="public/images/Sociable-logo.png"></p>
 <h2>About the project</h2>
 <p>
-A subscription-based service, that allow user to read and listen to a big collection of e-books, audiobooks, magazine and podcast in exchange for subscription.</p>
+social network website that allows user to share their thought online, connect with friend and family, make new friends and be part of interesting discussion among a large online community.
+</p>
 
 <a href="https://drive.google.com/drive/folders/1sIeJEeX398_4ElqYvRKbM5_WmCwwFlCV?usp=sharing"><p>Screenshots</p></a>
 
