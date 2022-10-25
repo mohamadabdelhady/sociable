@@ -3,8 +3,8 @@
 <p>
 social network website that allows user to share their thought online, connect with friend and family, make new friends and be part of interesting discussion among a large online community.
 </p>
-
-<a href="https://drive.google.com/drive/folders/1sIeJEeX398_4ElqYvRKbM5_WmCwwFlCV?usp=sharing"><p>Screenshots</p></a>
+<h2>preview of the website </h2>
+<a href="https://drive.google.com/drive/folders/1sIeJEeX398_4ElqYvRKbM5_WmCwwFlCV"><p>Screenshots</p></a>
 
 <h2>What is this website built with</h2>
 <ul>
